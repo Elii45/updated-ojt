@@ -1,14 +1,15 @@
 @media print {
     @page {
         size: A4 landscape;
-        margin: 8mm;
+        margin: 0;
     }
 
+    /* Hide Unwanted Elements */
     .print-btn, .submit {
         display: none !important;
     }
 
-    /* General Styles */
+    /* General Print Styles */
     body {
         font-family: Arial, sans-serif;
         margin: 0;
@@ -21,18 +22,19 @@
         font-size: 14px;
     }
 
-    /* Form Styles */
+    /* Form Styling */
     form {
-        padding: 10px;
         width: 90%;
         margin: auto;
+        margin-top: -15px; /* Moves the form up */
+        padding: 10px;
         border-radius: 6px;
         background-image: url("../../images/body.png");
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat;
     }
-
+    
     label {
         font-weight: bold;
         font-size: 12px;
@@ -40,8 +42,8 @@
         margin-top: 5px;
     }
 
-    input[type="text"], 
-    input[type="time"], 
+    input[type="text"],
+    input[type="time"],
     input[type="date"] {
         width: 70%;
         padding: 6px;
@@ -63,7 +65,9 @@
     }
 
     /* Content Sections */
-    .content1, .content2, .content3 {
+    .content1, 
+    .content2, 
+    .content3 {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
@@ -94,7 +98,7 @@
         word-wrap: break-word;
     }
 
-    /* Signature */
+    /* Signature Section */
     .signature {
         font-size: 12px;
         position: absolute;
@@ -103,7 +107,7 @@
         width: 100%;
     }
 
-    /* Footer */
+    /* Footer Section */
     .footer {
         position: fixed;
         bottom: 5px;
@@ -164,7 +168,7 @@
         margin-right: 5px;
     }
 
-    /* Button Adjustments */
+    /* Submit Button Adjustments */
     input[type="submit"] {
         width: 40%;
         font-size: 14px;
