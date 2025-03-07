@@ -1,0 +1,461 @@
+@media print {
+
+    /* Remove default browser margins */
+    @page {
+        size: A4;
+        margin: none;
+        /* Removes all margins */
+    }
+
+    .header {
+        text-align: center;
+        font-size: 20px;
+        /* Change size for printing */
+        margin-bottom: -220px !important;
+        margin-left: 40px;
+        
+    }
+
+    .logo {
+        width: 100px;
+        margin-left: -220px !important;
+    }
+
+    .subtext,
+    .italic {
+        font-size: 12px;
+    }
+
+    .italic {
+        font-style: italic;
+        text-align: left;
+        margin-left: 20px !important;
+        margin-bottom: 10px;
+    }
+
+    .title {
+        font-weight: bold;
+        font-size: 30px;
+       
+    }
+
+    .stamp {
+        border: 1px dashed #000;
+        padding: 10px;
+        font-size: 12px;
+        margin-left: 70px !important;
+        margin-bottom: 60px;
+
+    }
+
+    .buttonGroup {
+        display: none !important;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    h1,
+    h2 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    /*Form*/
+    form {
+        background: #fff;
+        padding: 20px;
+        max-width: 90%;
+        margin: -3px auto;
+    }
+
+    /*Table Inside*/
+    table {
+        width: 30%;
+        /* Reduce the width */
+        height: auto;
+        /* Let height adjust automatically */
+        border-collapse: collapse;
+        margin-top: -1px;
+        align-items: left;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid #000;
+        padding: 4px;
+        /* Reduce padding */
+        font-size: 12px;
+        /* Make text smaller */
+        text-align: left;
+    }
+
+    th {
+        text-align: center;
+        font-size: 14px;
+        /* Keep headers readable */
+    }
+
+
+    /*Table 4 */
+    .table4 {
+        width: 80%;
+        /* Reduce the width */
+        height: 20px !important;
+        /* Let height adjust automatically */
+        border-collapse: collapse;
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        border-spacing: 0;
+        border: 1px solid #000000;
+        text-align: center;
+        padding: 4px;
+        /* Reduce padding */
+
+    }
+
+    .table4 td,
+    .table4 th,
+    .table4 tr {
+        height: 10px !important;
+        font-size: 12px;
+        /* Adjust as needed */
+        padding: 0 !important;
+        /* Remove extra padding */
+        overflow: hidden;
+        /* Hide excess content */
+        white-space: wrap;
+        /* Prevent text wrapping */
+        text-align: center;
+    }
+
+    /*Whole Table*/
+    .container-table {
+        width: 100%;
+        border: 1px solid #000;
+        table-layout: fixed;
+    }
+
+    .container-table td {
+        vertical-align: top;
+        padding: 5px;
+    }
+
+    .container-table .divider {
+        border-right: 1px solid #000;
+    }
+
+    /*Inputs*/
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+        width: 20%;
+        padding: 8px;
+        margin-top: 5px;
+        border: none;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+    }
+
+    input[name="position"] {
+        padding: 5px;
+        border: none;
+        border-bottom: none;
+        border-radius: 0;
+        width: 20%;
+    }
+
+    input[name="salary"] {
+        padding: 5px;
+        border: none;
+        border-bottom: none;
+        border-radius: 0;
+        width: 20%;
+    }
+    
+
+    input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    .dropdown-selected {
+        width: 50%;
+        padding: 8px;
+        border: none;
+        border-bottom: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
+
+    /*Buttons*/
+    .buttonGroup {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .buttonGroup input[type="submit"],
+    .buttonGroup input[type="button"] {
+        width: 150px;
+        padding: 10px;
+        background: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .buttonGroup input[type="submit"]:hover {
+        background: #0056b3;
+    }
+
+    .buttonGroup input[type="button"] {
+        background: #28a745;
+    }
+
+    .buttonGroup input[type="button"]:hover {
+        background: #218838;
+    }
+
+    /*Office*/
+.office select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: none;
+    border-radius: 0;
+}
+
+    /*Container 1*/
+    .container1 {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    .container1 .office,
+    .container1 .name {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .container1 .title {
+        margin-right: 20px;
+    }
+
+    .container1 .name {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container1 .name label {
+        text-align: start;
+        font-weight: bold;
+    }
+
+    .container1 .name .name-fields {
+        display: flex;
+        flex-direction: row;
+        gap: 3px;
+    }
+    
+    .container1 .name .name-fields div {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+
+    .container1 .name .name-fields div {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+    }
+
+    .container1 label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        width: 70%;
+    }
+
+    .container1 .name input {
+        padding: 5px;
+        border: none;
+        border-bottom: none;
+        border-radius: 0;
+        width: 90%;
+        display: block;
+    }
+
+    .container2 label {
+        margin-left: 10px;
+    }
+
+    .subtext {
+        color: #373A40;
+        font-size: 0.8em;
+    }
+
+    .container4A table input[type="text"] {
+        border-bottom: none;
+        width: 100%;
+        padding: 5px;
+        display: block;
+    }
+
+    h5 {
+        text-align: center;
+    }
+
+    .signatureHR {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 10px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .signatureApplicant {
+        text-align: center;
+        margin-top: 5px;
+        margin-bottom: 2px;
+        padding-top: 10px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container4A .signatureHR input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        display: block;
+        border-bottom: 1px solid black;
+
+    }
+
+    .container3D .signatureApplicant input[type="text"] {
+        width: 100%;
+        max-width: 100%;
+        padding: 5px;
+        display: block;
+        border-bottom: 1px solid black;
+
+    }
+
+    .signatureAdmin {
+        text-align: center;
+        padding-top: 10px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 33%;
+        margin-bottom: 2%;
+    }
+
+    .container3C input[type="text"] {
+        width: 60%
+    }
+
+
+    .container4B .signatureAdmin input[type="text"] {
+        width: 100%;
+        max-width: 100%;
+        padding: 5px;
+        display: block;
+        border-bottom: 1px solid black;
+    }
+
+    .container4A .asOf {
+        align-items: center;
+        display: block;
+        margin-bottom: 10px;
+        margin-left: 150px;
+
+    }
+
+    .container4C {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .container4C-check {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
+
+    .approvedContainer,
+    .disapproved {
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+
+    }
+
+    .approvedContainer div,
+    .disapproved div {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+    }
+
+    .approvedContainer label,
+    .disapproved label {
+        text-align: start;
+        font-weight: bold;
+        width: 60%;
+    }
+
+    .approvedContainer input {
+        padding: 5px;
+        border: none;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+        width: 10%;
+        display: block;
+    }
+
+    .disapproved input {
+        padding: 5px;
+        border: none;
+        border-bottom: 1px solid black;
+        border-radius: 0;
+        width: 90%;
+        display: block;
+    }
+
+    .signatureGov {
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 10px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .signatureGov input[type="text"] {
+        width: 100%;
+        max-width: 100%;
+        padding: 5px;
+        display: block;
+        border-bottom: 1px solid black;
+        align-items: center;
+    }
+}

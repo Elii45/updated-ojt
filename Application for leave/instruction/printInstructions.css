@@ -1,0 +1,50 @@
+@media print {
+    /* Set the page size to A4 and adjust margins */
+    @page {
+        size: A4;
+        margin: 2mm;
+    }
+
+    /* Apply styles to fit content on one page */
+    body {
+        font-size: 5px;
+        line-height: 1.2;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 4px;
+        text-align: justify;
+        font-size: 11px;
+    }
+
+    th {
+        font-size: 1px;
+        font-weight: bold;
+    }
+
+    /* Reduce spacing for lists */
+    ul, ol {
+        margin: 2px 0;
+        padding-left: 15px;
+    }
+
+    /* Remove unnecessary decorations */
+    a {
+        display: none; /* Hide buttons/links */
+    }
+
+    .button-container {
+        display: none; /* Hide navigation buttons */
+    }
+
+    /* Adjust last row text to fit */
+    th[colspan="2"] {
+        font-size: 11px;
+        padding: 6px;
+    }
+}

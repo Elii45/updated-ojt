@@ -1,0 +1,457 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+}
+.header {
+    text-align: center;
+    font-size: 20px;
+    /* Change size for printing */
+    margin-bottom: -230px !important;
+    margin-left: 420px !important;
+    
+}
+.subtext {
+    margin-left: -30px;
+}
+
+.logo {
+    width: 100px;
+    margin-left: -50px !important;
+}
+
+.subtext,
+.italic {
+    font-size: 12px;
+}
+
+.italic {
+    font-style: italic;
+    text-align: left;
+    margin-left: 80px !important;
+    margin-bottom: -40px;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 30px;
+    margin-top: 10px !important;
+    margin-left: -5px !important;
+}
+
+.stamp {
+    border: 1px dashed #000;
+    padding: 10px;
+    font-size: 12px;
+    margin-left: 200px !important;
+    margin-bottom: 60px;
+
+}
+
+h1, h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.container3A .subtext { 
+    margin-left: 10px;
+    font-size: 7pt; 
+}
+
+
+/*Form*/
+form {
+    background: #fff;
+    padding: 20px;
+    max-width: 90%;
+    margin: -3px auto;  
+}
+
+/*Table Inside*/
+table {
+    width: 30%; /* Reduce the width */
+    height: auto; /* Let height adjust automatically */
+    border-collapse: collapse;
+    margin-top: -1px;
+    align-items: left;
+}
+
+table, th, td {
+    border: 1px solid #000;
+    padding: 4px; /* Reduce padding */
+    font-size: 12px; /* Make text smaller */
+    text-align: left;
+}
+
+th {
+    text-align: center;
+    font-size: 14px; /* Keep headers readable */
+}
+
+
+/*Table 4 */
+.table4 {
+    width: 80%; /* Reduce the width */
+    height: 20px !important; /* Let height adjust automatically */
+    border-collapse: collapse;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
+    border-spacing: 0;
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 4px; /* Reduce padding */
+    
+}
+
+.table4 td, .table4 th, .table4 tr {
+        height: 10px !important;
+        font-size: 12px; /* Adjust as needed */
+        padding: 0 !important; /* Remove extra padding */
+        overflow: hidden; /* Hide excess content */
+        white-space: wrap; /* Prevent text wrapping */
+        text-align: center;
+}
+
+/*Whole Table*/
+.container-table {
+    width: 100%;
+    border: 1px solid #000;
+    table-layout: fixed;
+}
+
+.container-table td {
+    vertical-align: top;
+    padding: 5px;
+}
+
+.container-table .divider {
+    border-right: 1px solid #000;
+}
+
+/*Inputs*/
+input[type="text"],
+input[type="date"],
+input[type="number"] {
+    width: 20%;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/*Buttons*/
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.buttonGroup input[type="submit"],
+.buttonGroup input[type="button"] {
+    width: 150px;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.buttonGroup input[type="submit"]:hover {
+    background: #0056b3;
+}
+
+.buttonGroup input[type="button"] {
+    background: #28a745;
+}
+
+.buttonGroup input[type="button"]:hover {
+    background: #218838;
+}
+
+/*Container 1*/
+.container1 {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.container1 .office, .container1 .name {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.container1 .title {
+        margin-right: 20px;
+}
+
+.container1 .name {
+    display: flex;
+    flex-direction: column;
+}
+
+.container1 .name label {
+    text-align: start;
+    font-weight: bold;
+}
+
+.container1 .name .name-fields {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.container1 .name .name-fields div {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.container1 label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 70%;
+}
+
+.container1 .name input {
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    width: 90%;
+    display: block;
+}
+
+.container2 label{
+    margin-left: 10px;
+}
+
+.subtext {
+    color: #373A40;
+    font-size: 0.8em;
+}
+
+.container4A table input[type="text"] {
+    border-bottom: none;
+    width: 100%;
+    padding: 5px;
+    display: block;
+}
+
+h5{
+    text-align: center;
+}
+
+.signatureHR {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.signatureApplicant {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 2px;
+    padding-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container4A .signatureHR input[type="text"]{
+    width: 100%;
+    padding: 5px;
+    display: block;
+    border-bottom: 1px solid black;
+
+}
+
+.container3D .signatureApplicant input[type="text"]{
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    display: block;
+    border-bottom: 1px solid black;
+
+}
+
+.signatureAdmin {
+    text-align: center;
+    padding-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 23%;
+    margin-bottom: 2%;
+}
+
+.container3C input[type="text"]{
+    width:60%
+}
+
+
+.container4B .signatureAdmin input[type="text"]{
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    display: block;
+    border-bottom: 1px solid black;
+}
+
+.container4A .asOf{
+    align-items: center;
+    display: block;
+    margin-bottom: 10px;
+    margin-left: 150px;
+
+}
+
+.container4C {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.container4C-check{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.approvedContainer, .disapproved {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+   
+}
+
+.approvedContainer div, .disapproved div {
+    display: flex;
+    align-items: center;
+    
+    width: 100%;
+}
+
+.approvedContainer label, .disapproved label {
+    text-align: start;
+    font-weight: bold;
+    width: 60%;
+}
+
+.approvedContainer input {
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    width: 10%;
+    display: block;
+}
+.disapproved input {
+    padding: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    width: 90%;
+    display: block; 
+}
+
+.signatureGov {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signatureGov input[type="text"]{
+    width: 100%;
+    max-width: 100%;
+    padding: 5px;
+    display: block;
+    border-bottom: 1px solid black;
+    align-items: center;
+}
+
+/*Checkbox*/
+/* Hide default checkbox */
+input[type="checkbox"] {
+    appearance: none; /* Removes default styling */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 16px; /* Adjust size */
+    height: 16px;
+    border: 2px solid black; /* Black border */
+    border-radius: 3px; /* Optional: rounded edges */
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Custom checkmark when checked */
+input[type="checkbox"]:checked::before {
+    content: "\2713"; /* Unicode checkmark */
+    font-size: 10px;
+    color: black; /* Black checkmark */
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*Office*/
+.office select {
+    width: 50%;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+}
+
+.dropdown-selected {
+    width: 50%;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.dropdown-options {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-options div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-options div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}

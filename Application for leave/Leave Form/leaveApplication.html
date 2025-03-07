@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application for Leave</title>
+    <script src="leaveApplication.js"></script>
+    <link rel="stylesheet" href="leave.css">
+    <link rel="stylesheet" href="leavePrint.css" media="print">
+    <script src="leavePrint.js"></script>
+    <script src="fetch_offices.php"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <script>
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header").innerHTML = data);
+    </script>
+
+
+    <div class="wrapper">
+        <form action="submit_leave.php" method="post">
+            <table class="container-table">
+                <tr>
+                    <td colspan="2" class="divider">
+                        <div class="container1">
+                            <div class="office">
+                                <label>1. OFFICE/DEPARTMENT</label>
+                                <select id="officeDropdown" name="office" required>
+                                    <option value="">Select an Office</option>
+                                </select>                                
+                            </div>
+
+                            <div class="name">
+                                <div class="name-fields">
+                                    <label>2. NAME:</label>
+                                    <div><label>Last Name:</label><input type="text" name="lastName" required></div>
+                                    <div><label>First Name:</label><input type="text" name="firstName" required></div>
+                                    <div><label>Middle Name:</label><input type="text" name="middleName" required></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="divider">
+                        <label>3. DATE OF FILING</label>
+                        <input type="date" name="filingDate" required>
+                        <label>4. POSITION</label>
+                        <input type="text" name="position" required>
+                        <label>5. SALARY</label>
+                        <input type="text" name="salary" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="divider">
+                        <h5>6. DETAILS OF APPLICATION</h5>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="divider">
+                        <div class="container3A">
+                            <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>
+                            <input type="radio" name="leaveType" value="vacationLeave" required> 
+                                <label>Vacation Leave</label>
+                                    <span class="subtext">(Sec. 51, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+                            <input type="radio" name="leaveType" value="forceLeave" required> 
+                                <label>Mandatory/Forced Leave</label>
+                                <span class="subtext"> (Sec. 2, Rule XVI, Omnibus Rules Implementing E.ONo.292)</span><br>
+                            <input type="radio" name="leaveType" value="sickLeave" required> 
+                                <label>Sick Leave</label>
+                                <span class="subtext"> (Sec. 43, Rule SVI, Omnibus Rules Implementing E.O No.292)</span><br>
+                            <input type="radio" name="leaveType" value="maternityLeave" required> 
+                                <label>Maternity Leave</label>
+                                <span class="subtext"> (R.A. No. 11210/IRR issued by CSC, DOLE and SSS)</span><br>
+                            <input type="radio" name="leaveType" value="paternityLeave" required> 
+                                <label>Paternity Leave</label>
+                                <span class="subtext"> (R.A. No. 8187/CSC MC No. 71, s. 1998, as amended)</span><br>
+                            <input type="radio" name="leaveType" value="specialPrivilege" required> 
+                                <label>Special Privilege Leave</label>
+                                <span class="subtext"> (Sec. 21, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+                            <input type="radio" name="leaveType" value="soloParentLeave" required>
+                                <label>Solo Parent Leave</label> 
+                                <span class="subtext"> (RA No. 8972/CSC MC No. 8, s. 2004)</span><br>
+                            <input type="radio" name="leaveType" value="studyLeave" required> 
+                                <label>Study Leave</label>
+                                <span class="subtext"> (Sec. 68, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+                            <input type="radio" name="leaveType" value="vawcLeave" required> 
+                                <label>10-Day VAWC Leave</label><span
+                                    class="subtext"> (RA No. 9262/CSC MC No. 15 s. 2005)</span><br>
+                            <input type="radio" name="leaveType" value="rehabPriv" required> 
+                                <label>Rehabilitation Privilege</label><span
+                                    class="subtext"> (Sec. 55, Rule XVI, Omnibus Rules Implementing E.O
+                                    No.292)</span><br>
+                            <input type="radio" name="leaveType" value="specialLeave" required> 
+                                <label>Special Leave Benefits for
+                                    Women</label><span class="subtext"> (RA No. 9710/CSC No. 25, s. 2010)</span><br>
+                            <input type="radio" name="leaveType" value="specialEmergency" required> 
+                                <label>Special Emergency Leave</label><span
+                                    class="subtext"> (CSC MC No. 2, s. 2012, as amended)</span><br>
+                            <input type="radio" name="leaveType" value="adoptionLeave" required> <label>Adoption Leave</label><span
+                                    class="subtext"> (R.A. No. 8552)</span><br>
+                            <input type="radio" name="leaveType" value="others" required><label>Others (Specify)</label>
+                            <input type="text" name="leaveTypeOthers" value=""
+                                    onclick="disableOtherCheckboxes(this)"><br><br>
+                        </div>
+                    </td>
+
+                    <td class="divider">
+                        <div class="container3B">
+                            <label>6.B DETAILS OF LEAVE</label>
+                            <!-- Vacation/Special Privilege Leave Details -->
+                            <div id="vacationDetails">
+                                <label>In case of vacation/special privilege Leave:</label><br>
+                                <input type="radio" name="detailType" value="withinPhilippines"> Within Philippines
+                                <input type="text" id="withinPhilippinesDetail" name="withinPhilippinesDetail"
+                                    class="required-field"><br>
+                                <input type="radio" name="detailType" value="abroad"> Abroad
+                                <input type="text" id="abroadDetails" name="abroadDetails"
+                                    class="required-field"><br><br>
+                            </div>
+
+                            <!-- Sick Leave Details -->
+                            <div id="sickLeaveDetails">
+                                <label>In case of sick Leave:</label><br>
+                                <input type="radio" name="hospital" value="1"> In Hospital (Specify Illness)
+                                <input type="text" id="hospitalDetail" name="hospitalDetail" class="required-field"><br>
+                                <input type="radio" name="outPatient" value="1"> Out Patient (Specify Illness)
+                                <input type="text" id="outPatientDetail" name="outPatientDetail"
+                                    class="required-field"><br><br>
+                            </div>
+
+                            <!-- Special Leave Benefits for Women -->
+                            <div id="womenLeaveDetails">
+                                <label>In case of Special Leave Benefits for Women:</label><br>
+                                <label>Specify Illness</label>
+                                <input type="text" id="leaveWomen" name="leaveWomen" class="required-field"><br>
+                            </div>
+
+                            <!-- Study Leave -->
+                            <div id="studyLeaveDetails">
+                                <label>In case of Study Leave:</label><br>
+                                <input type="radio" name="completion" value="1"> Completion of Master's Degree<br>
+                                <input type="radio" name="exam" value="1"> BAR/Board Examination Review<br>
+                            </div>
+
+                            <!-- Other Purposes -->
+                            <div id="otherPurposes">
+                                <label>Other Purposes:</label><br>
+                                <input type="radio" name="monetization" value="1"> Monetization of Leave Credits<br>
+                                <input type="radio" name="terminal" value="1"> Terminal Leave<br>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="divider">
+                        <div class="container3C">
+                            <label>6.C NUMBER OF WORKING DAYS APPLIED FOR</label>
+                            <input type="text" name="workingDays" required><br>
+                            <label>Inclusive Dates</label>
+                            <input type="date" name="inclDates" required>
+                        </div>
+                    </td>
+                    <td class="divider">
+                        <div class="container3D">
+                            <label>6.D COMMUTATION</label><br>
+                            <input type="radio" name="notRequested"> Not Requested<br>
+                            <input type="radio" name="requested"> Requested<br>
+                            <div class="signatureApplicant">
+                                <input type="text" name="signatureApplicant">
+                                <label>(Signature of Applicant)</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="divider">
+                        <h5>7. DETAILS OF ACTION ON APPLICATION</h5>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="divider">
+                        <div class="container4A">
+                            <label>7.A CERTIFICATION OF LEAVE CREDITS</label><br>
+                            <div class="asOf">
+                                <label>As of:</label>
+                                <input type="date" name="asOf" required>
+                            </div>
+                            <table class="table4">
+                                <tr>
+                                    <th></th>
+                                    <th>Vacation Leave</th>
+                                    <th>Sick Leave</th>
+                                </tr>
+                                <tr>
+                                    <td>Total Earned</td>
+                                    <td><input type="text" name="vacationTotalEarned"></td>
+                                    <td><input type="text" name="sickTotalEarned"></td>
+                                </tr>
+                                <tr>
+                                    <td>Less this application</td>
+                                    <td><input type="text" name="vacationLessApplication"></td>
+                                    <td><input type="text" name="sickLessApplication"></td>
+                                </tr>
+                                <tr>
+                                    <td>Balance</td>
+                                    <td><input type="text" name="vacationBalance"></td>
+                                    <td><input type="text" name="sickBalance"></td>
+                                </tr>
+                            </table>
+                            <div class="signatureHR">
+                                <input type="text" name="signatureHR">
+                                <label>JOSE FERNANDO G. MANAHAN</label><br>
+                                <label>OIC, PHRMO</label>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="divider">
+                        <div class="container4B">
+                            <label>7.B RECOMMENDATION</label><br>
+                            <input type="radio" name="approval" value="1"> For Approval<br>
+                            <input type="radio" name="disapproval" value="1"> For Disapproval due to
+                            <input type="text" name="disapprovalDetail"><br>
+
+                            <div class="signatureAdmin">
+                                <input type="text" name="signatureAdmin">
+                                <label>ANTONIA V. CONSTANTINO</label><br>
+                                <label>Provincial Administrator</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="divider">
+                        <div class="container4C">
+                            <div class="container4C-check">
+                                <div class="approvedContainer">
+                                    <label>7.C APPROVED FOR</label>
+
+                                    <div><input type="text" name="pay"><label>days with pay</label></div>
+                                    <div><input type="text" name="withoutPay"><label>days without pay</label></div>
+                                    <div><input type="text" name="othersApproved"><label>Others (Specify)</label></div>
+                                </div>
+                                <div class="disapproved container">
+                                    <label>7.D DISAPPROVED DUE TO:</label><br>
+                                    <input type="text" name="disapprovedTo"><br>
+                                </div>
+                            </div>
+
+                            <div class="signatureGov">
+                                <input type="text" name="signatureGov"><br>
+                                <label>HON. DANIEL R. FERNANDO</label><br>
+                                <label>Provincial Governor</label>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="buttonGroup">
+                <input type="submit" value="Submit">
+                <input type="button" value="Print" onclick="printLeaveForm();">
+            </div>
+
+        </form>
+    </div>
+
+    <script src="dropdown.js"></script>
+    <script src="fetch_offices.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Locator Slip</title>
+        <link rel="stylesheet" href="locatorSlip.css">
+        <link rel="stylesheet" href="../../logoHeader.css"> 
+        <link rel="stylesheet" href="../../footer.css">  
+        <link rel="stylesheet" href="locatorPrint.css">      
+    </head>
+    
+    <body>
+        <!-- LOGO -->
+        <div class="logo-container">
+            <img src="../../images/topheaderlogo.png" alt="Office Logo">
+        </div>
+        
+        <!-- HEADER -->
+        <div class="header">
+            <h1>Provincial Information Technology Office</h1>
+            <h2 class="subtext">(Office)</h2>
+        </div><br>
+
+        <form action="submit_locator.php" method="POST">
+            <h2>Locator Slip</h2>
+            <div class="content1">
+                <div class="official">
+                    <input type="checkbox" id="official" name="official">
+                    <label for="officialText">Official</label><br>
+                </div>
+                <div class="date-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date">
+                    <span class="subtext">(Date of Filing)</span>
+                </div>
+            </div>
+
+            <div class="content2">
+                <div class="field-group">
+                    <label for="destination">Destination:</label>
+                    <input type="text" id="destination" name="destination" required>
+                </div>
+            
+                <div class="field-group">
+                    <label for="purpose">Purpose:</label>
+                    <input type="text" id="purpose" name="purpose" required>
+                </div>
+            </div>            
+
+            <div class="content3">
+                <label for="inclDate">Inclusive Dates: </label>
+                <input type="date" id="inclDate" name="inclDate" required><br><br>
+
+                <label for="timeDeparture">Departure Time: </label>
+                <input type="time" id="timeDeparture" name="timeDeparture" required><br><br>
+
+                <label for="timeArrival">Arrival Time: </label>
+                <input type="time" id="timeArrival" name="timeArrival" required><br><br>
+            </div>
+
+            <div class="request-group">
+                <label for="request">Requested by:</label>
+                <input type="text" id="request" name="request" required>
+            </div>
+            
+            <input type="submit" id="submit" value="Submit">
+        </form>
+
+        <script src="locator.js"></script>   
+        
+        <footer class="footer">
+            <div class="footer-text">
+                <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
+                Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
+                Telephone Nos.: +63 44 791 8145 <br>
+                Email Address: phrmo@bulacan.gov.ph</p>
+            </div>
+            <img src="../../images/footer.png" alt="Footer Image">
+        </footer> 
+    </body>
+</html>

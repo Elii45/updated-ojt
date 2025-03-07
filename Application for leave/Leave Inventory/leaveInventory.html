@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Leave Inventory</title>
+        <link rel="stylesheet" href="../../footer.css">
+        <link rel="stylesheet" href="../../logoHeader.css">
+        <link rel="stylesheet" href="leaveInventory.css">
+        <link rel="stylesheet" href="leavePrintInventory.css">
+    </head>
+    
+    <body onload="fetchInventoryData()">
+        <!-- LOGO -->
+        <div class="logo-container">
+            <img src="../../images/topheaderlogo.png" alt="Office Logo">
+        </div>
+
+        <!-- HEADER -->
+        <div class="header">
+            <h1>PANLALAWIGANG TANGGAPAN NG IMPORMASYONG PANTEKNOLOHIYA</h1>
+        </div><br>
+
+        <div class="container">
+            <div class="date-group">
+                <label>Date:</label>
+                <input type="date">
+            </div><br>
+
+            <div class="text-group">
+                <label class="name"> G. JOSE FERNANDO G. MANAHAN</label>
+                <label class="position"> Puno, PHRMO</label>
+                <label class="building"> Pamahalaang Panlalawigan ng Bulacan</label>
+                <label class="area"> Lungsod ng Malolos, Bulacan</label>
+            </div>
+            <br><br>
+
+            <label> Mahal na </label>
+            <label class="surname">Ginoong Manahan:</label><br><br>
+            <label> Magalang na isinusumite ang talaan ng mga kawani at kaukulang papeles para sa aplikasyon sa sumusunod: </label><br><br>
+            <label class="option">(/) Leave Application/s</label><br>
+            <label>( ) Locator Slip/s</label><br><br>
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Blg.</th>
+                        <th>Pangalan ng Kawani</th>
+                        <th>Petsa ng Filing</th>
+                        <th>Petsa ng Pagliban</th>
+                        <th>Aksyon ng HRMO</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                    <!-- Table rows will be inserted dynamically here -->
+                </tbody>
+            </table><br>
+
+            <label class="salamat"> Maraming Salamat po! </label><br>
+
+            <label class="greet"> Sumasainyo, </label><br>
+
+            <label class="signature"> INH. RHEA LIZA R. VALERIO </label> 
+            <br><br>
+
+            <div class="button-container">
+                <button type="button" onclick="window.location.href = '../leave form/leaveApplication.html';">Back to Leave Application</button>
+                <button class="print-btn" onclick="printPage()">Print</button>
+            </div>
+        </div>
+
+        <script src="leavePrint.js"></script>
+        
+        <footer class="footer">
+            <div class="footer-text">
+                <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
+                Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
+                Telephone Nos.: +63 44 791 8145 <br>
+                Email Address: phrmo@bulacan.gov.ph</p>
+            </div>
+            <img src="../../images/footer.png" alt="Footer Image">
+        </footer>
+    </body>
+</html>

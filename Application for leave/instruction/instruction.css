@@ -1,0 +1,62 @@
+/* Table */
+table {
+    border-collapse: collapse;
+    margin: auto;
+    margin-top: 10px;
+    table-layout: auto;
+    width: 80% !important;
+    border-spacing: 0;
+}
+
+/* Table cells */
+th, td {
+    border: none; /* Removes border */
+    padding: 8px;
+    text-align: justify; /* Justifies the text */
+}
+
+th.title {
+    text-align: center;
+    border: 1px solid black;
+    background-color: none;
+}
+
+td:first-child {
+    width: 50%;
+}
+
+td:last-child {
+    width: 50%;
+}
+
+
+/* Next Button */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Moves button to the right */
+    padding: 20px;
+}
+
+.next-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    margin-right: 360px;
+}
+
+.next-button i {
+    margin-left: 8px;
+}
+
+.next-button:hover {
+    background-color: #0056b3;
+}

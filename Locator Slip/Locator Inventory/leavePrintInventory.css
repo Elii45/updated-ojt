@@ -1,0 +1,95 @@
+
+@media print {
+    .print-btn, .button-container, input[type="date"] {
+        display: none !important;
+    }
+
+    .logo-container {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo-container img {
+        max-width: auto;
+        height: auto;
+        display: block !important;
+    }
+
+    .header {
+        font-size: 10px !important;
+        text-align: center;
+        margin-top: 150px;
+    }
+
+    body {
+        background-image: url("../images/body.png");
+        background-size: auto; 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed; 
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+        padding: 20px;
+        background: none !important; 
+    }
+
+    table {
+        width:  95%;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 4px;
+        border: 1px solid black;
+        text-align: left;
+        word-wrap: break-word;
+        font-size: 12px;
+    }   
+    .signature {
+        font-size: 15px !important;
+        text-align: left;
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        width: 100%;
+    }
+    
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        text-align: center;
+        background: white;
+        padding: 10px 0;
+        font-size: 12px;
+    }
+
+    .footer img {
+        max-width: auto;
+        height: auto;
+        display: block !important;
+    }
+
+    .footer-text {
+        font-size: 7px; 
+        color: rgb(17, 31, 189);
+        text-align: left;
+        margin-top: 5px;
+    }
+    @page {
+        size: A4 portrait;
+        margin: 10mm;
+    }
+}

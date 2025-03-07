@@ -1,0 +1,228 @@
+body {
+    font-family: Arial, sans-serif;
+
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+}
+
+/*Container*/
+.container {
+    border: 2px solid blue;
+    align-items: center;
+    width: 90%;
+    margin-left: 100px;
+}
+
+/*Form*/
+form {
+    background: #fff;
+    padding: 20px;
+    width: 1300px;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("../images/body.png");
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.form-group {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.form-group > div {
+    width: 48%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+
+.form-group label {
+    width: 40%;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-group input {
+    width: 60%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+/*Office*/
+.office select {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #ccc; /* Only bottom border */
+    border-radius: 0; /* Removes rounded corners */
+    background-color: transparent; /* Makes input transparent */
+    outline: none; /* Removes focus outline */
+}
+
+/*Employee*/
+.employeeName {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+.employeeName label {
+    width: 40%;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.employeeName input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #ccc; /* Only bottom border */
+    border-radius: 0; /* Removes rounded corners */
+    background-color: transparent; /* Makes input transparent */
+    outline: none; /* Removes focus outline */
+}
+
+input[type="text"], input[type="date"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-bottom: 2px solid #ccc; /* Only bottom border */
+    border-radius: 0; /* Removes rounded corners */
+    background-color: transparent; /* Makes input transparent */
+    outline: none; /* Removes focus outline */
+}
+
+/*Table*/
+table {
+    width: 80%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    border: 2px solid black;
+}
+
+td {
+    padding: 10px;
+    border: 2px solid black;
+}
+
+td:first-child {
+    width: 40%;
+    font-weight: bold;
+    text-align: right;
+    padding-right: 10px;
+}
+
+td:last-child {
+    width: 60%;
+    text-align: center;
+}
+
+td:last-child input {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    text-align: center; /* Centers text inside input */
+
+}
+
+/*Print and Submit*/
+input[type="submit"] {
+    background: #007bff;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 30%;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+button {
+    background: #0023e4;
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 30%;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #000642;
+}
+
+/*Signatures*/
+.namegroup {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+    gap: 20px;
+    margin-left: 50px;
+    margin-bottom: 70px;
+}
+
+.submitted, .approved {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+}
+
+.submitted label, .approved label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.submitted input, .approved input {
+    width: 50%;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.submitted .signature, .approved .signature {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 5px;
+    width: 50%;
+}
