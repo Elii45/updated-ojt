@@ -52,7 +52,7 @@ form {
 }
 
 .form-group > div {
-    width: 48%;
+    width: 55%;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
@@ -111,7 +111,7 @@ form {
 }
 
 /*Date Filing, Position and Signatures Input*/
-input[type="text"], input[type="date"], input[type="number"] {
+input[type="text"], input[type="date"] {
     width: 100%;
     padding: 8px;
     border: none;
@@ -119,6 +119,18 @@ input[type="text"], input[type="date"], input[type="number"] {
     border-radius: 0;
     background-color: transparent;
     outline: none;
+}
+
+input[type="number"] {
+    border: none !important; /* Removes all borders */
+    border-bottom: none !important; /* Ensures uniform bottom border */
+    background: transparent !important;
+    color: none !important;
+    font-size: 10pt;
+    width: 70px !important; /* Force width */
+    max-width: 100%; /* Ensure it doesn't overflow */
+    height: auto;
+    text-align: left;
 }
 
 /*Table*/
