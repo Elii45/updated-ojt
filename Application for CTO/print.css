@@ -1,33 +1,33 @@
 @media print {
     @page {
-        size: A4 landscape; /* Force landscape orientation */
-        margin: 1mm; /* Adjust margins for better fit */
-        
+        size: A4 landscape;
+        margin: 0mm;
     }
 
-    /* Hide unnecessary elements */
-    .print-alert, .button, input[type="date"], input[type="text"] {
+    /* Hide elements */
+    .print-alert,
+    .button,
+    input[type="date"],
+    input[type="text"] {
         display: none !important;
     }
 
-    /* Ensure body fills page and prevents overflow */
-    body, html {  
+    body,
+    html {
         width: 100%;
         height: 100%;
-        overflow: hidden; /* Prevents overflow onto a second page */
-        font-size: 9pt; /* Reduce font size slightly to fit */  
+        overflow: hidden;
+        font-size: 9pt;
     }
 
-    /* Center header */
     header {
         width: 100%;
         max-width: 100%;
         text-align: center;
-        font-size: 8pt; /* Reduce font size for space */
+        font-size: 8pt;
         font-weight: bold;
     }
 
-    /* Ensure form fits properly */
     form {
         width: 950px;
         height: 300px;
@@ -47,21 +47,21 @@
         margin-left: 65px;
     }
 
-    .form-group{
+    .form-group {
         margin-top: -30px;
     }
 
-    /* Adjust table for better fit */
     table {
         width: 600px;
         margin-top: -20px;
         border: 2px solid black !important;
-        font-size: 9pt; /* Reduce table text size */
-        page-break-inside: avoid; /* Prevents splitting */
-        
+        font-size: 9pt;
+        page-break-inside: avoid;
+
     }
 
-    td, th {
+    td,
+    th {
         padding: 3px;
         text-align: center;
         border: 2px solid black !important;
@@ -73,12 +73,12 @@
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
-        text-align: center; /* Centers text inside input */
-    
+        text-align: center;
     }
 
-    /* Ensure inputs stay visible */
-    input, select, textarea {
+    input,
+    select,
+    textarea {
         font-size: 10pt;
         border-bottom: 1px solid black !important;
         width: 100%;
@@ -86,105 +86,107 @@
         color: black;
         padding: 3px;
         page-break-inside: avoid;
-    }    
+    }
 
     button {
         display: none;
     }
 
-    /* Keep signature section on one page */
     .signature-section {
         page-break-inside: avoid;
         text-align: center;
     }
-    
- /* Hiding Inputs */
- input, select {
-    background: transparent !important;
-    color: black !important;
-    font-size: inherit;
-    pointer-events: none;
-    width: auto;
-    display: inline;
-}
 
-input::before, select::before {
-    content: attr(data-value);
-    display: inline;
-    color: black;
-}
+    input,
+    select {
+        background: transparent !important;
+        color: black !important;
+        font-size: inherit;
+        pointer-events: none;
+        width: auto;
+        display: inline;
+    }
 
-input[type="text"], input[type="date"], input[type="number"] {
-    display: inline !important;
-    border-bottom: none;
-}
+    input::before,
+    select::before {
+        content: attr(data-value);
+        display: inline;
+        color: black;
+    }
 
-input[type="number"] {
-    display: inline !important;
-    border: none;
-}
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+        display: inline !important;
+        border-bottom: none;
+    }
 
-/* Show only stored values for text and number fields */
-input:not([type="date"])::before, 
-select::before {
-    content: attr(data-value);
-    display: inline;
-    color: black;
-}
+    input[type="number"] {
+        display: inline !important;
+        border: none;
+    }
 
-/* Special handling for Date Fields */
-input[type="date"] {
-    border-bottom: 1px solid black;
-    position: relative;
-    visibility: hidden; /* Hide actual input */
-}
+    input:not([type="date"])::before,
+    select::before {
+        content: attr(data-value);
+        display: inline;
+        color: black;
+    }
 
-/* Display date value as text instead */
-input[type="date"]::before {
-    content: attr(data-value); /* Show stored date value */
-    visibility: visible;
-    position: relative ;
-    color: black;
-    margin-top: 6px;
-}
+    input[type="date"] {
+        border-bottom: 1px solid black;
+        position: relative;
+        visibility: hidden;
+    }
 
-/* Hide buttons and alerts */
-.button, .print-alert, .custom-alert {
-    display: none !important;
-}
+    input[type="date"]::before {
+        content: attr(data-value);
+        visibility: visible;
+        position: relative;
+        color: black;
+        margin-top: 6px;
+    }
 
-/* Ensure Employee Name, Position, and Date of CTO are visible */
-label {
-    font-weight: bold;
-    color: black !important;
-}
+    .button,
+    .print-alert,
+    .custom-alert {
+        display: none !important;
+    }
 
-/*Signature*/
-.namegroup {
-    margin-top: -5px;
-    background: transparent;
-}
-.approved .signature{
-    font-size: 12px;
-} 
-.submitted .signature{
-    font-size: 12px;
-}
+    /* Ensure Employee Name, Position, and Date of CTO are visible */
+    label {
+        font-weight: bold;
+        color: black !important;
+    }
 
-.cto-date-container {
-    height: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    margin-left: -35px;
-}
+    /*Signature*/
+    .namegroup {
+        margin-top: -5px;
+        background: transparent;
+    }
 
-input[name="ctoDate"] {
-    text-align: left;
-}
+    .approved .signature {
+        font-size: 12px;
+    }
 
-/*Footer*/
+    .submitted .signature {
+        font-size: 12px;
+    }
+
+    .cto-date-container {
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 15px;
+        margin-left: -35px;
+    }
+
+    input[name="ctoDate"] {
+        text-align: left;
+    }
+
+    /*Footer*/
     .footer {
         position: fixed;
         bottom: 0;
@@ -200,12 +202,12 @@ input[name="ctoDate"] {
     .footer img {
         max-width: auto;
         height: 100%;
-        display: block !important; /* Ensure it is visible */
+        display: block !important;
         position: fixed;
     }
+
     .footer-text {
-        
-        font-size: 7px; /* Make text smaller */
+        font-size: 7px;
         color: rgb(17, 31, 189);
         text-align: left;
         margin-top: 5px;

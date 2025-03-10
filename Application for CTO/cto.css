@@ -30,7 +30,7 @@ label {
 form {
     background: #fff;
     padding: 20px;
-    width: 1300px;
+    width: 1195px;
     max-width: 100%;
     display: flex;
     flex-direction: column;
@@ -39,6 +39,7 @@ form {
     background-size: auto;
     background-position: center;
     background-repeat: no-repeat;
+    margin-left: 5px;
 }
 
 .form-group {
@@ -77,10 +78,10 @@ form {
     width: 100%;
     padding: 8px;
     border: none;
-    border-bottom: 2px solid #ccc; /* Only bottom border */
-    border-radius: 0; /* Removes rounded corners */
-    background-color: transparent; /* Makes input transparent */
-    outline: none; /* Removes focus outline */
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
 }
 
 /*Employee*/
@@ -103,20 +104,21 @@ form {
     width: 100%;
     padding: 8px;
     border: none;
-    border-bottom: 2px solid #ccc; /* Only bottom border */
-    border-radius: 0; /* Removes rounded corners */
-    background-color: transparent; /* Makes input transparent */
-    outline: none; /* Removes focus outline */
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
 }
 
+/*Date Filing, Position and Signatures Input*/
 input[type="text"], input[type="date"], input[type="number"] {
     width: 100%;
     padding: 8px;
     border: none;
-    border-bottom: 2px solid #ccc; /* Only bottom border */
-    border-radius: 0; /* Removes rounded corners */
-    background-color: transparent; /* Makes input transparent */
-    outline: none; /* Removes focus outline */
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
 }
 
 /*Table*/
@@ -150,11 +152,11 @@ td:last-child input {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    text-align: center; /* Centers text inside input */
+    text-align: center;
 
 }
 
-/*Print and Submit*/
+/*Print/Submit Button*/
 input[type="submit"] {
     background: #007bff;
     color: #fff;
