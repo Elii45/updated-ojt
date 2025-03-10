@@ -1,19 +1,17 @@
 @media print {
-
-    /* Remove default browser margins */
     @page {
         size: A4;
         margin: none;
-        /* Removes all margins */
     }
+    /*#instructionPage {
+        page-break-after: always;
+    }*/
 
     .header {
         text-align: center;
         font-size: 20px;
-        /* Change size for printing */
         margin-bottom: -220px !important;
         margin-left: 40px;
-        
     }
 
     .logo {
@@ -36,7 +34,7 @@
     .title {
         font-weight: bold;
         font-size: 30px;
-       
+
     }
 
     .stamp {
@@ -76,9 +74,7 @@
     /*Table Inside*/
     table {
         width: 30%;
-        /* Reduce the width */
         height: auto;
-        /* Let height adjust automatically */
         border-collapse: collapse;
         margin-top: -1px;
         align-items: left;
@@ -89,25 +85,20 @@
     td {
         border: 1px solid #000;
         padding: 4px;
-        /* Reduce padding */
         font-size: 12px;
-        /* Make text smaller */
         text-align: left;
     }
 
     th {
         text-align: center;
         font-size: 14px;
-        /* Keep headers readable */
     }
 
 
     /*Table 4 */
     .table4 {
         width: 80%;
-        /* Reduce the width */
         height: 20px !important;
-        /* Let height adjust automatically */
         border-collapse: collapse;
         margin-top: 30px;
         margin-left: auto;
@@ -116,8 +107,6 @@
         border: 1px solid #000000;
         text-align: center;
         padding: 4px;
-        /* Reduce padding */
-
     }
 
     .table4 td,
@@ -125,13 +114,9 @@
     .table4 tr {
         height: 10px !important;
         font-size: 12px;
-        /* Adjust as needed */
         padding: 0 !important;
-        /* Remove extra padding */
         overflow: hidden;
-        /* Hide excess content */
         white-space: wrap;
-        /* Prevent text wrapping */
         text-align: center;
     }
 
@@ -178,7 +163,7 @@
         border-radius: 0;
         width: 20%;
     }
-    
+
 
     input[type="checkbox"] {
         margin-right: 10px;
@@ -201,40 +186,47 @@
         margin-top: 20px;
     }
 
-    .buttonGroup input[type="submit"],
-    .buttonGroup input[type="button"] {
-        width: 150px;
-        padding: 10px;
-        background: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 16px;
-        cursor: pointer;
-        text-align: center;
-    }
-
-    .buttonGroup input[type="submit"]:hover {
-        background: #0056b3;
-    }
-
-    .buttonGroup input[type="button"] {
-        background: #28a745;
-    }
-
-    .buttonGroup input[type="button"]:hover {
-        background: #218838;
-    }
-
     /*Office*/
-.office select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: none;
-    border-bottom: none;
-    border-radius: 0;
-}
+    select[name="office"] {
+        border: none !important;
+        background: transparent !important;
+        color: black !important;
+        font-size: 8pt;
+        width: 100%;
+        display: inline-block;
+        height: auto;
+        margin: 0px !important;
+        line-height: normal !important;
+        appearance: none;
+        pointer-events: none;
+        text-align: left;
+    }
+
+    select[name="office"]::-ms-expand {
+        display: none;
+    }
+
+    select[name="office"] option {
+        color: black !important;
+    }
+
+    /* Hide the actual date input */
+    input[type="date"] {
+        visibility: hidden !important;
+        position: relative;
+    }
+
+    /* Display the formatted date after the input */
+    input[type="date"]+.formatted-date {
+        visibility: visible;
+        left: 0;
+        color: black;
+        width: auto;
+        text-align: left;
+        background: transparent;
+        pointer-events: none;
+        font-family: inherit;
+    }
 
     /*Container 1*/
     .container1 {
@@ -264,14 +256,15 @@
     .container1 .name label {
         text-align: start;
         font-weight: bold;
+        font-size: 10px;
     }
 
     .container1 .name .name-fields {
         display: flex;
         flex-direction: row;
-        gap: 3px;
+        gap: 1px;
     }
-    
+
     .container1 .name .name-fields div {
         display: flex;
         flex-direction: column;
@@ -412,7 +405,6 @@
     .disapproved div {
         display: flex;
         align-items: center;
-
         width: 100%;
     }
 
