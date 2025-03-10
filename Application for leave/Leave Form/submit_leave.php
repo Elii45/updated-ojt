@@ -1,17 +1,17 @@
 <?php
 // Database connection
-$host = 'localhost'; // Change if necessary
-$dbname = 'ojt';
-$username = 'root';
-$password = '';
+$servername = "127.0.0.1";
+$username = "root";
+$password = ""; // Set this if required
+$dbname = "ojt";
+$port = 3307;
 
 try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo = new PDO("mysql:host=$servername;port=$port;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Collect form data
@@ -34,7 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $officeName = $stmt->fetchColumn();
 
         if (!$officeName) {
-            die("<script>alert('Invalid Office ID'); window.history.back();</script>");
+            echo "<script>alert('Invalid Office ID'); window.history.back();</script>";
+            exit;
         }
 
         // Insert employee info with office_name instead of office_ID
