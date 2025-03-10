@@ -6,4 +6,4 @@
   -hours in cto should not input negative number
   -cto print footer cropped
   -locator slip print 
-  
+  -inventory dates gayahin yung sa leave date 
