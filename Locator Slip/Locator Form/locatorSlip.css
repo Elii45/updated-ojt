@@ -4,34 +4,106 @@ body {
     padding: 20px;
 }
 
+.formatted-date {
+    font-weight: normal;
+    color: black;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    padding: 3px 0;
+    width: 190px;
+    text-align: center;
+}
+
+
+/* Logo Header */
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center the content horizontally */
+    width: 100%;
+    position: relative;
+}
+
+.text-section {
+    font-size: 9px;
+    color: #666;
+    text-align: left;
+    line-height: 0.2;
+    position: absolute;
+    left: 80px;
+    /* Adjust based on preference */
+    top: 55%;
+    transform: translateY(-50%);
+}
+
+.office-logo {
+    max-width: 65vw;
+    height: auto;
+    margin-left: 50px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    color: #0c0909;
+    margin: 10px 0;
+    position: relative;
+}
+
+.header h1 {
+    display: inline-block;
+    font-size: 20px;
+    margin: 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid gray;
+    width: 65%;
+    text-align: center;
+}
+
+.header h2 {
+    font-size: 18px;
+    color: black;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    text-decoration: none;
+    transform: translateX(-50%);
+}
+
+
 h2 {
     text-align: center;
     text-decoration: underline;
 }
 
 form {
-    padding: 20px;
+    padding: 10px;
     width: 80%;
-    margin: auto;
     margin-top: 20px;
     margin: 0 auto;
-    padding: 20px;
-    margin: 0 auto;
-    border-radius: 10px; 
-    background-image: url("../../images/body.png"); /* Add background image */
-    background-size:auto; /* Adjust to cover the form area */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; 
-    border-radius: 10px; 
+    border-radius: 10px;
+    background-image: url("../../images/body.png");
+    /* Add background image */
+    background-size: auto;
+    /* Adjust to cover the form area */
+    background-position: center;
+    /* Center the image */
+    background-repeat: no-repeat;
+    border-radius: 10px;
 }
 
 label {
-    font-weight: bold;
+    font-weight: normal;
     display: block;
     margin-top: 10px;
+    margin-left: 5px;
 }
 
-input[type="text"]{
+input[type="text"] {
     width: 70%;
     padding: 8px;
     margin-top: 5px;
@@ -43,7 +115,7 @@ input[type="text"]{
 }
 
 input[type="time"],
-input[type="date"]{
+input[type="date"] {
     width: 12%;
     padding: 8px;
     margin-top: 5px;
@@ -51,7 +123,7 @@ input[type="date"]{
     border-radius: 4px;
 }
 
-.content1{
+.content1 {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -76,7 +148,7 @@ input[type="date"]{
 }
 
 .content2 label {
-    font-weight: bold;
+    font-weight: normal;
     white-space: nowrap;
     width: 100px;
     text-align: left;
@@ -87,7 +159,7 @@ input[type="date"]{
     max-width: 80%;
     padding: 8px;
     border: none;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid black;
     border-radius: 0;
     background-color: transparent;
     outline: none;
@@ -97,7 +169,7 @@ input[type="date"]{
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    padding: 15px;
+    padding: 10px;
     border-radius: 6px;
     margin-bottom: 15px;
     align-items: center;
@@ -108,16 +180,22 @@ input[type="checkbox"] {
     margin-right: 10px;
 }
 
+/*Buttons*/
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
 input[type="submit"] {
-    display: block;
-    margin: 20px auto;
     background: #0023e4;
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
-    width: 50%;
+    width: 45%;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -126,21 +204,50 @@ input[type="submit"] {
     box-shadow: 0 4px 6px rgba(60, 92, 220, 0.1);
 }
 
+button.print-btn {
+    background: #ff9800;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 45%;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(220, 92, 60, 0.1);
+}
+
 input[type="submit"]:hover {
     background: #000642;
 }
 
-input[type="submit"]:active {
-    background: #162028;
-    transform: scale(1);
+button.print-btn:hover {
+    background: #e68900;
 }
 
+input[type="submit"]:active,
+button.print-btn:active {
+    transform: scale(0.98);
+}
+
+/*Date Group*/
 .date-group {
     display: flex;
     margin-left: auto;
-    align-items: center; 
+    align-items: center;
     gap: 10px;
     position: relative;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the subtext below the input */
+    position: relative;
+    margin-top: 10px;
 }
 
 .date-group input[type="date"] {
@@ -148,14 +255,13 @@ input[type="submit"]:active {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    text-align: center;
 }
 
 .subtext {
     font-size: 12px;
     color: #666;
-    position: absolute;
-    left: 85px;
-    top: 100%;
+    text-align: center;
     margin-top: 2px;
 }
 
@@ -168,7 +274,7 @@ input[type="submit"]:active {
 }
 
 .request-group label {
-    font-weight: bold;
+    font-weight: normal;
     white-space: nowrap;
 }
 
@@ -177,7 +283,7 @@ input[type="submit"]:active {
     max-width: 80%;
     padding: 8px;
     border: none;
-    border-bottom: 2px solid #ccc;
+    border-bottom: 1px solid black;
     border-radius: 0;
     background-color: transparent;
     outline: none;
@@ -185,12 +291,50 @@ input[type="submit"]:active {
 
 .official {
     display: flex;
-    align-items: center; 
+    align-items: center;
     gap: 2px;
 }
 
-.official label{
+.official label {
     margin-bottom: 10px;
+}
+
+/* Custom Rectangular Checkbox */
+.official input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 15px;
+    border: 1px solid black;
+    background-color: white;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Custom X (Black) */
+.official input[type="checkbox"]::before,
+.official input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 1px;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    display: none;
+}
+
+/* Second line for X */
+.official input[type="checkbox"]::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Show X when checked */
+.official input[type="checkbox"]:checked::before,
+.official input[type="checkbox"]:checked::after {
+    display: block;
 }
 
 .alert {
@@ -216,40 +360,49 @@ input[type="submit"]:active {
     border: 1px solid #f5c6cb;
 }
 
-
-.header {
-    text-align: center;
-    font-size: 20px;
-    font-weight: bold;
-    padding: 15px;
-    color: rgb(12, 9, 9);
+/*Approved by*/
+.approved-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers the group */
+    justify-content: center;
     margin-top: 20px;
+    text-align: center;
+    width: 50%;
+    /* Half-width */
+    margin-left: auto;
+    margin-right: end;
+    /* Centers the group */
+}
+
+.approved-group label:first-child {
+    /* "Approved by:" */
+    align-self: flex-start;
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal;
     margin-bottom: 20px;
-    position: relative;
+    width: 100%;
+    margin-left: 132px;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 22px;
+.approved-group label:nth-child(2) {
+    /* "ENGR. RHEA LIZA R. VALERIO" */
+    display: inline-block;
+    border-bottom: 1px solid black;
     padding-bottom: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 55%;
 }
 
-.header h2 {
-    padding: 5px;
-    font-size: 20px;
-    color: #666;
-    position: absolute;
-    top: 100%; 
-    left: 50%; 
-    transform: translateX(-50%);
-    margin-top: 2px;
-}
-
-.header::after {
-    content: "";
-    display: block;
-    width: 80%;
-    height: 2px;
-    background-color: rgb(10, 9, 9);
-    margin: 8px auto 0;
+.approved-group label:last-child {
+    /* "Position" */
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    width: 100%;
+    margin-top: -10px;
 }

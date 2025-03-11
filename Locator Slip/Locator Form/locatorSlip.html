@@ -5,17 +5,22 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Locator Slip</title>
         <link rel="stylesheet" href="locatorSlip.css">
-        <link rel="stylesheet" href="../../logoHeader.css"> 
         <link rel="stylesheet" href="../../footer.css">  
         <link rel="stylesheet" href="locatorPrint.css">      
+        <script src="formatLocator.js"></script>
     </head>
     
     <body>
         <!-- LOGO -->
         <div class="logo-container">
-            <img src="../../images/topheaderlogo.png" alt="Office Logo">
+            <div class="text-section">
+                <p>Form No. HRD 12</p>
+                <p>Jul 2019</p>
+                <p>Rev 03</p>
+            </div>
+            <img src="../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
         </div>
-        
+                
         <!-- HEADER -->
         <div class="header">
             <h1>Provincial Information Technology Office</h1>
@@ -23,7 +28,7 @@
         </div><br>
 
         <form action="submit_locator.php" method="POST">
-            <h2>Locator Slip</h2>
+            <h2>LOCATOR SLIP</h2>
             <div class="content1">
                 <div class="official">
                     <input type="checkbox" id="official" name="official">
@@ -31,9 +36,11 @@
                 </div>
                 <div class="date-group">
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date">
-                    <span class="subtext">(Date of Filing)</span>
-                </div>
+                    <div class="input-container">
+                        <input type="date" id="date" name="date">
+                        <span class="subtext">(Date of Filing)</span>
+                    </div>
+                </div>                
             </div>
 
             <div class="content2">
@@ -63,8 +70,18 @@
                 <label for="request">Requested by:</label>
                 <input type="text" id="request" name="request" required>
             </div>
+
+            <div class="approved-group">
+                <label for="request">Approved by:</label>
+                <label>ENGR. RHEA LIZA R. VALERIO</label><br>
+                <label>Department Head</label>
+            </div>
             
-            <input type="submit" id="submit" value="Submit" class="submit">
+            <div class="button-group">
+                <input type="submit" id="submit" value="Submit" class="submit">
+                <button type="button" id="printButton" class="print-btn" onclick="printLocator()">Print</button>
+            </div>
+            
         </form>
 
         <script src="locator.js"></script>   

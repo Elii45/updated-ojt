@@ -5,6 +5,16 @@ body {
     color: #333;
 }
 
+.formatted-date {
+    font-weight: normal;
+    color: black;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    padding: 3px 0;
+    display: inline-block;
+    min-width: 120px; /* Keeps spacing similar to an input */
+}
+
 .header {
     color: rgb(46, 82, 211);
     text-align: center;
