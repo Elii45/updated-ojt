@@ -34,3 +34,36 @@ document.addEventListener("DOMContentLoaded", function () {
         updateDateDisplay(); // Run on page load to format pre-filled values
     });
 });
+
+function fetchInventoryData() {
+    fetch('leaveInventory.php') // Ensure this fetches data correctly
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById("inventoryTableBody");
+            tableBody.innerHTML = ""; // Clear existing rows
+
+            if (!Array.isArray(data) || data.length === 0) {
+                tableBody.innerHTML = "<tr><td colspan='6'>No records found</td></tr>";
+                return;
+            }
+
+            data.forEach((item, index) => {
+                const row = document.createElement("tr");
+
+                row.innerHTML = `
+                    <td>${index + 1}</td> <!-- Sequential numbering (Blg.) -->
+                    <td>${item.full_name || 'N/A'}</td>
+                    <td>${item.filing_date || 'N/A'}</td>
+                    <td>${item.inclusive_dates || 'N/A'}</td>
+                    <td>${item.hrmo_action || 'N/A'}</td>
+                    <td>${item.remarks || 'N/A'}</td>
+                `;
+
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error("Error fetching inventory data:", error));
+}
+
+// Ensure data is fetched when the page loads
+window.onload = fetchInventoryData;

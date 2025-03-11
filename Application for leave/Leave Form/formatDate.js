@@ -1,30 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll('input[type="date"]').forEach((dateInput) => {
         function updateDateDisplay() {
-            const selectedDate = new Date(dateInput.value);
-            if (!isNaN(selectedDate)) {
+            if (dateInput.value) { // Ensure a date is selected
+                const selectedDate = new Date(dateInput.value);
                 const options = { month: "long", day: "2-digit", year: "numeric" };
                 const formattedDate = selectedDate.toLocaleDateString("en-US", options);
 
-                // Create a span to replace the input field
                 const span = document.createElement("span");
                 span.className = "formatted-date";
                 span.textContent = formattedDate;
                 span.dataset.originalInput = dateInput.name;
+                span.dataset.dateValue = dateInput.value; // Store the actual value
                 span.style.cursor = "pointer";
-                span.style.fontSize = "12px"; // Set font size
                 span.style.display = "inline-block";
 
-                // Apply different padding based on input name
-                if (dateInput.name === "filingDate") {
-                    span.style.padding = "0 170px 0 20px";
-                } else {
-                    span.style.padding = "20px 10px 10px 10px";
-                }
-                
-                // When the span is clicked, replace it with the input again
+                // When clicked, replace span with the original input field
                 span.addEventListener("click", function () {
-                    dateInput.style.display = "inline-block";
                     span.replaceWith(dateInput);
                 });
 
@@ -34,5 +25,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
         dateInput.addEventListener("change", updateDateDisplay);
         updateDateDisplay();
+    });
+
+    // ✅ Restore date inputs before submission
+    document.querySelector("form").addEventListener("submit", function () {
+        document.querySelectorAll(".formatted-date").forEach(span => {
+            let input = document.createElement("input");
+            input.type = "date";
+            input.name = span.dataset.originalInput;
+            input.value = span.dataset.dateValue; // Retrieve the correct value
+            input.required = true;
+            span.replaceWith(input);
+        });
     });
 });

@@ -37,3 +37,27 @@ function fetchInventoryData() {
 
 // Ensure data is fetched when the page loads
 window.onload = fetchInventoryData;
+
+function applyPagination() {
+    const rows = document.querySelectorAll("#inventoryTableBody tr");
+    rows.forEach((row, index) => {
+        if ((index + 1) % 10 === 0) {
+            const pageBreak = document.createElement("div");
+            pageBreak.classList.add("page-break");
+            row.parentNode.insertBefore(pageBreak, row.nextSibling);
+        }
+    });
+
+    // Ensure footer appears only on the last page
+    const footer = document.querySelector(".footer");
+    if (rows.length > 10) {
+        footer.style.display = "block";
+    } else {
+        footer.style.display = "none";
+    }
+}
+
+// Run pagination after fetching data
+window.onload = function () {
+    fetchInventoryData().then(() => applyPagination());
+};

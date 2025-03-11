@@ -1,7 +1,23 @@
-
 @media print {
     .print-btn, .button-container, input[type="date"] {
         display: none !important;
+    }
+
+    /* Ensure page break every 10 rows */
+    .page-break {
+        display: block;
+        page-break-before: always;
+        height: 1px; /* Minimal height for cleaner breaks */
+    }
+
+    /* Ensure header appears on all pages */
+    .header {
+        display: table-header-group;
+    }
+
+    /* Add spacing to lower tables on new pages */
+    .page-break + .table-container {
+        padding-top: 50px; /* Adjust this value to move the second table down */
     }
 
     .logo-container {
@@ -13,37 +29,16 @@
         text-align: center;
     }
 
-    .logo-container img {
-        max-width: auto;
-        height: auto;
-        display: block !important;
-    }
-
-    .header {
-        font-size: 10px !important;
-        text-align: center;
-        margin-top: 150px;
-    }
-
-    body {
-        background-image: url("../images/body.png");
-        background-size: auto; 
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed; 
-    }
-
     .container {
         position: relative;
         width: 100%;
         max-width: 100%;
         margin: 0;
         padding: 20px;
-        background: none !important; 
     }
 
     table {
-        width:  95%;
+        width: 95%;
         table-layout: fixed;
         border-collapse: collapse;
     }
@@ -54,42 +49,31 @@
         text-align: left;
         word-wrap: break-word;
         font-size: 12px;
-    }   
-    .signature {
-        font-size: 15px !important;
-        text-align: left;
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        width: 100%;
     }
-    
+
+    /* Footer should appear ONLY on the last page */
     .footer {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        text-align: center;
-        background: white;
-        padding: 10px 0;
-        font-size: 12px;
+        display: none;
     }
 
-    .footer img {
-        max-width: auto;
-        height: auto;
-        display: block !important;
-    }
-
-    .footer-text {
-        font-size: 7px; 
-        color: rgb(17, 31, 189);
-        text-align: left;
-        margin-top: 5px;
-    }
+    /* Show footer only on the last page */
     @page {
         size: A4 portrait;
         margin: 10mm;
+    }
+
+    @page:last {
+        .footer {
+            display: block;
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            text-align: center;
+            background: white;
+            padding: 10px 0;
+            font-size: 12px;
+        }
     }
 }

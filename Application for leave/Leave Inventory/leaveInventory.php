@@ -11,15 +11,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Correct SQL query to fetch necessary fields
 $sql = "
     SELECT 
-        e.id AS employee_id, e.office, e.last_name, e.first_name, e.middle_name, e.filing_date, e.position, e.salary,
-        l.type_of_leave, l.vacation_within_philippines, l.vacation_abroad, l.sick_hospital, l.sick_out_patient, 
-        l.special_leave_women, l.study_leave_master, l.study_leave_exam, l.monetization, l.terminal_leave, 
-        l.working_days, l.inclusive_dates, l.commutation,
-        a.as_of, a.vacation_total_earned, a.sick_total_earned, a.vacation_less_application, a.sick_less_application, 
-        a.vacation_balance, a.sick_balance, a.recommendation, a.approval_status, a.days_with_pay, a.days_without_pay, 
-        a.others_specify, a.disapproved_to
+        CONCAT(e.last_name, ', ', e.first_name, ' ', IFNULL(e.middle_name, '')) AS full_name, 
+        e.filing_date, 
+        l.inclusive_dates
     FROM employee_info e
     LEFT JOIN leave_details l ON e.id = l.employee_id
     LEFT JOIN leave_approval a ON e.id = a.employee_id
@@ -36,5 +33,6 @@ if ($result->num_rows > 0) {
 } else {
     echo json_encode([]);
 }
+
 $conn->close();
 ?>
