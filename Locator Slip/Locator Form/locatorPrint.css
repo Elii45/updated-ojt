@@ -4,7 +4,6 @@
         margin: 0;
     }
 
-    /* Hide Unwanted Elements */
     .print-btn, .submit {
         display: none !important;
     }
@@ -15,12 +14,11 @@
         padding: 10px;
     }
 
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
+    h2 {
+        text-align: center;
+        text-decoration: underline;
+        font-size: 15px;
     }
-    
     /* Logo Header */
     .logo-container {
         display: flex;
@@ -80,13 +78,7 @@
         transform: translateX(-50%);
     }
     
-    
-    h2 {
-        text-align: center;
-        text-decoration: underline;
-        font-size: 15px;
-    }
-    
+    /*Form*/
     form {
         padding: 10px;
        max-width: 100%;
@@ -212,10 +204,18 @@
     /*Date Group*/
     .date-group {
         display: flex;
-        margin-left: auto;
+        margin-left: 750px;
         align-items: center;
         gap: 10px;
         position: relative;
+    }
+    
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centers the subtext below the input */
+        position: relative;
+        margin-top: 10px;
     }
     
     .date-group input[type="date"] {
@@ -223,17 +223,16 @@
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
+        text-align: center;
     }
     
     .subtext {
         font-size: 12px;
         color: #666;
-        position: absolute;
-        left: 85px;
-        top: 100%;
+        text-align: center;
         margin-top: 2px;
     }
-    
+
     .request-group {
         display: flex;
         align-items: center;
@@ -257,7 +256,7 @@
         background-color: transparent;
         outline: none;
     }
-    
+    /*Official*/
     .official {
         display: flex;
         align-items: center;
@@ -268,7 +267,6 @@
         margin-bottom: 10px;
     }
     
-    /* Custom Rectangular Checkbox */
     .official input[type="checkbox"] {
         -webkit-appearance: none;
         appearance: none;
@@ -281,7 +279,6 @@
         cursor: pointer;
     }
     
-    /* Custom X (Black) */
     .official input[type="checkbox"]::before,
     .official input[type="checkbox"]::after {
         content: "";
@@ -295,12 +292,10 @@
         display: none;
     }
     
-    /* Second line for X */
     .official input[type="checkbox"]::after {
         transform: translate(-50%, -50%) rotate(-45deg);
     }
     
-    /* Show X when checked */
     .official input[type="checkbox"]:checked::before,
     .official input[type="checkbox"]:checked::after {
         display: block;
