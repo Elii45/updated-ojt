@@ -1,52 +1,30 @@
-// Handle status messages from URL parameters
-const urlParams = new URLSearchParams(window.location.search);
-const status = urlParams.get("status");
-
-if (status) {
-    const alertBox = document.createElement("div");
-    alertBox.classList.add("alert");
-
-    if (status === "success") {
-        alertBox.textContent = "Leave Application Submitted Successfully!";
-        alertBox.classList.add("success");
-    } else if (status === "error") {
-        alertBox.textContent = "Error submitting the form. Please try again.";
-        alertBox.classList.add("error");
-    }
-
-    document.body.prepend(alertBox);
-    alertBox.style.display = "block";
-
-    setTimeout(() => {
-        alertBox.style.display = "none";
-    }, 5000);
-}
-
-// Function to print locator slip
-function printLocator() {
-    document.body.classList.add("print-mode"); // Apply print styles if needed
-    window.print(); // Open print dialog
-    document.body.classList.remove("print-mode"); // Remove after printing
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    function formatInput(inputId, displayId) {
-        const input = document.getElementById(inputId);
-        const display = document.getElementById(displayId);
-
-        if (input.value) {
-            display.textContent = input.value;
-            input.style.display = "none"; // Hide the input
-            display.style.display = "inline"; // Show the formatted value
-        }
-    }
-
-    // Ensure previously entered values are displayed on page load
-    function initializeInputs() {
-        formatInput("inclDate", "inclDateText");
-        formatInput("timeDeparture", "timeDepartureText");
-        formatInput("timeArrival", "timeArrivalText");
-    }
-
-    initializeInputs();
-});
+function handleSubmit(event) {
+    event.preventDefault()
+  
+    // Get form data
+    const form = document.getElementById("locatorForm")
+    const formData = new FormData(form)
+  
+    // Create URL parameters
+    const params = new URLSearchParams()
+  
+    // Add form fields to URL parameters
+    params.append("official", document.getElementById("official").checked ? "yes" : "no")
+    params.append("date", document.getElementById("date").value)
+    params.append("destination", document.getElementById("destination").value)
+    params.append("purpose", document.getElementById("purpose").value)
+    params.append("inclDate", document.getElementById("inclDate").value)
+    params.append("timeDeparture", document.getElementById("timeDeparture").value)
+    params.append("timeArrival", document.getElementById("timeArrival").value)
+    params.append("request", document.getElementById("request").value)
+  
+    // Show alert
+    alert("Locator Slip Submitted Successfully!")
+  
+    // Redirect to print page with form data
+    window.location.href = `locatorSlipPrint.html?${params.toString()}`
+  
+    return false
+  }
+  
+  

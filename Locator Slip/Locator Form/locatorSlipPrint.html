@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locator Slip</title>
+    <link rel="stylesheet" href="locatorSlip.css">
+    <link rel="stylesheet" href="locatorPrint.css">
+    <link rel="stylesheet" href="../../footer.css">
+</head>
+
+<body>
+    <!-- LOGO -->
+    <div class="logo-container">
+        <div class="text-section">
+            <p>Form No. HRD 12</p>
+            <p>Jul 2019</p>
+            <p>Rev 03</p>
+        </div>
+        <img src="../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
+    </div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Provincial Information Technology Office</h1>
+        <h2 class="subtext">(Office)</h2>
+    </div><br>
+<form id="printForm">
+    <h2>LOCATOR SLIP</h2>
+    <div class="content1">
+        <div class="official">
+            <input type="checkbox" id="official" name="official">
+            <label for="officialText">Official</label><br>
+        </div>
+        <div class="date-group">
+            <label for="date">Date:</label>
+            <div class="input-container">
+                <input type="text" id="date" name="date" readonly>
+                <span class="subtext">(Date of Filing)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content2">
+        <div class="field-group">
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" readonly>
+        </div>
+
+        <div class="field-group">
+            <label for="purpose">Purpose:</label>
+            <input type="text" id="purpose" name="purpose" readonly>
+        </div>
+    </div>
+
+    <div class="content3">
+        <label for="inclDate">Inclusive Dates: </label>
+        <input type="text" id="inclDate" name="inclDate" readonly><br><br>
+
+        <label for="timeDeparture">Departure Time: </label>
+        <input type="text" id="timeDeparture" name="timeDeparture" readonly><br><br>
+
+        <label for="timeArrival">Arrival Time: </label>
+        <input type="text" id="timeArrival" name="timeArrival" readonly><br><br>
+    </div>
+
+    <div class="request-group">
+        <label for="request">Requested by:</label>
+        <input type="text" id="request" name="request" readonly>
+    </div>
+
+    <div class="approved-group">
+        <label for="request">Approved by:</label>
+        <label>ENGR. RHEA LIZA R. VALERIO</label><br>
+        <label>Department Head</label>
+    </div>
+
+    <button type="button" onclick="window.print()" class="print-btn">Print This Page</button>
+</form>
+
+<footer class="footer">
+    <div class="footer-text">
+        <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
+            Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
+            Telephone Nos.: +63 44 791 8145 <br>
+            Email Address: pito@bulacan.gov.ph</p>
+    </div>
+    <img src="../../images/footer.png" alt="Footer Image">
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Debug - log all parameters
+        console.log("Received Parameters:", Object.fromEntries(urlParams.entries()));
+        
+        // Format date function
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            } catch (e) {
+                console.error("Date formatting error:", e);
+                return dateString;
+            }
+        }
+        
+        // Set checkbox value
+        const officialValue = urlParams.get('official');
+        if (document.getElementById('official')) {
+            document.getElementById('official').checked = officialValue === "1" || officialValue === "yes";
+        }
+        
+        // Set text field values
+        const fields = [
+            'date', 'destination', 'purpose', 'inclDate', 
+            'timeDeparture', 'timeArrival', 'request'
+        ];
+        
+        fields.forEach(field => {
+            const element = document.getElementById(field);
+            if (element) {
+                let value = urlParams.get(field) || '';
+                
+                // Format dates if needed
+                if (field === 'date' || field === 'inclDate') {
+                    value = formatDate(value);
+                }
+                
+                element.value = value;
+            } else {
+                console.warn(`Element with ID '${field}' not found`);
+            }
+        });
+    });
+</script>
+</body>
+</html>
