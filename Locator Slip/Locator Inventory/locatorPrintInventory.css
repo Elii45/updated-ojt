@@ -9,6 +9,53 @@
         page-break-before: always;
     }
 
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+    
+    .formatted-date {
+        font-weight: normal;
+        color: black;
+        cursor: pointer;
+        border-bottom: 1px solid black;
+        padding: 3px 0;
+        display: inline-block;
+        min-width: 120px; /* Keeps spacing similar to an input */
+    }
+
+    .header {
+        color: rgb(46, 82, 211);
+        text-align: center;
+        padding: 15px;
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        max-width: 100%;
+        width: 90%;
+        margin: 20px auto;
+        background-image: url("../../images/body.png");
+        background-size: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    .text-group .name, .surname, .option, .greet, .signature {
+        font-weight: bold;
+    }
+    
+    .text-group label {
+        text-align: left;
+        margin-bottom: 1px;
+        display: block;
+    }
+
     /* Ensure the header appears on all pages */
     thead {
         display: table-header-group;
@@ -34,30 +81,5 @@
         font-size: 12px;
     }
 
-    /* Footer should only appear on the last page */
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        text-align: center;
-        background: white;
-        padding: 10px;
-        font-size: 12px;
-    }
-
-    .footer img {
-        width: 100%;
-        max-height: 100%; /* Set a max height to prevent cropping */
-        object-fit: fill; /* Ensures the image is fully visible */
-    }
-
-    .footer-text {
-        font-size: 7px;
-        color: rgb(17, 31, 189);
-        text-align: left;
-        margin-top: 5px;
-        margin-right: 300px !important;
-    }
+    
 }

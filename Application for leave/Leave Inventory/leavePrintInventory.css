@@ -1,40 +1,60 @@
 @media print {
+    /* Ensure there's enough space for the footer */
+    @page {
+        size: A4 portrait;
+        margin: 0mm;
+    }
+
     .print-btn, .button-container, input[type="date"] {
         display: none !important;
     }
 
-    /* Ensure page break every 10 rows */
-    .page-break {
-        display: block;
-        page-break-before: always;
-        height: 1px; /* Minimal height for cleaner breaks */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        padding-bottom: 100px; /* Leaves space for footer */
     }
 
-    /* Ensure header appears on all pages */
+    .formatted-date {
+        font-weight: normal;
+        color: black;
+        cursor: pointer;
+        border-bottom: 1px solid black;
+        padding: 3px 0;
+        display: inline-block;
+        min-width: 120px;
+    }
+
     .header {
-        display: table-header-group;
-    }
-
-    /* Add spacing to lower tables on new pages */
-    .page-break + .table-container {
-        padding-top: 50px; /* Adjust this value to move the second table down */
-    }
-
-    .logo-container {
-        position: fixed;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
+        color: rgb(46, 82, 211);
         text-align: center;
+        padding: 15px;
+        font-size: 10px;
+        font-weight: bold;
     }
 
     .container {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
+        background: rgba(255, 255, 255, 0.9);
         padding: 20px;
+        max-width: 100%;
+        width: 90%;
+        margin: 20px auto;
+        background-image: url("../../images/body.png");
+        background-size: auto;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    .text-group .name, .surname, .option, .greet, .signature {
+        font-weight: bold;
+    }
+    
+    .text-group label {
+        text-align: left;
+        margin-bottom: 1px;
+        display: block;
     }
 
     table {
@@ -51,29 +71,28 @@
         font-size: 12px;
     }
 
-    /* Footer should appear ONLY on the last page */
-    .footer {
-        display: none;
+    footer {
+        position: fixed; /* Ensures it stays at the bottom */
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        background: white; /* Ensures background is visible */
     }
-
-    /* Show footer only on the last page */
-    @page {
-        size: A4 portrait;
-        margin: 10mm;
+    
+    .footer img {
+        width: 100%; /* Ensures the image spans the full width */
+        height: 100%; /* Maintains aspect ratio */
+        display: block; /* Ensures no extra spacing */
+        object-fit: contain; /* Ensures the full image is visible */
+        padding: 0 20px; /* Adjusts spacing to move the image */
     }
-
-    @page:last {
-        .footer {
-            display: block;
-            position: fixed;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            text-align: center;
-            background: white;
-            padding: 10px 0;
-            font-size: 12px;
-        }
+    
+    .footer-text {
+        font-size: 7px;
+        color: rgb(17, 31, 189);
+        text-align: left;
+        margin-top: 5px;
+        margin-left: 5px !important;
     }
 }
