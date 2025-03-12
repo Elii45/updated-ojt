@@ -1,5 +1,4 @@
 # ojt
 
--Fix database leave application + locator (copy cto)
-- layout + footer
-- 
+-Fix css of print in both inventory
+-fix css in leave form printing
