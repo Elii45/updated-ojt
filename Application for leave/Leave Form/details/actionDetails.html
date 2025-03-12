@@ -1,0 +1,90 @@
+<table class="container-table">
+    <tr>
+        <td colspan="2" class="divider">
+            <h5>7. DETAILS OF ACTION ON APPLICATION</h5>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="divider">
+            <div class="container4A">
+                <label>7.A CERTIFICATION OF LEAVE CREDITS</label><br>
+                <div class="asOf">
+                    <label>As of:</label>
+                    <input type="date" name="asOf" required>
+                </div>
+                <table class="table4">
+                    <tr>
+                        <th></th>
+                        <th>Vacation Leave</th>
+                        <th>Sick Leave</th>
+                    </tr>
+                    <tr>
+                        <td>Total Earned</td>
+                        <td><input type="text" name="vacationTotalEarned"></td>
+                        <td><input type="text" name="sickTotalEarned"></td>
+                    </tr>
+                    <tr>
+                        <td>Less this application</td>
+                        <td><input type="text" name="vacationLessApplication"></td>
+                        <td><input type="text" name="sickLessApplication"></td>
+                    </tr>
+                    <tr>
+                        <td>Balance</td>
+                        <td><input type="text" name="vacationBalance"></td>
+                        <td><input type="text" name="sickBalance"></td>
+                    </tr>
+                </table>
+                <div class="signatureHR">
+                    <input type="text" name="signatureHR">
+                    <label>JOSE FERNANDO G. MANAHAN</label><br>
+                    <label>OIC, PHRMO</label>
+                </div>
+            </div>
+        </td>
+
+        <td class="divider">
+            <div class="container4B">
+                <label>7.B RECOMMENDATION</label><br>
+                <input type="radio" name="approval" value="1"> For Approval<br>
+                <input type="radio" name="disapproval" value="1"> For Disapproval due to
+                <input type="text" name="disapprovalDetail"><br>
+
+                <div class="signatureAdmin">
+                    <input type="text" name="signatureAdmin">
+                    <label>ANTONIA V. CONSTANTINO</label><br>
+                    <label>Provincial Administrator</label>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" class="divider">
+            <div class="container4C">
+                <div class="container4C-check">
+                    <div class="approvedContainer">
+                        <label>7.C APPROVED FOR</label>
+
+                        <div><input type="text" name="pay"><label>days with pay</label></div>
+                        <div><input type="text" name="withoutPay"><label>days without pay</label>
+                        </div>
+                        <div><input type="text" name="othersApproved"><label>Others
+                                (Specify)</label></div>
+                    </div>
+                    <div class="disapproved container">
+                        <label>7.D DISAPPROVED DUE TO:</label><br>
+                        <input type="text" name="disapprovedTo"><br>
+                    </div>
+                </div>
+
+                <div class="signatureGov">
+                    <input type="text" name="signatureGov"><br>
+                    <label>HON. DANIEL R. FERNANDO</label><br>
+                    <label>Provincial Governor</label>
+                </div>
+
+            </div>
+        </td>
+    </tr>
+</table>

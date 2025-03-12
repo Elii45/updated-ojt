@@ -14,7 +14,12 @@ try {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Collect form data
+    // Validate office ID
+    if (!isset($_POST['office']) || empty($_POST['office'])) {
+        echo "<script>alert('Office ID is missing.'); window.history.back();</script>";
+        exit;
+    }
+
     $officeId = $_POST['office']; // Office_ID from the form
     $lastName = $_POST['lastName'];
     $firstName = $_POST['firstName'];
@@ -56,7 +61,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 VALUES (?, NOW(), 0, 0, 0, 0, 0, 0, NULL, 'Pending', 0, 0, 0, NULL)");
         $stmt->execute([$employeeId]);
 
-        echo "<script>alert('Leave application submitted successfully!'); window.location.href='leaveApplication.html';</script>";
+        // Build URL parameters for the print page
+        $params = $_POST;
+        $params['officeName'] = $officeName; // Add office name
+        $params['employeeId'] = $employeeId; // Add employee ID
+
+        // Redirect to print page with all form data
+        header("Location: leaveApplicationPrint.html?" . http_build_query($params));
+        exit;
+        
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
