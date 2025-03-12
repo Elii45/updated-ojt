@@ -4,17 +4,6 @@ body {
     padding: 20px;
 }
 
-.formatted-date {
-    font-weight: normal;
-    color: black;
-    cursor: pointer;
-    border-bottom: 1px solid black;
-    padding: 3px 0;
-    width: 190px;
-    text-align: center;
-}
-
-
 /* Logo Header */
 .logo-container {
     display: flex;

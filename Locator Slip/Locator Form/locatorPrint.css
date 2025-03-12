@@ -4,7 +4,7 @@
         margin: 0;
     }
 
-    .print-btn, .submit {
+    .print-btn {
         display: none !important;
     }
 
@@ -19,34 +19,33 @@
         text-decoration: underline;
         font-size: 15px;
     }
+
     /* Logo Header */
     .logo-container {
         display: flex;
         align-items: center;
         justify-content: center;
-        /* Center the content horizontally */
         width: 100%;
         position: relative;
     }
-    
+
     .text-section {
         font-size: 9px;
         color: #666;
         text-align: left;
-        line-height: 0.2;
+        line-height: 1;
         position: absolute;
         left: 80px;
-        /* Adjust based on preference */
-        top: 55%;
+        top: 50%;
         transform: translateY(-50%);
     }
-    
+
     .office-logo {
         max-width: 65vw;
         height: auto;
         margin-left: 50px;
     }
-    
+
     /* Header */
     .header {
         text-align: center;
@@ -57,322 +56,326 @@
         margin: 10px 0;
         position: relative;
     }
-    
+
     .header h1 {
-        display: inline-block;
         font-size: 20px;
         margin: 0;
         padding-bottom: 6px;
         border-bottom: 1px solid gray;
         width: 65%;
-        text-align: center;
+        display: inline-block;
     }
-    
-    .header h2 {
-        font-size: 18px;
+
+    .subtext {
+        font-size: 14px;
+        font-weight: normal;
         color: black;
-        position: absolute;
-        top: 90%;
-        left: 50%;
-        text-decoration: none;
-        transform: translateX(-50%);
+        text-align: center;
+        margin-top: 5px;
     }
-    
-    /*Form*/
+
+    /* Form Styling */
     form {
         padding: 10px;
-       max-width: 100%;
-        margin-top: 20px;
+        max-width: 100%;
         margin: 0 auto;
         border-radius: 10px;
         background-image: url("../../images/body.png");
-        background-size: contain; /* Ensures the full image is visible */
-        background-position: top center; /* Align it properly */
-        width: 100%;
+        background-size: 45% !important;
+        background-position: top center;
         background-repeat: no-repeat;
-        border-radius: 10px;
-    }
+        width: 100%;
+
     
+    }
+
     label {
         font-weight: normal;
         display: block;
         margin-top: 10px;
-        margin-left: 5px;
-    }
-    
-    input[type="text"] {
-        width: 70%;
-        padding: 8px;
-        margin-top: 5px;
-        border: none;
-        border-bottom: 2px solid #ccc;
-        border-radius: 0;
-        background-color: transparent;
-        outline: none;
-    }
-    
-    input[type="time"],
-    input[type="date"] {
-        width: 12%;
-        padding: 8px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    
-    .content1 {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        padding: 15px;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        align-items: center;
-    }
-    
-    .content2 {
-        display: flex;
-        flex-direction: column;
-        padding: 15px;
-        border-radius: 6px;
-        gap: 10px;
-    }
-    
-    .content2 .field-group {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .content2 label {
-        font-weight: normal;
-        white-space: nowrap;
-        width: 100px;
-        text-align: left;
-    }
-    
-    .content2 input[type="text"] {
-        flex: 1;
-        max-width: 80%;
-        padding: 8px;
-        border: none;
-        border-bottom: 1px solid black;
-        border-radius: 0;
-        background-color: transparent;
-        outline: none;
-    }
-    
-    .content3 {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 15px;
-        padding: 10px;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        align-items: center;
-    }
-    
-    input[type="checkbox"] {
-        transform: scale(1.5);
-        margin-right: 10px;
-    }
-    
-    /*Buttons*/
-    .button-group {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        margin-top: 20px;
-    }
-    
-    input[type="submit"] {
-        background: #0023e4;
-        color: white;
-        padding: 12px 20px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        width: 45%;
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        box-shadow: 0 4px 6px rgba(60, 92, 220, 0.1);
-    }
-    
-    /*Date Group*/
-    .date-group {
-        display: flex;
-        margin-left: 750px;
-        align-items: center;
-        gap: 10px;
-        position: relative;
-    }
-    
-    .input-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Centers the subtext below the input */
-        position: relative;
-        margin-top: 10px;
-    }
-    
-    .date-group input[type="date"] {
-        width: 150px;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        text-align: center;
-    }
-    
-    .subtext {
-        font-size: 12px;
-        color: #666;
-        text-align: center;
-        margin-top: 2px;
     }
 
-    .request-group {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 15px;
-        margin-bottom: 15px;
-    }
-    
-    .request-group label {
-        font-weight: normal;
-        white-space: nowrap;
-    }
-    
-    .request-group input[type="text"] {
-        flex: 1;
-        max-width: 80%;
-        padding: 8px;
-        border: none;
-        border-bottom: 1px solid black;
-        border-radius: 0;
-        background-color: transparent;
-        outline: none;
-    }
-    /*Official*/
-    .official {
-        display: flex;
-        align-items: center;
-        gap: 2px;
-    }
-    
-    .official label {
-        margin-bottom: 10px;
-    }
-    
-    .official input[type="checkbox"] {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 40px;
-        height: 15px;
-        border: 1px solid black;
-        background-color: white;
-        display: inline-block;
-        position: relative;
-        cursor: pointer;
-    }
-    
-    .official input[type="checkbox"]::before,
-    .official input[type="checkbox"]::after {
-        content: "";
-        position: absolute;
-        width: 14px;
-        height: 1px;
-        background-color: black;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(45deg);
-        display: none;
-    }
-    
-    .official input[type="checkbox"]::after {
-        transform: translate(-50%, -50%) rotate(-45deg);
-    }
-    
-    .official input[type="checkbox"]:checked::before,
-    .official input[type="checkbox"]:checked::after {
-        display: block;
-    }
-    
-    /*Approved by*/
-    .approved-group {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* Centers the group */
-        justify-content: center;
-        margin-top: 20px;
-        text-align: center;
-        width: 50%;
-        /* Half-width */
-        margin-left: auto;
-        margin-right: end;
-        /* Centers the group */
-    }
-    
-    .approved-group label:first-child {
-        /* "Approved by:" */
-        align-self: flex-start;
-        text-align: left;
-        font-size: 16px;
-        font-weight: normal;
-        margin-bottom: 20px;
-        width: 100%;
-        margin-left: 132px;
-    }
-    
-    .approved-group label:nth-child(2) {
-        /* "ENGR. RHEA LIZA R. VALERIO" */
-        display: inline-block;
-        border-bottom: 1px solid black;
-        padding-bottom: 3px;
-        font-size: 18px;
-        font-weight: bold;
-        text-align: center;
-        width: 55%;
-    }
-    
-    .approved-group label:last-child {
-        /* "Position" */
-        font-size: 14px;
-        font-weight: normal;
-        text-align: center;
-        width: 100%;
-        margin-top: -10px;
+    /*Official Checkbox*/
+.official {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.official label {
+    margin-bottom: 10px;
+}
+
+/* Custom Rectangular Checkbox */
+.official input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 40px;
+    height: 15px;
+    border: 1px solid black;
+    background-color: white;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Custom X (Black) */
+.official input[type="checkbox"]::before,
+.official input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 1px;
+    background-color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    display: none;
+}
+
+/* Second line for X */
+.official input[type="checkbox"]::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Show X when checked */
+.official input[type="checkbox"]:checked::before,
+.official input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+/*Content 1*/
+.content1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.date-group {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+.content1 input[type="text"] {
+    width: 70%;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the subtext below the input */
+    position: relative;
+    margin-top: 10px;
+}
+
+.subtext {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    margin-top: 2px;
+}
+/*Content 2*/
+.content2 {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.content2 input[type="text"] {  
+    width: 83.5%;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
+    margin-left: 50px;
+}
+
+.content2 .field-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.content2 label {
+    white-space: nowrap;
+    width: 100px;
+}
+
+/* Styling for content3 inputs */
+.content3 {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.content3 label {
+    font-weight: normal;
+    width: 150px;
+    text-align: left;
+}
+
+.content3 input[type="text"] {
+    flex: 1;
+    max-width: 209px;
+    padding: 6px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
+    text-align: center;
+    font-size: 14px;
+}
+/* Specific margin adjustments */
+#inclDate {
+    margin-left: 10px;
+    margin-right: 30px;
+}
+
+#timeDeparture {
+    margin-left: -20px;
+    margin-right: 40px;
+}
+#timeArrival {
+    margin-left: -40px;
+}
+
+.request-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.request-group label {
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.request-group input[type="text"] {
+    flex: 1;
+    max-width: 83.7%;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+    background-color: transparent;
+    outline: none;
+    margin-left: 45px;
+}
+
+/*Approved by*/
+.approved-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centers the group */
+    justify-content: center;
+    margin-top: 20px;
+    text-align: center;
+    width: 50%;
+    /* Half-width */
+    margin-left: auto;
+    margin-right: end;
+    /* Centers the group */
+}
+
+.approved-group label:first-child {
+    /* "Approved by:" */
+    align-self: flex-start;
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 20px;
+    width: 100%;
+    margin-left: 132px;
+}
+
+.approved-group label:nth-child(2) {
+    /* "ENGR. RHEA LIZA R. VALERIO" */
+    display: inline-block;
+    border-bottom: 1px solid black;
+    padding-bottom: 3px;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    width: 55%;
+}
+
+.approved-group label:last-child {
+    /* "Position" */
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    width: 100%;
+    margin-top: -10px;
+}
+    .allcontent {
+        margin-top: -30px !important;
+        height: 800px !important;
+        scale: 100% !important;
+        width: 100%!important;
+        padding-bottom: 50px;
     }
 
-    /* Footer Section */
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        text-align: center;
-        background: white;
-        padding: 10px;
-        font-size: 12px;
-    }
+/*Footer*/
+.footer {
+    position: fixed; /* Keeps it at the bottom */
+    bottom: 0;
+    width: 7px;;
+    height: 30px; /* Adjust to fit properly */
+    display: flex;
+    
+    
+    background: url("../images/footer.png") no-repeat center;
+    background-size:cover; /* Keeps image within bounds */
+    padding: 5px;
+    color: rgb(8, 8, 146);
+    overflow: hidden;
+}
 
-    .footer img {
-        width: 100%;
-        max-height: 100%; /* Set a max height to prevent cropping */
-        object-fit: fill; /* Ensures the image is fully visible */
-    }
+.footer img {
+    width: 50%;
+    height: 90%;
+   
+    position:fixed;
+    top: 0;
+    
+    border: solid red;
+}
 
-
-    .footer-text {
-        font-size: 7px;
-        color: rgb(17, 31, 189);
-        text-align: left;
-        margin-top: 5px;
-        margin-right: 300px !important;
-    }
+.footer-text {
+    position: relative;
+    z-index: 1;
+    left: 40px;
+    top: 50%; 
+     
+    font-size: 14px;
+    font-weight: bold;
+    max-width: 100%; 
+    text-align: left;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    border-radius: 5px; 
+}
 }
