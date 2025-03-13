@@ -57,7 +57,7 @@ function printPage() {
     const tableBody = document.getElementById("inventoryTableBody")
     const rows = tableBody.querySelectorAll("tr")
     const totalRows = rows.length
-    const rowsPerPage = 10 // Exactly 10 rows per page
+    const rowsPerPage = 7 // Exactly 10 rows per page
   
     if (totalRows > 0) {
       const pagesNeeded = Math.ceil(totalRows / rowsPerPage)

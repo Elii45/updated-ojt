@@ -29,6 +29,7 @@
       background-repeat: no-repeat;
       margin-top: -5px !important;
     }
+    
   
     /* Print page wrapper styling */
     .print-page-wrapper {
@@ -66,7 +67,7 @@
     
     .punoPito {
       margin-top: -50px !important;
-      margin-bottom: 70px;
+      margin-bottom: 30px;
     }
   
     /* Table styling */
@@ -89,37 +90,53 @@
       font-weight: bold !important;
     }
   
-    /* Footer styling */
-    .footer {
-      position: relative !important;
-      bottom: 0 !important;
-      left: 0 !important;
-      right: 0 !important;
-      text-align: center !important;
-      border-top: none !important;
-      padding-top: 20px !important;
-      margin: 0 auto !important;
-      width: 90% !important;
-    }
-  
-    .print-page-wrapper .footer {
-      position: relative !important;
-      margin-top: 40px !important;
-    }
-  
-    .footer-text {
-      margin-bottom: 20px !important;
-      font-size: 12px !important;
-    }
-  
-    .footer img {
-      max-width: 100% !important;
-      height: auto !important;
-    }
+
+
+/* Ensure it's positioned properly for print */
+.print-page-wrapper {
+  position: relative; /* Ensures the footer is contained */
+  min-height: 100vh; /* Prevents content from overlapping */
+  padding-bottom: 150px; /* Reserve space for footer */
+}
+
+/* Footer styling */
+.footer {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  page-break-before: always !important; /* Forces footer to stay on page 1 */
+  page-break-after: avoid !important; /* Prevents break after footer */
+}
+
+
+/* Footer Text */
+.footer-text {
+font-size: 10px !important;
+margin-left: 200px;
+
+text-align: left;
+display: block !important;
+page-break-inside: avoid !important; /* Prevents text from breaking */
+}
+
+/* Footer Image */
+.footer img {
+max-width: 100% !important;
+width: 100%;
+height: 70% !important;
+display: flex !important;
+margin: 5px auto !important; /* Center image */
+page-break-inside: avoid !important; /* Ensures image does not split */
+object-fit: contain;
+}
+
+
   
     /* Content spacing */
     .text-group {
       margin-bottom: 20px !important;
+     
     }
   
     .text-group label {
@@ -133,5 +150,19 @@
       /* Fixed height for each row */
     }
   }
+  .upperContent {
+    margin-top: -20px;
+  }
+  .lowerContent1 {
+    margin-top: -20px;
+  }
+  .lowerContent2 {
+    margin-top: -10px;
+  }
+  .lowerContent3 {
+    margin-top: -10px;
+    margin-bottom: -300px !important;
+  }
+
   
   
