@@ -13,6 +13,7 @@
         margin-bottom: -220px !important;
         margin-left: 40px;
     }
+    
 
     .logo {
         width: 100px;
@@ -22,6 +23,13 @@
     .subtext,
     .italic {
         font-size: 12px;
+    }
+    .wrapper {
+        width: 800px !important;
+        scale: 130% !important;
+        position: center;
+        margin-top: 150px;
+        margin-left: 100px;
     }
 
     .italic {

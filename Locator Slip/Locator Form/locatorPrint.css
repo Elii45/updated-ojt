@@ -345,8 +345,6 @@
     width: 7px;;
     height: 30px; /* Adjust to fit properly */
     display: flex;
-    
-    
     background: url("../images/footer.png") no-repeat center;
     background-size:cover; /* Keeps image within bounds */
     padding: 5px;
@@ -357,10 +355,8 @@
 .footer img {
     width: 50%;
     height: 90%;
-   
     position:fixed;
     top: 0;
-    
     border: solid red;
 }
 
@@ -369,7 +365,6 @@
     z-index: 1;
     left: 40px;
     top: 50%; 
-     
     font-size: 14px;
     font-weight: bold;
     max-width: 100%; 

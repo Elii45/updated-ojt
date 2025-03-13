@@ -1,85 +1,137 @@
 @media print {
-    .print-btn, .button-container, input[type="date"] {
-        display: none !important;
+    @page {
+      margin: 0cm;
+      size: A4 portrait;
     }
-
-    /* Force a page break every 10 rows */
-    .page-break {
-        display: block;
-        page-break-before: always;
-    }
-
+  
     body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        color: #333;
+      margin: 0;
+      padding: 0;
+      background: white;
     }
-    
-    .formatted-date {
-        font-weight: normal;
-        color: black;
-        cursor: pointer;
-        border-bottom: 1px solid black;
-        padding: 3px 0;
-        display: inline-block;
-        min-width: 120px; /* Keeps spacing similar to an input */
+  
+    .print-btn,
+    .button-container,
+    input[type="date"] {
+      display: none !important;
     }
-
-    .header {
-        color: rgb(46, 82, 211);
-        text-align: center;
-        padding: 15px;
-        font-size: 10px;
-        font-weight: bold;
-    }
-
+  
+    /* Container styling */
     .container {
-        background: rgba(255, 255, 255, 0.9);
-        padding: 20px;
-        max-width: 100%;
-        width: 90%;
-        margin: 20px auto;
-        background-image: url("../../images/body.png");
-        background-size: auto;
-        background-position: center;
-        background-repeat: no-repeat;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      max-width: 100%;
+      width: 90%;
+      margin: 20px auto;
+      background-image: url("../../images/body.png");
+      background-size: auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-top: -5px !important;
     }
-    
-    .text-group .name, .surname, .option, .greet, .signature {
-        font-weight: bold;
+  
+    /* Print page wrapper styling */
+    .print-page-wrapper {
+      page-break-before: always !important;
+      margin: 0 auto !important;
+      width: 100% !important;
     }
-    
-    .text-group label {
-        text-align: left;
-        margin-bottom: 1px;
+  
+    .print-page-wrapper .container {
+      margin: 20px auto !important;
+    }
+  
+    /* Logo styling */
+    .logo-container {
+      text-align: center !important;
+      margin-bottom: 20px !important;
+    }
+  
+    .logo-container img {
+      height: auto !important;
+      width: auto !important;
+    }
+  
+    .header {
+        color: rgb(46, 82, 211) !important;
+        text-align: center !important;
+        width: 80% !important;
+        font-size: 8px !important;
+        font-weight: bold !important;
+        margin-top: -50px !important; /* Now this will work */
+        margin-left: auto !important;
+        margin-right: auto !important;
         display: block;
     }
-
-    /* Ensure the header appears on all pages */
-    thead {
-        display: table-header-group;
-    }
-
-    /* Move new table down slightly on new pages */
-    .page-break + table {
-        margin-top: 30px; /* Adjust spacing as needed */
-    }
-
-    /* Ensure table layout remains unchanged */
-    table {
-        width: 95%;
-        table-layout: fixed;
-        border-collapse: collapse;
-    }
-
-    th, td {
-        padding: 4px;
-        border: 1px solid black;
-        text-align: left;
-        word-wrap: break-word;
-        font-size: 12px;
-    }
-
     
-}
+    .punoPito {
+      margin-top: -50px !important;
+      margin-bottom: 70px;
+    }
+  
+    /* Table styling */
+    table {
+      width: 100% !important;
+      border-collapse: collapse !important;
+      margin: 20px 0 !important;
+      page-break-inside: avoid !important;
+    }
+  
+    th,
+    td {
+      padding: 8px !important;
+      border: 1px solid black !important;
+      text-align: left !important;
+      font-size: 12px !important;
+    }
+  
+    th {
+      font-weight: bold !important;
+    }
+  
+    /* Footer styling */
+    .footer {
+      position: relative !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      text-align: center !important;
+      border-top: none !important;
+      padding-top: 20px !important;
+      margin: 0 auto !important;
+      width: 90% !important;
+    }
+  
+    .print-page-wrapper .footer {
+      position: relative !important;
+      margin-top: 40px !important;
+    }
+  
+    .footer-text {
+      margin-bottom: 20px !important;
+      font-size: 12px !important;
+    }
+  
+    .footer img {
+      max-width: 100% !important;
+      height: auto !important;
+    }
+  
+    /* Content spacing */
+    .text-group {
+      margin-bottom: 20px !important;
+    }
+  
+    .text-group label {
+      display: block !important;
+      margin-bottom: 5px !important;
+    }
+  
+    /* Ensure each page has exactly 10 rows of equal height */
+    tbody tr {
+      height: 35px !important;
+      /* Fixed height for each row */
+    }
+  }
+  
+  

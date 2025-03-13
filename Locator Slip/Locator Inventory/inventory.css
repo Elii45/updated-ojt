@@ -15,12 +15,17 @@ body {
     min-width: 120px; /* Keeps spacing similar to an input */
 }
 
+.punoPito {
+    margin-top: -60px !important;
+    margin-bottom: 70px;
+}
 .header {
     color: rgb(46, 82, 211);
     text-align: center;
     padding: 15px;
     font-size: 15px;
     font-weight: bold;
+    
 }
 
 .container {
@@ -84,15 +89,12 @@ button:hover {
     background-color: #00509E;
 }
 
-
-
 .date-group {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 5px;
 }
-
 
 input[type="date"] {
     width: 150px;
