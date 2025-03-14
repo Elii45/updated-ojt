@@ -60,10 +60,9 @@
                 <!-- Vacation/Special Privilege Leave Details -->
                 <div id="vacationDetails">
                     <label>In case of vacation/special privilege Leave:</label><br>
-                    <input type="radio" name="detailType" value="withinPhilippines"> Within
-                    Philippines
-                    <input type="text" id="withinPhilippinesDetail" name="withinPhilippinesDetail"
-                        class="required-field"><br>
+                    <input type="radio" name="detailType" value="withinPhilippines"> Within Philippines
+                    <input type="text" id="withinPhilippinesDetail" name="withinPhilippinesDetail" class="required-field"><br>
+
                     <input type="radio" name="detailType" value="abroad"> Abroad
                     <input type="text" id="abroadDetails" name="abroadDetails"
                         class="required-field"><br><br>
@@ -72,9 +71,10 @@
                 <!-- Sick Leave Details -->
                 <div id="sickLeaveDetails">
                     <label>In case of sick Leave:</label><br>
-                    <input type="radio" name="hospital" value="1"> In Hospital (Specify Illness)
+                    <input type="radio" name="detailType" value="1"> In Hospital (Specify Illness)
                     <input type="text" id="hospitalDetail" name="hospitalDetail" class="required-field"><br>
-                    <input type="radio" name="outPatient" value="1"> Out Patient (Specify Illness)
+                    
+                    <input type="radio" name="detailType" value="1"> Out Patient (Specify Illness)
                     <input type="text" id="outPatientDetail" name="outPatientDetail"
                         class="required-field"><br><br>
                 </div>
@@ -83,23 +83,21 @@
                 <div id="womenLeaveDetails">
                     <label>In case of Special Leave Benefits for Women:</label><br>
                     <label>Specify Illness</label>
-                    <input type="text" id="leaveWomen" name="leaveWomen" class="required-field"><br>
+                    <input type="text" id="leaveWomen" name="detailType" class="required-field"><br>
                 </div>
 
                 <!-- Study Leave -->
                 <div id="studyLeaveDetails">
                     <label>In case of Study Leave:</label><br>
-                    <input type="radio" name="completion" value="1"> Completion of Master's
-                    Degree<br>
-                    <input type="radio" name="exam" value="1"> BAR/Board Examination Review<br>
+                    <input type="radio" name="detailType" value="1"> Completion of Master's Degree<br>
+                    <input type="radio" name="detailType" value="1"> BAR/Board Examination Review<br>
                 </div>
 
                 <!-- Other Purposes -->
                 <div id="otherPurposes">
                     <label>Other Purposes:</label><br>
-                    <input type="radio" name="monetization" value="1"> Monetization of Leave
-                    Credits<br>
-                    <input type="radio" name="terminal" value="1"> Terminal Leave<br>
+                    <input type="radio" name="detailType" value="1"> Monetization of Leave Credits<br>
+                    <input type="radio" name="detailType" value="1"> Terminal Leave<br>
                 </div>
             </div>
         </td>
@@ -117,8 +115,8 @@
         <td class="divider">
             <div class="container3D">
                 <label>6.D COMMUTATION</label><br>
-                <input type="radio" name="notRequested"> Not Requested<br>
-                <input type="radio" name="requested"> Requested<br>
+                <input type="radio" name="commutation" value="Not Requested"> Not Requested<br>
+                <input type="radio" name="request" value="Requested"> Requested<br>
                 <div class="signatureApplicant">
                     <input type="text" name="signatureApplicant">
                     <label>(Signature of Applicant)</label>

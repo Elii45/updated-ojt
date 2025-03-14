@@ -5,34 +5,41 @@ $password = "";
 $dbname = "ojt";           
 $port = 3307;              
 
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
+// Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    die(json_encode(["error" => "Connection failed: " . $conn->connect_error]));
 }
 
-// Correct SQL query to fetch necessary fields
+// Set content type to JSON
+header('Content-Type: application/json');
+
+// SQL query to fetch employee leave applications
 $sql = "
     SELECT 
         CONCAT(e.last_name, ', ', e.first_name, ' ', IFNULL(e.middle_name, '')) AS full_name, 
         e.filing_date, 
         l.inclusive_dates
-    FROM employee_info e
-    LEFT JOIN leave_details l ON e.id = l.employee_id
-    LEFT JOIN leave_approval a ON e.id = a.employee_id
+    FROM EmployeeDetails e
+    LEFT JOIN LeaveDetails l ON e.id = l.employee_id
+    LEFT JOIN LeaveApproval a ON e.id = a.employee_id
 ";
 
+// Execute query
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
+if ($result) {
     $leaveApplications = [];
     while ($row = $result->fetch_assoc()) {
         $leaveApplications[] = $row;
     }
     echo json_encode($leaveApplications);
 } else {
-    echo json_encode([]);
+    echo json_encode(["error" => "Query failed: " . $conn->error]);
 }
 
+// Close connection
 $conn->close();
 ?>
