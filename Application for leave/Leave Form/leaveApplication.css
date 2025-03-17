@@ -5,17 +5,11 @@ body {
     background-color: #fff;
 }
 
-/*#instructionPage {
-    display: none;
-}*/
-
 .header {
     text-align: center;
     font-size: 20px;
-    /* Change size for printing */
     margin-bottom: -230px !important;
     margin-left: 420px !important;
-    
 }
 .subtext {
     margin-left: -30px;
@@ -25,12 +19,9 @@ body {
     width: 100px;
     margin-left: -50px !important;
 }
-
-.subtext,
-.italic {
+.subtext, .italic {
     font-size: 12px;
 }
-
 .italic {
     font-style: italic;
     text-align: left;
@@ -59,10 +50,6 @@ h1, h2 {
     text-transform: uppercase;
 }
 
-.container3A .subtext { 
-    margin-left: 10px;
-    font-size: 7pt; 
-}
 
 
 /*Form*/
@@ -93,8 +80,6 @@ th {
     text-align: center;
     font-size: 14px; /* Keep headers readable */
 }
-
-
 /*Table 4 */
 .table4 {
     width: 80%; /* Reduce the width */
@@ -118,7 +103,6 @@ th {
         white-space: wrap; /* Prevent text wrapping */
         text-align: center;
 }
-
 /*Whole Table*/
 .container-table {
     width: 100%;
@@ -147,46 +131,8 @@ input[type="number"] {
     border-radius: 0;
 }
 
-.formatted-date {
-    display: inline-block; /* Ensures it's visible */
-    color: black;
-}
-
 input[type="checkbox"] {
     margin-right: 10px;
-}
-
-/*Buttons*/
-.buttonGroup {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.buttonGroup input[type="submit"],
-.buttonGroup input[type="button"] {
-    width: 150px;
-    padding: 10px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.buttonGroup input[type="submit"]:hover {
-    background: #0056b3;
-}
-
-.buttonGroup input[type="button"] {
-    background: #0015b0;
-}
-
-.buttonGroup input[type="button"]:hover {
-    background: #0015b0;
 }
 
 /*Container 1*/
@@ -196,6 +142,45 @@ input[type="checkbox"] {
     gap: 20px;
     width: 100%;
     align-items: flex-start;
+}
+
+/*Office*/
+.office select {
+    width: 50%;
+    padding: 8px;
+    margin-top: 5px;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 0;
+}
+
+.dropdown-selected {
+    width: 50%;
+    padding: 8px;
+    border: none;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.dropdown-options {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    z-index: 1000;
+}
+
+.dropdown-options div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.dropdown-options div:hover {
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .container1 .office, .container1 .name {
@@ -246,6 +231,7 @@ input[type="checkbox"] {
     display: block;
 }
 
+/* Container 2 */
 .container2 label{
     margin-left: 10px;
 }
@@ -255,75 +241,26 @@ input[type="checkbox"] {
     font-size: 0.8em;
 }
 
+
+
+h5{
+    text-align: center;
+}
+/* Container 3 */
+.container3A .subtext { 
+    margin-left: 10px;
+    font-size: 7pt; 
+}
+.container3C input[type="text"]{
+    width:60%
+}
+/* Container 4 */
 .container4A table input[type="text"] {
     border-bottom: none;
     width: 100%;
     padding: 5px;
     display: block;
 }
-
-h5{
-    text-align: center;
-}
-
-.signatureHR {
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 10px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-.signatureApplicant {
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 2px;
-    padding-top: 10px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.container4A .signatureHR input[type="text"]{
-    width: 100%;
-    padding: 5px;
-    display: block;
-    border-bottom: 1px solid black;
-
-}
-
-.container3D .signatureApplicant input[type="text"]{
-    width: 100%;
-    max-width: 100%;
-    padding: 5px;
-    display: block;
-    border-bottom: 1px solid black;
-
-}
-
-.signatureAdmin {
-    text-align: center;
-    padding-top: 10px;
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 23%;
-    margin-bottom: 2%;
-}
-
-.container3C input[type="text"]{
-    width:60%
-}
-
-
-.container4B .signatureAdmin input[type="text"]{
-    width: 100%;
-    max-width: 100%;
-    padding: 5px;
-    display: block;
-    border-bottom: 1px solid black;
-}
-
 .container4A .asOf{
     align-items: center;
     display: block;
@@ -382,7 +319,8 @@ h5{
     display: block; 
 }
 
-.signatureGov {
+/* Signatures */
+.signatureHR {
     text-align: center;
     margin-top: 20px;
     padding-top: 10px;
@@ -391,77 +329,73 @@ h5{
     margin-right: auto;
 }
 
-.signatureGov input[type="text"]{
-    width: 100%;
-    max-width: 100%;
-    padding: 5px;
-    display: block;
-    border-bottom: 1px solid black;
-    align-items: center;
-}
-
-/*Checkbox*/
-/* Hide default checkbox */
-input[type="checkbox"] {
-    appearance: none; /* Removes default styling */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 16px; /* Adjust size */
-    height: 16px;
-    border: 2px solid black; /* Black border */
-    border-radius: 3px; /* Optional: rounded edges */
-    display: inline-block;
-    position: relative;
-    cursor: pointer;
-}
-
-/* Custom checkmark when checked */
-input[type="checkbox"]:checked::before {
-    content: "\2713"; /* Unicode checkmark */
-    font-size: 10px;
-    color: black; /* Black checkmark */
-    font-weight: bold;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/*Office*/
-.office select {
-    width: 50%;
-    padding: 8px;
+.signatureApplicant {
+    text-align: center;
     margin-top: 5px;
-    border: none;
-    border-bottom: 1px solid black;
-    border-radius: 0;
-}
-
-.dropdown-selected {
+    margin-bottom: 2px;
+    padding-top: 10px;
     width: 50%;
-    padding: 8px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#signatureApplicantLabel, #signatureGovLabel, #signatureAdminLabel, #signatureHRLabel {
+    display: block;
+    width: 250px; /* Adjust width as needed */
+    min-height: 30px; /* Adjust height for signature space */
+    border-bottom: 2px solid black; /* Creates a signature line */
+    text-align: center;
+    font-family: inherit; /* Matches surrounding text */
+    margin-top: 5px;
+}
+
+.signatureAdmin {
+    text-align: center;
+    padding-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 23%;
+    margin-bottom: 2%;
+}
+
+.signatureGov {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+/*Buttons*/
+.buttonGroup {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.buttonGroup input[type="submit"],
+.buttonGroup input[type="button"] {
+    width: 150px;
+    padding: 10px;
+    background: #007bff;
+    color: #fff;
     border: none;
-    border-bottom: 1px solid black;
-    background-color: transparent;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
+    text-align: center;
 }
 
-.dropdown-options {
-    position: absolute;
-    width: 100%;
-    background: white;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
-    z-index: 1000;
+.buttonGroup input[type="submit"]:hover {
+    background: #0056b3;
 }
 
-.dropdown-options div {
-    padding: 8px;
-    cursor: pointer;
+.buttonGroup input[type="button"] {
+    background: #0015b0;
 }
 
-.dropdown-options div:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.buttonGroup input[type="button"]:hover {
+    background: #0015b0;
 }

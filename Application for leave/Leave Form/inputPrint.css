@@ -1,0 +1,80 @@
+.print-field-office {
+    color: #333;
+    border-bottom: 1px solid blue; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  .print-field-name {
+    color: #333;
+    border-bottom: 3px solid green; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  .print-field-date {
+    color: #333;
+    border-bottom: 3px solid red; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  .print-field-leaveOthers {
+    display: inline-block; /* or block */
+    color: #333;
+    width: 10%;
+    margin-top: 10px;
+    border-bottom: 3px solid aqua; /* Optional underline effect */
+    padding: 5px;
+  }
+
+  .print-field-workingDays {
+    display: inline-block; /* or block */
+    color: #333;
+    width: 10%;
+    margin-top: 10px;
+    border-bottom: 3px solid blueviolet; /* Optional underline effect */
+    padding: 5px;
+  }
+
+  .print-field-details {
+    display: inline-block; /* or block */
+    color: #333;
+    width: 10%;
+    margin-top: 10px;
+    border-bottom: 3px solid coral; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  #inclDates {
+    color: #333;
+    width: 15%;
+    border-bottom: 3px solid fuchsia; /* Example styling */
+    padding: 5px;
+    display: inline-block; /* Ensures width is applied */
+  }
+  
+  .print-field-actionDate {
+    color: #333;
+    border-bottom: 3px solid gold; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  .print-field-actionTable {
+    color: palevioletred;
+  }
+  
+  .print-field-actionDisapprovalReason {
+    color: #333;
+    border-bottom: 3px solid indigo; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  .print-field-actionApproved {
+    color: #333;
+    border-bottom: 3px solid olivedrab; /* Optional underline effect */
+    padding: 5px;
+  }
+  
+  .print-field-actionDisapproved {
+    color: #333;
+    border-bottom: 3px solid maroon; /* Optional underline effect */
+    padding: 5px;
+  }

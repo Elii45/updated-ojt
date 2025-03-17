@@ -24,7 +24,7 @@ $conn->begin_transaction();
 try {
     // Process form data
     // 1. Personal Details
-    $office = $_POST['office'];
+    $officeId = $_POST['office'];
     $lastName = $_POST['lastName'];
     $firstName = $_POST['firstName'];
     $middleName = $_POST['middleName'];
@@ -32,13 +32,26 @@ try {
     $position = $_POST['position'];
     $salary = $_POST['salary'];
 
-    // Insert employee details
-    $sql = "INSERT INTO employeedetails (office, last_name, first_name, middle_name, filing_date, position, salary) 
-            VALUES (?, ?, ?, ?, ?, ?, ?)";
-    
+    // Fetch office_name from the database
+    $sql = "SELECT office_name FROM offices WHERE office_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssssd", $office, $lastName, $firstName, $middleName, $filingDate, $position, $salary);
+    $stmt->bind_param("i", $officeId);
     $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($row = $result->fetch_assoc()) {
+    $officeName = $row['office_name']; // Get office_name
+    } else {
+        die("Error: Office ID not found.");
+    }
+    // Insert employee details with office_name
+    $sql = "INSERT INTO employeedetails (office, last_name, first_name, middle_name, filing_date, position, salary) 
+        VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssssssd", $officeName, $lastName, $firstName, $middleName, $filingDate, $position, $salary);
+    $stmt->execute();
+
     
     // Get the employee ID
     $employeeId = $conn->insert_id;
@@ -213,15 +226,26 @@ try {
     }
     
     // Commit transaction
-    $conn->commit();
-    
-    // Redirect to print page with all form data
-    $params = $_POST;
-    $params['employee_id'] = $employeeId; // Add employee ID to params
-    $params['leave_id'] = $leaveId; // Add leave ID to params
-    header("Location: leaveApplicationPrint.html?" . http_build_query($params));
-    exit;
-    
+$conn->commit();
+
+// Fetch office name before redirecting
+$officeId = $_POST['office'];
+$officeQuery = $conn->prepare("SELECT office_name FROM offices WHERE office_id = ?");
+$officeQuery->bind_param("i", $officeId);
+$officeQuery->execute();
+$officeResult = $officeQuery->get_result();
+$officeRow = $officeResult->fetch_assoc();
+$officeName = $officeRow['office_name'] ?? '';
+
+// Redirect to print page with all form data
+$params = $_POST;
+$params['employee_id'] = $employeeId; // Add employee ID to params
+$params['leave_id'] = $leaveId; // Add leave ID to params
+$params['officeName'] = $officeName; // ✅ Include office name in parameters
+
+header("Location: leaveApplicationPrint.html?" . http_build_query($params));
+exit;
+
 } catch (Exception $e) {
     // Rollback transaction on error
     $conn->rollback();
@@ -231,4 +255,3 @@ try {
 
 // Close connection
 $conn->close();
-?>  
