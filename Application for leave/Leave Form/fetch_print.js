@@ -1,7 +1,7 @@
 // Get URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 
-// Format date function
+// Function to format dates
 function formatDate(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -12,19 +12,16 @@ function formatDate(dateString) {
     });
 }
 
-// Load the same section templates but with print modifications
+// Load and process personal details
 fetch("../Leave Form/details/personalDetails.html")
     .then(response => response.text())
     .then(data => {
-        let urlParams = new URLSearchParams(window.location.search);
-
-        // Replace input elements with span elements for printing
         let printData = data.replace(/<input[^>]*name="([^"]*)"[^>]*>/g, (match, name) => {
             const value = urlParams.get(name) || '';
             return `<span class="print-field" id="${name}">${value}</span>`;
         });
 
-        // Replace select elements with span elements
+        // Replace select elements
         printData = printData.replace(/<select[^>]*name="([^"]*)"[^>]*>.*?<\/select>/gs, (match, name) => {
             const value = urlParams.get(name) || '';
             return `<span class="print-field" id="${name}">${value}</span>`;
@@ -39,32 +36,33 @@ fetch("../Leave Form/details/personalDetails.html")
         document.getElementById("personalDetails").innerHTML = printData;
     });
 
-
+// Load and process leave details
 fetch("../Leave Form/details/leaveDetails.html")
     .then(response => response.text())
     .then(data => {
         let printData = data.replace(/<input[^>]*name="([^"]*)"[^>]*>/g, (match, name) => {
             const value = urlParams.get(name) || '';
 
-            // Check for radio buttons and checkboxes
-            if (match.includes('type="radio"') || match.includes('type="checkbox"')) {
+            // Handle radio buttons properly
+            if (match.includes('type="radio"')) {
                 const matchValue = match.match(/value="([^"]*)"/);
                 const inputValue = matchValue ? matchValue[1] : '';
 
-                // Special handling for section 6.B
-                if (name === "detailType") {
-                    return urlParams.get(name) === inputValue ? `☑ ${match.split('>')[1]}` : `☐ ${match.split('>')[1]}`;
-                }
-
-                // General fix for other checkboxes/radio buttons
-                return urlParams.get(name) === inputValue ? '☑' : '☐';
-            } else {
-                return `<span class="print-field" id="${name}">${value}</span>`;
+                return urlParams.get(name) === inputValue 
+                    ? `☑ ${match.split('>')[1]}`  // Checked
+                    : `☐ ${match.split('>')[1]}`; // Unchecked
             }
+            
+            // Handle checkboxes
+            if (match.includes('type="checkbox"')) {
+                return urlParams.get(name) === 'on' || urlParams.get(name) === '1' ? '☑' : '☐';
+            }
+
+            return `<span class="print-field" id="${name}">${value}</span>`;
         });
 
         // Format dates properly
-        const dateFields = ['inclDates']; // Add other date fields if needed
+        const dateFields = ['inclDates'];
         dateFields.forEach(field => {
             const value = urlParams.get(field);
             if (value) {
@@ -76,11 +74,10 @@ fetch("../Leave Form/details/leaveDetails.html")
         document.getElementById("leaveDetails").innerHTML = printData;
     });
 
-
+// Load and process action details
 fetch("../Leave Form/details/actionDetails.html")
     .then(response => response.text())
     .then(data => {
-        // Replace input elements with span elements for printing
         let printData = data.replace(/<input[^>]*name="([^"]*)"[^>]*>/g, (match, name) => {
             if (match.includes('type="radio"') || match.includes('type="checkbox"')) {
                 const checked = urlParams.get(name) === 'on' || urlParams.get(name) === '1';
