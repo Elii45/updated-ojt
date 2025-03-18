@@ -1,7 +1,7 @@
 // Get URL parameters
 const urlParams = new URLSearchParams(window.location.search);
 
-// Function to format dates
+// Function to format dates as "Month Day, Year" (e.g., "March 18, 2025")
 function formatDate(dateString) {
     if (!dateString) return '';
     const date = new Date(dateString);
@@ -18,7 +18,7 @@ fetch("../Leave Form/details/personalDetails.html")
     .then(data => {
         let printData = data;
 
-        // Replace input fields for Name (Last, First, Middle)
+        // Replace Name fields (Last, First, Middle)
         const nameFields = ["lastName", "firstName", "middleName"];
         nameFields.forEach(field => {
             const value = urlParams.get(field) || '';
@@ -31,7 +31,13 @@ fetch("../Leave Form/details/personalDetails.html")
         // Replace Date of Filing, Position, and Salary fields
         const detailFields = ["filingDate", "position", "salary"];
         detailFields.forEach(field => {
-            const value = urlParams.get(field) || '';
+            let value = urlParams.get(field) || '';
+            
+            // Format the filingDate field
+            if (field === "filingDate") {
+                value = formatDate(value);
+            }
+
             printData = printData.replace(
                 new RegExp(`<input[^>]*name="${field}"[^>]*>`, "g"),
                 `<span class="print-field-date" id="${field}">${value}</span>`
@@ -44,7 +50,7 @@ fetch("../Leave Form/details/personalDetails.html")
             `<span class="print-field-office" id="office">${urlParams.get("office") || ''}</span>`
         );
 
-        // Ensure office name is displayed instead of ID
+        // Ensure office name is displayed instead of ID if available
         if (urlParams.has("officeName")) {
             printData = printData.replace(
                 /<span class="print-field-office" id="office">.*?<\/span>/,
@@ -60,7 +66,7 @@ fetch("../Leave Form/details/leaveDetails.html")
     .then(response => response.text())
     .then(data => {
         let printData = data.replace(/<input[^>]*name="([^"]*)"[^>]*>/g, (match, name) => {
-            const value = urlParams.get(name) || '';
+            let value = urlParams.get(name) || '';
 
             // Handle radio buttons properly
             if (match.includes('type="radio"')) {
@@ -77,25 +83,41 @@ fetch("../Leave Form/details/leaveDetails.html")
                 return urlParams.get(name) === 'on' || urlParams.get(name) === '1' ? '☑' : '☐';
             }
 
-           // Replace input fields in specific containers
-           if (name === "leaveTypeOthers") {
-            return `<span class="print-field-leaveOthers" id="${name}">${value}</span>`;
-        }
-        if (name === "workingDays") {
-            return `<span class="print-field-workingDays" id="${name}">${value}</span>`;
-        }
+            function numberToWords(num) {
+                const belowTwenty = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"];
+                const tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+            
+                if (num < 20) return belowTwenty[num];  
+                else if (num < 100) return tens[Math.floor(num / 10)] + (num % 10 !== 0 ? "-" + belowTwenty[num % 10] : "");
+                else return num; // Keeps numbers 100+ in digit form
+            }
+            
+            // Replace input fields for specific leave details
+            if (name === "leaveTypeOthers" || name === "workingDays") { 
+                if (name === "workingDays") {
+                    let wordForm = numberToWords(parseInt(value)); 
+            
+                    return `<span class="print-field-workingDays" id="${name}">(${value}) ${wordForm} working day${value > 1 ? 's' : ''}</span>`;
+                }
+                
+                return `<span class="print-field-workingDays" id="${name}">${value}</span>`;
+            }
+            
 
-        // Replace text input fields
-        return `<span class="print-field-details" id="${name}">${value}</span>`;
-    });
+            // Replace text input fields
+            return `<span class="print-field-details" id="${name}">${value}</span>`;
+        });
 
-        // Format dates properly
+        // Format date fields properly
         const dateFields = ['inclDates'];
         dateFields.forEach(field => {
-            const value = urlParams.get(field);
+            let value = urlParams.get(field);
             if (value) {
                 const formattedDate = formatDate(value);
-                printData = printData.replace(new RegExp(`id="${field}">[^<]*<`, 'g'), `id="${field}">${formattedDate}<`);
+                printData = printData.replace(
+                    new RegExp(`id="${field}">[^<]*<`, 'g'),
+                    `id="${field}">${formattedDate}<`
+                );
             }
         });
 
@@ -108,9 +130,12 @@ fetch("../Leave Form/details/actionDetails.html")
     .then(data => {
         let printData = data;
 
-        // Replace input fields for As of Date
+        // Replace As of Date and format it
         const asOfField = "asOf";
-        const asOfValue = urlParams.get(asOfField) || '';
+        let asOfValue = urlParams.get(asOfField) || '';
+        if (asOfValue) {
+            asOfValue = formatDate(asOfValue);
+        }
         printData = printData.replace(
             new RegExp(`<input[^>]*name="${asOfField}"[^>]*>`, "g"),
             `<span class="print-field-actionDate" id="${asOfField}">${asOfValue}</span>`
@@ -166,7 +191,5 @@ fetch("../Leave Form/details/actionDetails.html")
             `<span class="print-field-actionDisapproved" id="${disapprovedToField}">${disapprovedToValue}</span>`
         );
 
-        // Insert final processed content into the document
         document.getElementById("actionDetails").innerHTML = printData;
     });
-

@@ -86,12 +86,12 @@
     td {
         border: 1px solid #000;
         padding: 4px;
-        font-size: 12px;
+        font-size: 9px;
     }
 
     th {
         text-align: center;
-        font-size: 14px;
+        font-size: 9px;
     }
 
     .table4 {
@@ -108,7 +108,7 @@
     .table4 th,
     .table4 tr {
         height: 10px !important;
-        font-size: 12px;
+        font-size: 9px;
         padding: 0 !important;
         overflow: hidden;
         white-space: wrap;
@@ -128,7 +128,18 @@
     .container-table .divider {
         border-right: 1px solid #000;
     }
-    
+
+    .container-table .title {
+        font-size: 9px;
+        text-align: center;
+        height: 5px;
+        /* Adjust as needed */
+        line-height: 20px;
+        /* Ensures text stays centered */
+        padding: 0px 3px;
+        /* Reduce padding */
+    }
+
     .container1 {
         display: flex;
         gap: 20px;
@@ -146,11 +157,19 @@
     .container1 .name label {
         text-align: start;
         font-weight: bold;
-        font-size: 10px;
+        font-size: 9px;
+    }
+
+    .container1 .name .name-fields {
+        display: flex;
+        flex-direction: row;
+        gap: 3px;
     }
 
     .container1 .name .name-fields div {
-        width: 50%;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
     }
 
     .container1 label {
@@ -165,25 +184,6 @@
         font-size: 0.8em;
     }
 
-    h5 {
-        text-align: center;
-    }
-
-    .signatureHR,
-    .signatureApplicant,
-    .signatureAdmin,
-    .signatureGov {
-        text-align: center;
-        padding-top: 10px;
-        width: 50%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .signatureAdmin {
-        margin-top: 33%;
-        margin-bottom: 2%;
-    }
 
     .container4A .asOf {
         margin-left: 150px;
@@ -218,5 +218,50 @@
     .disapproved label {
         width: 60%;
         font-weight: bold;
+    }
+
+    .print-field-date {
+        display: inline-block;
+        /* or block */
+        color: #333;
+        width: 12%;
+        border-bottom: 1px solid black;
+        /* Optional underline effect */
+        padding: 5px;
+        margin-right: 50px;
+    }
+
+    /* Signature Sections */
+    .signatureHR,
+    .signatureApplicant,
+    .signatureAdmin,
+    .signatureGov {
+        text-align: center !important;
+        padding-top: 10px !important;
+        width: 50% !important;
+        margin: 20px auto 5px auto !important;
+        /* Centers the div horizontally */
+    }
+
+    #signatureApplicantLabel,
+    #signatureGovLabel,
+    #signatureAdminLabel,
+    #signatureHRLabel {
+        display: block !important;
+        width: 160px !important;
+        min-height: 30px !important;
+        border-bottom: 1px solid black !important;
+        text-align: center !important;
+        font-family: inherit !important;
+        margin: 5px auto !important;
+    }
+
+    .signatureAdmin {
+        margin-top: 90px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .signatureGov {
+        margin-top: 20px !important;
     }
 }
