@@ -2,6 +2,9 @@
     @page {
         size: A4 landscape;
         margin: 0;
+        page-break-before: auto !important;
+        page-break-after: auto !important;
+        page-break-inside: avoid !important;
     }
 
     .print-btn {
@@ -342,35 +345,37 @@
 .footer {
     position: fixed; /* Keeps it at the bottom */
     bottom: 0;
-    width: 7px;;
-    height: 30px; /* Adjust to fit properly */
-    display: flex;
-    background: url("../images/footer.png") no-repeat center;
-    background-size:cover; /* Keeps image within bounds */
-    padding: 5px;
-    color: rgb(8, 8, 146);
-    overflow: hidden;
+    left: 0;
+    width: 100%; /* Full width */
+    text-align: center;
+    background: white;
+    padding: 3px;
+    font-size: 10px;
+    height: auto; /* Adjust height dynamically */
 }
 
 .footer img {
-    width: 50%;
-    height: 90%;
-    position:fixed;
-    top: 0;
-    border: solid red;
+    max-width: 100%; /* Set a fixed width */
+    max-height: 120px; /* Ensure it fits within the footer */
+    object-fit: contain; /* Maintain aspect ratio */
+    margin-top: 20px;
+    bottom: 0;
+    page-break-after: avoid;
 }
 
 .footer-text {
-    position: relative;
+    position: fixed;
     z-index: 1;
-    left: 40px;
-    top: 50%; 
-    font-size: 14px;
+    left: 60px;
+    
+    bottom: 0;
+    font-size: 10px;
+    margin-left: 250px !important;
     font-weight: bold;
     max-width: 100%; 
     text-align: left;
     background: rgba(255, 255, 255, 0.6);
     padding: 10px;
-    border-radius: 5px; 
+    
 }
 }

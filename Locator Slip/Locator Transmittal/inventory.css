@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.formatted-date {
+    font-weight: normal;
+    color: black;
+    cursor: pointer;
+    border-bottom: 1px solid black;
+    padding: 3px 0;
+    display: inline-block;
+    min-width: 120px;
+}
+
+.punoPito {
+    margin-top: -60px !important;
+    margin-bottom: 70px;
+}
+.header {
+    color: rgb(46, 82, 211);
+    text-align: center;
+    padding: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    max-width: 100%;
+    width: 60%;
+    margin: 20px auto;
+    background-image: url("../../images/body.png");
+    background-size: auto;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.text-group .name, .surname, .option, .greet, .signature {
+    font-weight: bold;
+}
+
+.text-group label {
+    text-align: left;
+    margin-bottom: 1px;
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: left;
+    border: 2px solid #333;
+}
+
+th, td {
+    border: 2px solid #0e0b0b;
+    padding: 4px;
+    text-align: left;
+}
+
+th {
+    color: #140b0b;
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+button {
+    background-color: #003366;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #00509E;
+}
+
+.date-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+input[type="date"] {
+    width: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.salamat, .greet, .signature{
+    display: block;
+    text-align: left;
+    margin-top: 20px;
+    font-size: 16px;
+    margin-left
+    : 20px;
+}

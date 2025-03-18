@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editable Locator Slip</title>
+    <link rel="stylesheet" href="../locationSlipPrint.css">
+    <link rel="stylesheet" href="../locatorPrint.css">
+    <link rel="stylesheet" href="../../footer.css">
+</head>
+<body>
+    <div class="logo-container">
+        <div class="text-section">
+            <p>Form No. HRD 12</p>
+            <p>Jul 2019</p>
+            <p>Rev 03</p>
+        </div>
+        <img src="../../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
+    </div>
+
+    <div class="header">
+        <h1>Provincial Information Technology Office</h1>
+        <h2 class="subtext">(Office)</h2>
+    </div><br>
+
+    <form id="editForm" action="update_locator.php" method="POST">
+        <input type="hidden" id="id" name="id"> <!-- Hidden field for ID -->
+        
+        <h2>LOCATOR SLIP</h2>
+        <div class="allcontent">
+            <div class="content1">
+                <div class="official">
+                    <input type="checkbox" id="official" name="official">
+                    <label for="officialText">Official</label><br>
+                </div>
+                <div class="date-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date">
+                </div>
+            </div>
+            <div class="content2">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination">
+            </div>
+            <div class="content2">
+                <label for="purpose">Purpose:</label>
+                <input type="text" id="purpose" name="purpose">
+            </div>
+            <div class="content3">
+                <label for="inclDate">Inclusive Dates:</label>
+                <input type="text" id="inclDate" name="inclDate"><br><br>
+                <label for="timeDeparture">Departure Time:</label>
+                <input type="time" id="timeDeparture" name="timeDeparture"><br><br>
+                <label for="timeArrival">Arrival Time:</label>
+                <input type="time" id="timeArrival" name="timeArrival"><br><br>
+            </div>
+            <div class="request-group">
+                <label for="request">Requested by:</label>
+                <input type="text" id="request" name="request">
+            </div>
+            <div class="approved-group">
+                <label>Approved by:</label>
+                <label>ENGR. RHEA LIZA R. VALERIO</label><br>
+                <label>Department Head</label>
+            </div>
+            <button type="submit" class="submit-btn">Save Changes</button>
+        </div>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+    
+            if (!id) {
+                alert("No record ID provided!");
+                return;
+            }
+    
+            // Fetch data from database using AJAX
+            fetch(`fetch_locator.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert("Error fetching data: " + data.error);
+                    } else {
+                        // Populate form fields
+                        document.getElementById('id').value = data.id;
+                        document.getElementById('destination').value = data.destination;
+                        document.getElementById('purpose').value = data.purpose;
+                        document.getElementById('inclDate').value = data.inclusive_dates;
+                        document.getElementById('timeDeparture').value = data.time_of_departure;
+                        document.getElementById('timeArrival').value = data.time_of_arrival;
+                        document.getElementById('request').value = data.requested_by;
+                        document.getElementById('date').value = data.date;
+    
+                        // Set checkbox for "official"
+                        if (data.official === "1") {
+                            document.getElementById('official').checked = true;
+                        }
+                    }
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        });
+    </script>
+    
+    
+</body>
+</html>

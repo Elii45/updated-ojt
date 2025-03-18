@@ -52,7 +52,7 @@
   }
 
   .print-page-wrapper .lowerContent {
-    margin-top: -30px !important; /* Try a larger negative value */
+    margin-top: -30px !important;
     margin-bottom: -200px !important;
     display: flex;
     flex-direction: column;
@@ -168,7 +168,6 @@ table {
 th,
 td {
   padding: 4px !important;
-  /* Reduced padding */
   border: 1px solid black !important;
   text-align: center !important;
   font-size: 11px !important;
@@ -196,7 +195,7 @@ tbody tr {
   margin-bottom: -200px !important;
   display: flex;
   flex-direction: column;
-  align-items: start; /* Aligns text to the left */
+  align-items: start;
 }
 
 .signature {
@@ -204,20 +203,20 @@ tbody tr {
   display: block;
   margin: 0 20px;
   padding: 0;
-  text-align: center; /* Centers the text inside */
+  text-align: center;
 }
 
 label.signature {
   font-weight: bold;
   border-bottom: 1px solid black;
-  text-align: center; /* Ensures label text is centered */
+  text-align: center;
 }
 
 span.signature {
   font-size: 9px;
   font-weight: normal;
-  text-align: center; /* Centers span text */
-  display: block; /* Ensures it remains on a new line */
+  text-align: center;
+  display: block;
 }
 
 /* Footer */
@@ -227,9 +226,7 @@ span.signature {
   left: 0 !important;
   right: 0 !important;
   page-break-before: always !important;
-  /* Forces footer to stay on page 1 */
   page-break-after: avoid !important;
-  /* Prevents break after footer */
 }
 
 .footer-text {

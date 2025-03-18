@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     span.style.display = "inline-block";
                     span.style.borderBottom = "1px solid black";
                     span.style.padding = "3px 0";
-                    span.style.minWidth = "120px"; // Ensures spacing is correct
+                    span.style.minWidth = "120px";
 
                     // Clicking the span brings back the input field
                     span.addEventListener("click", function () {
@@ -31,6 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         dateInput.addEventListener("change", updateDateDisplay);
-        updateDateDisplay(); // Run on page load to format pre-filled values
+        updateDateDisplay();
     });
 });
