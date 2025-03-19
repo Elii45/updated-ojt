@@ -5,50 +5,66 @@ $password = "";
 $dbname = "ojt";
 $port = 3307;
 
-// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get and sanitize data from form
-$id = isset($_POST['id']) ? $conn->real_escape_string($_POST['id']) : '';
-$destination = isset($_POST['destination']) ? $conn->real_escape_string($_POST['destination']) : '';
-$purpose = isset($_POST['purpose']) ? $conn->real_escape_string($_POST['purpose']) : '';
-$inclDate = isset($_POST['inclDate']) ? $conn->real_escape_string($_POST['inclDate']) : '';
-$timeDeparture = isset($_POST['timeDeparture']) ? date("h:i A", strtotime($_POST['timeDeparture'])) : '';
-$timeArrival = isset($_POST['timeArrival']) ? date("h:i A", strtotime($_POST['timeArrival'])) : '';
-$request = isset($_POST['request']) ? $conn->real_escape_string($_POST['request']) : '';
+$official = isset($_POST['official']) ? 1 : 0;
+$date = $_POST['date'];
+$destination = $_POST['destination'];
+$purpose = $_POST['purpose'];
+$inclDate = $_POST['inclDate'];
+$timeDeparture = $_POST['timeDeparture'];
+$timeArrival = $_POST['timeArrival'];
 
-// Check if ID is provided
-if (!empty($id)) {
-    // Prepare the update query
-    $sql = "UPDATE locator_slip SET 
-                destination = ?, 
-                purpose = ?, 
-                inclusive_dates = ?, 
-                time_of_departure = ?, 
-                time_of_arrival = ?, 
-                requested_by = ? 
-            WHERE id = ?";
-    
-    $stmt = $conn->prepare($sql);
-    if ($stmt) {
-        $stmt->bind_param("ssssssi", $destination, $purpose, $inclDate, $timeDeparture, $timeArrival, $request, $id);
-        if ($stmt->execute()) {
-            // Redirect to print page with updated data
-            header("Location: locatorSlipPrint.html?id=$id&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture&timeArrival=$timeArrival&request=$request");
-            exit();
-        } else {
-            echo "Error updating record: " . $stmt->error;
-        }
-        $stmt->close();
-    } else {
-        echo "Error preparing statement: " . $conn->error;
-    }
-} else {
-    echo "Error: No ID provided.";
+$originalRequest = $_POST['originalRequest'];
+$originalDate = $_POST['originalDate'];
+
+$timeDeparture12 = date("h:i A", strtotime($timeDeparture));
+$timeArrival12 = date("h:i A", strtotime($timeArrival));
+
+$requesters = isset($_POST['request']) && is_array($_POST['request']) ? $_POST['request'] : [];
+
+if (empty($requesters)) {
+    die("Error: No requesters selected.");
 }
 
+$requestersStr = implode(", ", $requesters);
+
+$sql = "UPDATE locator_slip 
+        SET official = ?, 
+            date = ?, 
+            destination = ?, 
+            purpose = ?, 
+            inclusive_dates = ?, 
+            time_of_departure = ?, 
+            time_of_arrival = ?, 
+            requested_by = ? 
+        WHERE requested_by = ? AND date = ?";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("isssssssss", 
+    $official, 
+    $date, 
+    $destination, 
+    $purpose, 
+    $inclDate, 
+    $timeDeparture12, 
+    $timeArrival12, 
+    $requestersStr,
+    $originalRequest,
+    $originalDate
+);
+
+if ($stmt->execute()) {
+    header("Location: ../locatorSlipPrint.html?official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
+    exit();
+} else {
+    echo "Error updating record: " . $stmt->error;
+}
+
+$stmt->close();
 $conn->close();
 ?>
+

@@ -1,109 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editable Locator Slip</title>
-    <link rel="stylesheet" href="../locationSlipPrint.css">
-    <link rel="stylesheet" href="../locatorPrint.css">
-    <link rel="stylesheet" href="../../footer.css">
+    <title>Edit Locator Slip</title>
+    <link rel="stylesheet" href="../Style/locatorSlip.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            margin-right: 10px;
+            background-color: #6c757d;
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+            display: none;
+        }
+        .remove-btn {
+            margin-left: 10px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .request-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="logo-container">
-        <div class="text-section">
-            <p>Form No. HRD 12</p>
-            <p>Jul 2019</p>
-            <p>Rev 03</p>
-        </div>
-        <img src="../../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
-    </div>
-
     <div class="header">
-        <h1>Provincial Information Technology Office</h1>
-        <h2 class="subtext">(Office)</h2>
-    </div><br>
-
-    <form id="editForm" action="update_locator.php" method="POST">
-        <input type="hidden" id="id" name="id"> <!-- Hidden field for ID -->
+        <h2>EDIT LOCATOR SLIP</h2>
+    </div>
+    
+    <div id="errorMessage" class="error-message">
+        Could not load employee data. Please refresh the page.
+    </div>
+    
+    <form action="update_locator.php" method="POST">
+        <!-- Hidden field to store the original request string for identification -->
+        <input type="hidden" id="originalRequest" name="originalRequest">
+        <input type="hidden" id="originalDate" name="originalDate">
         
-        <h2>LOCATOR SLIP</h2>
-        <div class="allcontent">
-            <div class="content1">
-                <div class="official">
-                    <input type="checkbox" id="official" name="official">
-                    <label for="officialText">Official</label><br>
-                </div>
-                <div class="date-group">
-                    <label for="date">Date:</label>
+        <div class="content1">
+            <div class="official">
+                <input type="checkbox" id="official" name="official">
+                <label for="officialText">Official</label><br>
+            </div>
+            <div class="date-group">
+                <label for="date">Date:</label>
+                <div class="input-container">
                     <input type="date" id="date" name="date">
+                    <span class="subtext">(Date of Filing)</span>
                 </div>
             </div>
-            <div class="content2">
+        </div>
+
+        <div class="content2">
+            <div class="field-group">
                 <label for="destination">Destination:</label>
-                <input type="text" id="destination" name="destination">
+                <input type="text" id="destination" name="destination" required>
             </div>
-            <div class="content2">
+
+            <div class="field-group">
                 <label for="purpose">Purpose:</label>
-                <input type="text" id="purpose" name="purpose">
+                <input type="text" id="purpose" name="purpose" required>
             </div>
-            <div class="content3">
-                <label for="inclDate">Inclusive Dates:</label>
-                <input type="text" id="inclDate" name="inclDate"><br><br>
-                <label for="timeDeparture">Departure Time:</label>
-                <input type="time" id="timeDeparture" name="timeDeparture"><br><br>
-                <label for="timeArrival">Arrival Time:</label>
-                <input type="time" id="timeArrival" name="timeArrival"><br><br>
-            </div>
+        </div>
+
+        <div class="content3">
+            <label for="inclDate">Inclusive Dates:</label>
+            <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" required>
+
+            <label for="timeDeparture">Departure Time: </label>
+            <input type="time" id="timeDeparture" name="timeDeparture" required><br><br>
+
+            <label for="timeArrival">Arrival Time: </label>
+            <input type="time" id="timeArrival" name="timeArrival" required><br><br>
+        </div>
+
+        <!-- Dropdown Container -->
+        <div id="dropdown-container">
             <div class="request-group">
                 <label for="request">Requested by:</label>
-                <input type="text" id="request" name="request">
+                <select id="request" name="request[]" required>
+                    <option value="">Select Employee</option>
+                    <option value="PITO Office">PITO Office</option>
+                    <!-- Fallback options will be added here if AJAX fails -->
+                </select>
             </div>
-            <div class="approved-group">
-                <label>Approved by:</label>
-                <label>ENGR. RHEA LIZA R. VALERIO</label><br>
-                <label>Department Head</label>
-            </div>
-            <button type="submit" class="submit-btn">Save Changes</button>
+        </div>
+
+        <!-- Add Button -->
+        <button type="button" id="addDropdown">Add</button>
+        
+        <div class="button-group">
+            <button type="button" class="back-btn" onclick="window.history.back()">Cancel</button>
+            <input type="submit" id="submit" value="Update" class="submit">
         </div>
     </form>
 
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="../Script/inclusiveDate.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
+    // Fallback employee data in case the AJAX request fails
+    const fallbackEmployees = [
+        { name: "Overa, Mary Christian Joy C." },
+        { name: "Perez, Ronalyn C." },
+        { name: "Santos, Juan D." },
+        { name: "Reyes, Maria L." },
+        { name: "Cruz, Jose M." }
+    ];
     
-            if (!id) {
-                alert("No record ID provided!");
-                return;
-            }
-    
-            // Fetch data from database using AJAX
-            fetch(`fetch_locator.php?id=${id}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.error) {
-                        alert("Error fetching data: " + data.error);
-                    } else {
-                        // Populate form fields
-                        document.getElementById('id').value = data.id;
-                        document.getElementById('destination').value = data.destination;
-                        document.getElementById('purpose').value = data.purpose;
-                        document.getElementById('inclDate').value = data.inclusive_dates;
-                        document.getElementById('timeDeparture').value = data.time_of_departure;
-                        document.getElementById('timeArrival').value = data.time_of_arrival;
-                        document.getElementById('request').value = data.requested_by;
-                        document.getElementById('date').value = data.date;
-    
-                        // Set checkbox for "official"
-                        if (data.official === "1") {
-                            document.getElementById('official').checked = true;
-                        }
-                    }
-                })
-                .catch(error => console.error("Error fetching data:", error));
+    // Function to populate dropdown with fallback data
+    function populateWithFallbackData() {
+        const select = document.getElementById('request');
+        if (!select) return;
+        
+        // Clear existing options except the first two
+        while (select.options.length > 2) {
+            select.remove(2);
+        }
+        
+        // Add fallback options
+        fallbackEmployees.forEach(employee => {
+            const option = document.createElement('option');
+            option.value = employee.name;
+            option.textContent = employee.name;
+            select.appendChild(option);
         });
+        
+        console.log("Populated dropdown with fallback data");
+    }
+    
+    // Show error message
+    function showError(message) {
+        const errorElement = document.getElementById('errorMessage');
+        if (errorElement) {
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+    }
     </script>
-    
-    
+    <script src="getEmployees.js"></script>
+    <script src="editLocator.js"></script>
+    <script>
+    // Additional script to handle fallback if AJAX fails
+    document.addEventListener('DOMContentLoaded', function() {
+        // Set a timeout to check if employees loaded
+        setTimeout(function() {
+            if (!window.employeesList || window.employeesList.length === 0) {
+                console.warn("Employee data not loaded after timeout, using fallback data");
+                populateWithFallbackData();
+                showError("Could not load employee data from server. Using fallback data.");
+            }
+        }, 3000); // Wait 3 seconds for AJAX to complete
+    });
+    </script>
 </body>
+
 </html>
+

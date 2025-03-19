@@ -77,10 +77,11 @@
                 <label>Department Head</label>
             </div>
 
-            <button type="button" onclick="window.print()" class="print-btn">Print This Page</button>
-            <!--
-    <button type="button" id="editBtn" class="edit-btn">Edit</button>
--->
+            <div class="button-container">
+                <button type="button" id="editBtn" class="edit-btn">Edit</button>
+                <button type="button" onclick="window.print()" class="print-btn">Print This Page</button>
+            </div>
+        </div>
         </div>
     </form>
 
@@ -97,17 +98,17 @@
     <!-- Fetch Data -->
     <script src="Print/fetchData.js"></script>
 
-    <!--
+
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const editBtn = document.getElementById("editBtn");
 
             editBtn.addEventListener("click", function () {
-                window.location.href = "Edit/locatorEdit.html";
+                const urlParams = new URLSearchParams(window.location.search);
+                window.location.href = "Edit/locatorEdit.php?" + urlParams.toString();
             });
         });
     </script>
--->
 </body>
 
 </html>
