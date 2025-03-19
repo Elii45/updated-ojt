@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Mar 17, 2025 at 09:52 AM
+-- Generation Time: Mar 19, 2025 at 09:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -38,16 +38,6 @@ CREATE TABLE `cto_requests` (
   `applied_hours` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cto_requests`
---
-
-INSERT INTO `cto_requests` (`request_id`, `employee_name`, `office`, `position`, `filing_date`, `earned_hours`, `cto_date`, `applied_hours`) VALUES
-(483, 'Chabelita', 'Office of the Governor (GO)', 'Intern', '2025-03-11', 5, '2025-03-11', 2),
-(484, 'user', 'Office of the Vice Governor - Personal Staff', 'user', '2025-03-11', 1, '2025-03-11', 1),
-(485, '1', 'Office of the Secretary to the Sangguniang Panlalawigan (OSSP)', '1', '2025-03-12', 1, '2025-03-12', 1),
-(486, 'bb', 'Office of the Vice Governor (VGO)', 'bb', '2025-03-12', 1, '2025-03-12', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -64,21 +54,6 @@ CREATE TABLE `employeedetails` (
   `position` varchar(255) NOT NULL,
   `salary` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `employeedetails`
---
-
-INSERT INTO `employeedetails` (`id`, `office`, `last_name`, `first_name`, `middle_name`, `filing_date`, `position`, `salary`) VALUES
-(1, 'HR Department', 'Doe', 'John', 'A', '2025-03-10', 'HR Manager', 50000.00),
-(108, '4', 'Dela Cruz', 'renz', 'culalic', '2025-03-17', 'Intern', 0.00),
-(109, '20', 'Dela Cruz', 'Chabelita', 'Pita', '2025-03-17', 'Intern', 0.00),
-(110, '1', 'bb', 'bb', 'bb', '2025-03-17', 'bb', 0.00),
-(111, 'Office of the Governor (GO)', 'bb', 'bb', 'bb', '2025-03-17', 'bb', 0.00),
-(112, 'Office of the Governor - Personal Staff', 'bb', 'bb', 'bb', '2025-03-17', 'bb', 0.00),
-(113, 'Office of the Governor - Personal Staff', 'bb', 'bb', 'bb', '2025-03-17', 'bb', 0.00),
-(114, 'Office of the Governor - Personal Staff', 'bb', 'bb', 'bb', '2025-03-17', 'bb', 0.00),
-(115, 'Office of the Governor - Personal Staff', 'bb', 'bb', 'bb', '2025-03-17', 'bb', 0.00);
 
 -- --------------------------------------------------------
 
@@ -101,17 +76,6 @@ CREATE TABLE `leaveapproval` (
   `disapproved_reason` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `leaveapproval`
---
-
-INSERT INTO `leaveapproval` (`id`, `employee_id`, `leave_id`, `as_of`, `vacation_leave_balance`, `vacation_less_application`, `sick_leave_balance`, `sick_less_application`, `days_with_pay`, `days_without_pay`, `disapproved_days`, `disapproved_reason`) VALUES
-(1, 1, 1, '2025-03-14', 10.00, 2.00, 8.00, 1.00, 5, 2, NULL, NULL),
-(84, 108, 108, '2025-03-17', 2.00, 1.00, 1.00, 2.00, 3, 3, NULL, NULL),
-(85, 109, 109, '2025-03-17', 0.00, 0.00, 1.00, 0.00, 0, 1, NULL, NULL),
-(86, 110, 110, '2025-03-17', 0.00, 0.00, 0.00, 0.00, 0, 0, NULL, NULL),
-(87, 115, 115, '2025-03-17', 0.00, 0.00, 0.00, 0.00, 0, 0, NULL, 'asdasd');
-
 -- --------------------------------------------------------
 
 --
@@ -129,21 +93,6 @@ CREATE TABLE `leavedetails` (
   `inclusive_dates` date NOT NULL,
   `commutation` enum('notRequested','requested') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `leavedetails`
---
-
-INSERT INTO `leavedetails` (`id`, `employee_id`, `leave_type`, `leave_type_others`, `detail_type`, `detail_description`, `working_days`, `inclusive_dates`, `commutation`) VALUES
-(1, 1, 'sickLeave', NULL, 'hospital', 'Flu', 5, '2025-03-10', 'requested'),
-(108, 108, 'vacationLeave', NULL, 'withinPhilippines', 'Siargao', 12, '2025-03-17', 'requested'),
-(109, 109, 'sickLeave', NULL, 'hospital', 'Lagnat', 3, '2025-03-17', 'requested'),
-(110, 110, 'vacationLeave', NULL, 'withinPhilippines', 'bb', 0, '2025-03-17', 'notRequested'),
-(111, 111, 'vacationLeave', NULL, 'withinPhilippines', 'bb', 0, '2025-03-17', 'notRequested'),
-(112, 112, 'vacationLeave', NULL, 'withinPhilippines', 'bb', 0, '2025-03-17', 'notRequested'),
-(113, 113, 'vacationLeave', NULL, 'withinPhilippines', 'bb', 0, '2025-03-17', 'notRequested'),
-(114, 114, 'vacationLeave', NULL, 'withinPhilippines', 'bb', 0, '2025-03-17', 'notRequested'),
-(115, 115, 'vacationLeave', NULL, 'withinPhilippines', 'bb', 0, '2025-03-17', 'requested');
 
 -- --------------------------------------------------------
 
@@ -168,28 +117,7 @@ CREATE TABLE `locator_slip` (
 --
 
 INSERT INTO `locator_slip` (`id`, `official`, `date`, `destination`, `purpose`, `inclusive_dates`, `time_of_departure`, `time_of_arrival`, `requested_by`) VALUES
-(2, 0, '2024-02-28', 'Provincial Office', 'Submit Reports', '2024-02-28', '08:30 AM', '02:30 PM', 'Robert White'),
-(5, 0, '2024-03-03', 'Government Office', 'Sign Documents', '2024-03-03', '11:00 AM', '01:00 PM', 'Jessica Taylor'),
-(6, 0, '2024-03-04', 'Health Department', 'Health and Safety Inspection', '2024-03-04', '09:15 AM', '03:45 PM', 'Daniel Clark'),
-(10, 1, '2025-02-26', 'Malolos', 'Tambay', '2025-02-26', '03:23 PM', '04:23 PM', 'Chabelita\r\n'),
-(11, 0, '2025-02-02', 'Lugam', 'Tambay', '2025-02-09', '08:24 PM', '10:24 PM', 'user 6'),
-(12, 1, '2025-02-27', 'Malolos', 'Tambay', '2025-03-01', '12:52 PM', '12:52 PM', 'Chabelita zghdhfhhzsgdzd'),
-(13, 0, '2025-02-11', 'Malolos', 'Tambay', '2025-02-27', '11:53 AM', '11:53 PM', 'aaaa'),
-(14, 1, '2025-03-04', 'aaaaaa', 'Tambay', '2025-03-12', '11:58 AM', '11:57 AM', 'user1\r\n'),
-(15, 1, '2025-03-20', 'Malolos', 'Tambay', '2025-02-27', '04:38 PM', '08:37 PM', 'user 2\r\n'),
-(16, 1, '2025-03-04', 'Malolos', 'Tambay', '2025-03-10', '09:37 AM', '12:36 PM', 'user3\r\n'),
-(17, 1, '0000-00-00', 'Malolos', 'Tambay', '', '01:00 AM', '01:00 AM', 'Chabelita'),
-(18, 0, '2024-02-28', 'Provincial Office', 'Submit Reports', '2024-02-28', '08:30 AM', '02:30 PM', 'Robert White'),
-(19, 1, '0000-00-00', 'Plaridel', 'Wala', '', '01:00 AM', '01:00 AM', 'Marie'),
-(26, 1, '2025-03-12', 'dd', 'dd', '2025-03-12', '09:16 AM', '09:19 AM', 'dd'),
-(27, 1, '2025-03-12', 'cc', 'cc', '2025-03-12', '09:19 AM', '09:19 AM', 'cc'),
-(28, 0, '2025-03-01', 'Location', 'Agenda', '2025-03-01', '06:19 PM', '09:19 PM', 'User'),
-(29, 1, '2025-03-12', 'aaaaa', 'aaaaaaa', '2025-03-12', '09:25 AM', '09:25 AM', 'aaaaaaa'),
-(30, 1, '2025-03-12', '2', '2', '2025-03-27', '02:22 PM', '10:23 AM', '2'),
-(31, 0, '2025-03-12', '1', '1', '2025-03-12', '02:01 PM', '02:01 AM', '1'),
-(32, 1, '2025-03-12', 'Malolos', 'Tambay', '2025-03-12', '02:19 PM', '02:19 PM', 'Marie'),
-(33, 1, '2025-03-12', 'Malolos', 'Tambay', '2025-03-12', '02:19 PM', '02:19 PM', 'Marie'),
-(34, 1, '2025-03-25', 'aaaaaa', 'Tambay', '2025-03-06', '03:12 AM', '03:12 AM', 'Chabelita');
+(1, 1, '2025-03-19', 'Bulacan', 'Meeting', 'Mar 17-Mar 18, Mar 20-Mar 21', '04:22 PM', '05:22 PM', 'Abiol, Tristan P., Cervantes, Joseph S.');
 
 -- --------------------------------------------------------
 
@@ -236,6 +164,50 @@ INSERT INTO `offices` (`office_ID`, `office_name`) VALUES
 (27, 'Provincial Treasurer\'s Office (PTO)'),
 (28, 'Provincial Veterinary Office (PVO)'),
 (29, 'Provincial Youth and Sports Development Office (PYSDO)');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pito_office`
+--
+
+CREATE TABLE `pito_office` (
+  `employee_id` int(11) NOT NULL,
+  `employee_lastName` varchar(255) NOT NULL,
+  `employee_firstName` varchar(255) NOT NULL,
+  `employee_middleName` varchar(255) NOT NULL,
+  `position` varchar(100) NOT NULL,
+  `mobile_number` varchar(20) DEFAULT NULL,
+  `email_address` varchar(150) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pito_office`
+--
+
+INSERT INTO `pito_office` (`employee_id`, `employee_lastName`, `employee_firstName`, `employee_middleName`, `position`, `mobile_number`, `email_address`) VALUES
+(1, 'Abiol', 'Tristan', 'P.', 'Computer Programmer III', '09420303612', 't_abiol@yahoo.com'),
+(2, 'Bartolo', 'John Daniel', 'A.', 'Admin Aide II', '09501138555', 'bartsdaniel22@gmail.com'),
+(3, 'Cervantes', 'Joseph', 'S.', 'CP II', '09058373331', 'josephcervantes.pgb@gmail.com'),
+(4, 'Crisostomo', 'Emmanuel', 'C.', 'DEMO II', '09178967299', 'mnycris@gmail.com'),
+(5, 'Cue', 'Karlo Antonio', 'B.', 'DEMO I', '09335566543', 'karloluna23@gmail.com'),
+(6, 'De Guzman', 'Krizza Mhei', 'A.', 'Administrative Aide VI', '09613676136', 'krizzadeguzman31@gmail.com'),
+(7, 'Guitierrez', 'Arnel', 'S.', 'CP III', '09226319826', 'pgb.pito.az@gmail.com'),
+(8, 'Mendoza', 'Baby Angela', 'R.', 'CP III', '09153822952', 'angela.mendoza1127@gmail.com'),
+(9, 'Navarro', 'Frederick', 'P.', 'DEMO II', '09321326387', 'gatts1511@gmail.com'),
+(10, 'Nicolas', 'James Patrick', 'S.', 'DEMO I', '09958232310', 'jpatricknicolas@gmail.com'),
+(11, 'Ochoa', 'Joseph Gary', 'G.', 'CP III', '09436059207', 'joegarochoa@gmail.com'),
+(12, 'Owera', 'Mary Christian Joy', 'C.', 'DEMO I', '09335433882', 'ceejayowera12@gmail.com'),
+(13, 'Palad', 'Arthur', 'L.', 'CP III', '09158489357', 'ants_bug@yahoo.com'),
+(14, 'Perez', 'Ronalyn', 'C.', 'IT OFFICER II', '09174645119', 'rcperez828@gmail.com'),
+(15, 'Sacdalan', 'Bryan Allen', 'S.', 'DEMO I', '09499377005', 'bryanallensacdalan555@gmail.com'),
+(16, 'Santiago', 'Christian Dave', 'T.', 'DEMO I', '09613354694', 'christiandavesantiago7@gmail.com'),
+(17, 'Santiago', 'Sandy', 'I.', 'CP III', '09234657337', 'zahndee@yahoo.com'),
+(18, 'Santos', 'Joe Allann', 'S.', 'DEMO I', '09433915177', 'sajsantos7@gmail.com'),
+(19, 'Santos', 'Paul Andrew', 'R.', 'CP III', '09326204981', 'paulandrewsantos@gmail.com'),
+(20, 'Tolentino', 'Gilbert', 'T.', 'DEMO II', '09067859854', 'gilberttolentino04112o@gmail.com'),
+(21, 'Tolentino', 'Joseph', 'C.', 'DEMO II', '09166417402', 'pito.kuyajoseph@gmail.com'),
+(22, 'Valerio', 'Rhea Liza', 'R.', 'Department Head\r\n', '09162837328', 'pgbulacandco@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -302,6 +274,12 @@ ALTER TABLE `offices`
   ADD PRIMARY KEY (`office_ID`);
 
 --
+-- Indexes for table `pito_office`
+--
+ALTER TABLE `pito_office`
+  ADD PRIMARY KEY (`employee_id`);
+
+--
 -- Indexes for table `remarks`
 --
 ALTER TABLE `remarks`
@@ -315,37 +293,43 @@ ALTER TABLE `remarks`
 -- AUTO_INCREMENT for table `cto_requests`
 --
 ALTER TABLE `cto_requests`
-  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=487;
+  MODIFY `request_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `employeedetails`
 --
 ALTER TABLE `employeedetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `leaveapproval`
 --
 ALTER TABLE `leaveapproval`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT for table `leavedetails`
 --
 ALTER TABLE `leavedetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 
 --
 -- AUTO_INCREMENT for table `locator_slip`
 --
 ALTER TABLE `locator_slip`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `offices`
 --
 ALTER TABLE `offices`
   MODIFY `office_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+
+--
+-- AUTO_INCREMENT for table `pito_office`
+--
+ALTER TABLE `pito_office`
+  MODIFY `employee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `remarks`
