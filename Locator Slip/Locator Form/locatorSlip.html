@@ -5,27 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locator Slip</title>
-    <link rel="stylesheet" href="locatorSlip.css">
-    <link rel="stylesheet" href="../../footer.css">
+    <link rel="stylesheet" href="Style/locatorSlip.css">
+    <script src="Script/inclusiveDate.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
-    <!-- LOGO -->
-    <div class="logo-container">
-        <div class="text-section">
-            <p>Form No. HRD 12</p>
-            <p>Jul 2019</p>
-            <p>Rev 03</p>
-        </div>
-        <img src="../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
-    </div>
-
-    <!-- HEADER -->
-    <div class="header">
-        <h1>Provincial Information Technology Office</h1>
-        <h2 class="subtext">(Office)</h2>
-    </div><br>
-
     <form action="submit_locator.php" method="POST">
         <h2>LOCATOR SLIP</h2>
         <div class="content1">
@@ -55,8 +40,8 @@
         </div>
 
         <div class="content3">
-            <label for="inclDate">Inclusive Dates: </label>
-            <input type="date" id="inclDate" name="inclDate" required><br><br>
+            <label for="inclDate">Inclusive Dates:</label>
+            <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" required>
 
             <label for="timeDeparture">Departure Time: </label>
             <input type="time" id="timeDeparture" name="timeDeparture" required><br><br>
@@ -65,32 +50,27 @@
             <input type="time" id="timeArrival" name="timeArrival" required><br><br>
         </div>
 
-        <div class="request-group">
-            <label for="request">Requested by:</label>
-            <input type="text" id="request" name="request" required>
+        <!-- Dropdown Container -->
+        <div id="dropdown-container">
+            <div class="request-group">
+                <label for="request">Requested by:</label>
+                <select id="request" name="request[]" required>
+                    <option value="">Select Employee</option>
+                </select>
+            </div>
         </div>
 
-        <div class="approved-group">
-            <label for="request">Approved by:</label>
-            <label>ENGR. RHEA LIZA R. VALERIO</label><br>
-            <label>Department Head</label>
-        </div>
-
+        <!-- Add Button -->
+        <button type="button" id="addDropdown">Add</button>
+                      
+        
         <input type="submit" id="submit" value="Submit" class="submit">
-
     </form>
 
-    <script src="locator.js"></script>
-
-    <footer class="footer">
-        <div class="footer-text">
-            <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
-                Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
-                Telephone Nos.: +63 44 791 8145 <br>
-                Email Address: phrmo@bulacan.gov.ph</p>
-        </div>
-        <img src="../../images/footer.png" alt="Footer Image">
-    </footer>
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="locator.js"></script> <!-- Submit -->
+    <script src="Script/getEmployees.js"></script> <!-- Dropdown -->
 </body>
 
 </html>

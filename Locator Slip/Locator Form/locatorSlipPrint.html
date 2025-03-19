@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locator Slip</title>
-    <link rel="stylesheet" href="locationSlipPrint.css">
-    <link rel="stylesheet" href="locatorPrint.css">
+    <link rel="stylesheet" href="Print/locatorPrint.css">
+    <link rel="stylesheet" href="Print/locationSlipPrint.css">
     <link rel="stylesheet" href="../../footer.css">
 </head>
 
@@ -31,7 +31,7 @@
         <div class="allcontent">
             <div class="content1">
                 <div class="official">
-                    <input type="checkbox" id="official" name="official">
+                    <input type="checkbox" id="official" name="official" readonly>
                     <label for="officialText">Official</label><br>
                 </div>
                 <div class="date-group">
@@ -93,62 +93,11 @@
         </div>
         <img src="../../images/footer.png" alt="Footer Image">
     </footer>
-    
+
     <!-- Fetch Data -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
+    <script src="Print/fetchData.js"></script>
 
-            // Debug - log all parameters
-            console.log("Received Parameters:", Object.fromEntries(urlParams.entries()));
-
-            // Format date function
-            function formatDate(dateString) {
-                if (!dateString) return '';
-                try {
-                    const date = new Date(dateString);
-                    return date.toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                } catch (e) {
-                    console.error("Date formatting error:", e);
-                    return dateString;
-                }
-            }
-
-            // Set checkbox value
-            const officialValue = urlParams.get('official');
-            if (document.getElementById('official')) {
-                document.getElementById('official').checked = officialValue === "1" || officialValue === "yes";
-            }
-
-            // Set text field values
-            const fields = [
-                'date', 'destination', 'purpose', 'inclDate',
-                'timeDeparture', 'timeArrival', 'request'
-            ];
-
-            fields.forEach(field => {
-                const element = document.getElementById(field);
-                if (element) {
-                    let value = urlParams.get(field) || '';
-
-                    // Format dates if needed
-                    if (field === 'date' || field === 'inclDate') {
-                        value = formatDate(value);
-                    }
-
-                    element.value = value;
-                } else {
-                    console.warn(`Element with ID '${field}' not found`);
-                }
-            });
-        });
-    </script>
-<!--
+    <!--
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const editBtn = document.getElementById("editBtn");

@@ -1,98 +1,104 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-}
+@media print {
+    @page {
+        size: A4 landscape;
+        margin: 0;
+        page-break-before: auto !important;
+        page-break-after: auto !important;
+        page-break-inside: avoid !important;
+    }
 
-/* Logo Header */
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Center the content horizontally */
-    width: 100%;
-    position: relative;
-}
+    .print-btn {
+        display: none !important;
+    }
 
-.text-section {
-    font-size: 9px;
-    color: #666;
-    text-align: left;
-    line-height: 0.2;
-    position: absolute;
-    left: 80px;
-    /* Adjust based on preference */
-    top: 55%;
-    transform: translateY(-50%);
-}
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 10px;
+    }
 
-.office-logo {
-    max-width: 65vw;
-    height: auto;
-    margin-left: 50px;
-}
+    h2 {
+        text-align: center;
+        text-decoration: underline;
+        font-size: 15px;
+    }
 
-/* Header */
-.header {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px;
-    color: #0c0909;
-    margin: 10px 0;
-    position: relative;
-}
+    /* Logo Header */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+    }
 
-.header h1 {
-    display: inline-block;
-    font-size: 20px;
-    margin: 0;
-    padding-bottom: 6px;
-    border-bottom: 1px solid gray;
-    width: 65%;
-    text-align: center;
-}
+    .text-section {
+        font-size: 9px;
+        color: #666;
+        text-align: left;
+        line-height: 1;
+        position: absolute;
+        left: 80px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-.header h2 {
-    font-size: 18px;
-    color: black;
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    text-decoration: none;
-    transform: translateX(-50%);
-}
+    .office-logo {
+        max-width: 65vw;
+        height: auto;
+        margin-left: 50px;
+    }
 
+    /* Header */
+    .header {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+        color: #0c0909;
+        margin: 10px 0;
+        position: relative;
+    }
 
-h2 {
-    text-align: center;
-    text-decoration: underline;
-}
+    .header h1 {
+        font-size: 20px;
+        margin: 0;
+        padding-bottom: 6px;
+        border-bottom: 1px solid gray;
+        width: 65%;
+        display: inline-block;
+    }
 
-form {
-    padding: 10px;
-    width: 80%;
-    margin-top: 20px;
-    margin: 0 auto;
-    border-radius: 10px;
-    background-image: url("../../images/body.png");
-    /* Add background image */
-    background-size: auto;
-    /* Adjust to cover the form area */
-    background-position: center;
-    /* Center the image */
-    background-repeat: no-repeat;
-    border-radius: 10px;
-}
+    .subtext {
+        font-size: 14px;
+        font-weight: normal;
+        color: black;
+        text-align: center;
+        margin-top: 5px;
+    }
 
-label {
-    font-weight: normal;
-    display: block;
-    margin-top: 10px;
-    margin-left: 5px;
-}
+    /* Form Styling */
+    form {
+        padding: 10px;
+        max-width: 100%;
+        margin: 0 auto;
+        border-radius: 10px;
+        background-image: url("../../images/body.png");
+        background-size: 45% !important;
+        background-position: top center;
+        background-repeat: no-repeat;
+        width: 100%;
 
-/*Official Checkbox*/
+    
+    }
+
+    label {
+        font-weight: normal;
+        display: block;
+        margin-top: 10px;
+    }
+
+    /*Official Checkbox*/
 .official {
     display: flex;
     align-items: center;
@@ -327,19 +333,49 @@ label {
     width: 100%;
     margin-top: -10px;
 }
+    .allcontent {
+        margin-top: -30px !important;
+        height: 800px !important;
+        scale: 100% !important;
+        width: 100%!important;
+        padding-bottom: 50px;
+    }
 
-button.print-btn {
-    background: #ff9800;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
+/*Footer*/
+.footer {
+    position: fixed; /* Keeps it at the bottom */
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    text-align: center;
+    background: white;
+    padding: 3px;
+    font-size: 10px;
+    height: auto; /* Adjust height dynamically */
 }
 
-button.print-btn:hover {
-    background: #e68900;
+.footer img {
+    max-width: 100%; /* Set a fixed width */
+    max-height: 120px; /* Ensure it fits within the footer */
+    object-fit: contain; /* Maintain aspect ratio */
+    margin-top: 20px;
+    bottom: 0;
+    page-break-after: avoid;
+}
+
+.footer-text {
+    position: fixed;
+    z-index: 1;
+    left: 60px;
+    
+    bottom: 0;
+    font-size: 10px;
+    margin-left: 250px !important;
+    font-weight: bold;
+    max-width: 100%; 
+    text-align: left;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    
+}
 }
