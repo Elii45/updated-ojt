@@ -58,7 +58,7 @@ $stmt->bind_param("isssssssss",
 );
 
 if ($stmt->execute()) {
-    header("Location: ../locatorSlipPrint.html?official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
+    header("Location: ../Print/locatorSlipPrint.html?official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
     exit();
 } else {
     echo "Error updating record: " . $stmt->error;
