@@ -43,7 +43,7 @@ $stmt->bind_param("isssssss", $official, $date, $destination, $purpose, $inclDat
 
 if ($stmt->execute()) {
     // ✅ Redirect to print page with form data
-    header("Location: locatorSlipPrint.html?official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
+    header("Location: ../Print/locatorSlipPrint.html?official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
     exit();
 } else {
     echo "Error: " . $stmt->error;

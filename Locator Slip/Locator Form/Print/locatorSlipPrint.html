@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locator Slip</title>
-    <link rel="stylesheet" href="Print/locatorPrint.css">
-    <link rel="stylesheet" href="Print/locationSlipPrint.css">
+    <link rel="stylesheet" href="locatorPrint.css">
+    <link rel="stylesheet" href="locationSlipPrint.css">
     <link rel="stylesheet" href="../../footer.css">
 </head>
 
@@ -18,7 +18,7 @@
             <p>Jul 2019</p>
             <p>Rev 03</p>
         </div>
-        <img src="../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
+        <img src="../../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
     </div>
 
     <!-- HEADER -->
@@ -92,11 +92,11 @@
                 Telephone Nos.: +63 44 791 8145 <br>
                 Email Address: pito@bulacan.gov.ph</p>
         </div>
-        <img src="../../images/footer.png" alt="Footer Image">
+        <img src="../../../images/footer.png" alt="Footer Image">
     </footer>
 
     <!-- Fetch Data -->
-    <script src="Print/fetchData.js"></script>
+    <script src="fetchData.js"></script>
 
 
     <script>
@@ -105,7 +105,7 @@
 
             editBtn.addEventListener("click", function () {
                 const urlParams = new URLSearchParams(window.location.search);
-                window.location.href = "Edit/locatorEdit.php?" + urlParams.toString();
+                window.location.href = "../Edit/locatorEdit.php?" + urlParams.toString();
             });
         });
     </script>

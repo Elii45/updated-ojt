@@ -5,9 +5,6 @@ document.addEventListener("DOMContentLoaded", function () {
     addButton.addEventListener("click", function () {
         addDropdown();
     });
-
-    let firstDropdown = document.getElementById("request");
-    attachChangeListener(firstDropdown);
 });
 
 let employeesList = [];
@@ -21,7 +18,6 @@ function fetchEmployees() {
                 return;
             }
             employeesList = data;
-            populateDropdown(document.getElementById("request"), true);
         })
         .catch(error => console.error("Error fetching employee names:", error));
 }
@@ -30,7 +26,7 @@ function populateDropdown(selectElement, isFirst = false) {
     let selectedValues = getSelectedEmployees();
 
     selectElement.innerHTML = `<option value="" disabled selected>Select Employee</option>`;
-    
+
     if (isFirst) {
         selectElement.innerHTML += `<option value="PITO Office">PITO Office</option>`;
     }
@@ -43,8 +39,6 @@ function populateDropdown(selectElement, isFirst = false) {
             selectElement.appendChild(option);
         }
     });
-
-    attachChangeListener(selectElement);
 }
 
 function addDropdown() {
@@ -54,11 +48,15 @@ function addDropdown() {
     newGroup.classList.add("request-group");
 
     let select = document.createElement("select");
-    select.name = "request[]";  // ✅ Ensures the backend receives an array
+    select.name = "request[]";  
     select.required = true;
     select.classList.add("request");
 
-    populateDropdown(select, false);
+    let isFirstDropdown = container.querySelectorAll(".request").length === 0;
+    populateDropdown(select, isFirstDropdown);
+
+    // Ensure it always starts with "Select Employee"
+    select.value = "";
 
     let removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove";
@@ -73,15 +71,43 @@ function addDropdown() {
     newGroup.appendChild(removeBtn);
     container.appendChild(newGroup);
 
-    attachChangeListener(select);
+    select.addEventListener("change", function () {
+        updateDropdowns();
+    });
+
+    updateDropdowns();
 }
 
 function updateDropdowns() {
+    let selectedValues = getSelectedEmployees();
+
     document.querySelectorAll(".request").forEach((select, index) => {
         let previousValue = select.value;
-        populateDropdown(select, index === 0); // Allow "PITO Office" only in the first dropdown
-        select.value = previousValue;
+
+        let availableOptions = employeesList.filter(emp => 
+            !selectedValues.includes(emp.name) || emp.name === previousValue
+        );
+
+        select.innerHTML = `<option value="" disabled ${previousValue ? "" : "selected"}>Select Employee</option>`;
+
+        if (index === 0) {
+            select.innerHTML += `<option value="PITO Office">PITO Office</option>`;
+        }
+
+        availableOptions.forEach(employee => {
+            let option = document.createElement("option");
+            option.value = employee.name;
+            option.textContent = employee.name;
+            select.appendChild(option);
+        });
+
+        if (previousValue && select.querySelector(`option[value="${previousValue}"]`)) {
+            select.value = previousValue;
+        } else {
+            select.value = ""; // Ensure "Select Employee" is shown when adding new
+        }
     });
+
     handleSelection();
 }
 
@@ -91,18 +117,14 @@ function getSelectedEmployees() {
         .filter(value => value !== "");
 }
 
-function attachChangeListener(selectElement) {
-    selectElement.addEventListener("change", handleSelection);
-}
-
 function handleSelection() {
-    let firstDropdown = document.getElementById("request");
+    let dropdowns = document.querySelectorAll(".request");
     let addButton = document.getElementById("addDropdown");
 
-    if (firstDropdown.value === "PITO Office") {
+    if (dropdowns.length > 0 && dropdowns[0].value === "PITO Office") {
         addButton.disabled = true;
-        document.querySelectorAll(".request-group").forEach((group, index) => {
-            if (index > 0) group.remove();
+        dropdowns.forEach((select, index) => {
+            if (index > 0) select.closest(".request-group").remove();
         });
     } else {
         addButton.disabled = false;
