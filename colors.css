@@ -1,0 +1,12 @@
+:root {
+    --base: #F7F1EA;
+    --yellow: #FFE6BC;
+    --black: #000000;
+    --success-color: #00ff00;
+    --warning-color: #ffff00;
+
+    /* Aliases */
+    --lightBackground: var(--base);
+    --lightText: var(--black);
+    --buttons: var(--yellow);
+}
