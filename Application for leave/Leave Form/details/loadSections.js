@@ -18,14 +18,3 @@ document.addEventListener("DOMContentLoaded", function () {
   
   loadSection("actionDetails", "details/actionDetails.html");
 });
-
-// If you're using fetch:
-fetch("details/sections/SectionC_Dates.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("sectionC").innerHTML = html;
-
-    // Initialize calendar after injecting HTML
-    initializeDatepicker();
-  });
-

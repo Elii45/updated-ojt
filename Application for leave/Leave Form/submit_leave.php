@@ -163,8 +163,9 @@ try {
         $detailDescription = 'No details provided';
     }
     
-    $workingDays = $_POST['workingDays'];
-    $inclDates = $_POST['inclDates'];
+    $workingDays = isset($_POST['workingDays']) ? $_POST['workingDays'] : '0'; // Default to 0 if not provided
+$inclDates = isset($_POST['inclDates']) ? $_POST['inclDates'] : ''; // Default to empty string if not provided
+
     
     // Handle commutation field
     $commutation = 'notRequested'; // Default value
