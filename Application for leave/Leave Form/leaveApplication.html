@@ -48,13 +48,14 @@
 
                                 <label>Inclusive Dates</label>
                                 <div class="input-group date" id="datepicker">
+                                    <input type="text" class="form-control" id="Dates" name="Dates"
+                                        placeholder="Select days" required readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="Dates" name="Dates"
-                                        placeholder="Select days" required />
                                 </div>
                             </div>
+
                         </div>
                     </td>
                     <td class="divider">
@@ -73,13 +74,112 @@
 
     <!-- Your custom scripts -->
     <script src="../Leave Form/details/loadSections.js"></script>
-    <script src="inclusiveDates.js"></script>
     <script src="dropdown.js"></script>
 
     <!-- Required JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    function loadSection(id, url) {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById(id).innerHTML = data;
+
+                if (id === "sectionC") {
+                    const $datepicker = $('#datepicker');
+                    let selectedDates = [];
+
+                    $datepicker.datepicker({
+                        startDate: new Date(),
+                        multidate: true,
+                        format: "mm/dd/yyyy", // We'll override the display anyway
+                        daysOfWeekHighlighted: [5, 6],
+                        todayHighlight: true,
+                        autoclose: false
+                    }).on('changeDate', function (e) {
+                        selectedDates = e.dates
+                            .map(date => new Date(date))
+                            .sort((a, b) => a - b);
+
+                        setTimeout(() => {
+                            $('#Dates').val(formatDateRanges(selectedDates));
+                            $('#workingDays').val(selectedDates.length);
+                        }, 0);
+                    });
+
+                    // Reapply formatted text when calendar hides (clicked outside)
+                    $datepicker.on('hide', function () {
+                        setTimeout(() => {
+                            $('#Dates').val(formatDateRanges(selectedDates));
+                        }, 0);
+                    });
+
+                    // Show calendar when calendar icon is clicked
+                    $('.input-group-addon').click(function () {
+                        $datepicker.datepicker('show');
+                    });
+                }
+            })
+            .catch(error => console.error(`Error loading ${url}:`, error));
+    }
+
+    loadSection("sectionC", "details/sections/SectionC_Dates.html");
+
+    // Formatting helpers
+    function formatDate(date) {
+        return date.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    }
+
+    function isConsecutive(date1, date2) {
+        return date2.getTime() - date1.getTime() === 86400000;
+    }
+
+    function makeRange(start, end) {
+        const sameDay = start.getTime() === end.getTime();
+        if (sameDay) {
+            return formatDate(start);
+        }
+
+        const sameMonthYear = start.getFullYear() === end.getFullYear() &&
+                              start.getMonth() === end.getMonth();
+
+        if (sameMonthYear) {
+            return `${start.toLocaleDateString('en-US', { month: 'long' })} ${start.getDate()}–${end.getDate()}, ${start.getFullYear()}`;
+        } else {
+            return `${formatDate(start)}–${formatDate(end)}`;
+        }
+    }
+
+    function formatDateRanges(dates) {
+        if (!dates.length) return '';
+
+        const ranges = [];
+        let start = dates[0];
+        let end = start;
+
+        for (let i = 1; i < dates.length; i++) {
+            if (isConsecutive(end, dates[i])) {
+                end = dates[i];
+            } else {
+                ranges.push(makeRange(start, end));
+                start = dates[i];
+                end = start;
+            }
+        }
+        ranges.push(makeRange(start, end));
+        return ranges.join(', ');
+    }
+});
+</script>
 
 </body>
 
