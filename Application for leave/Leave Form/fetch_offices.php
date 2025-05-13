@@ -8,7 +8,7 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "ojt";
-$port = 3307;
+$port = 3306;
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname, $port);

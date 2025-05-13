@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Application for Leave</title>
-    <script src="leaveApplication.js"></script>
     <link rel="stylesheet" href="leaveApplication.css">
     <script src="fetch_offices.php"></script>
+
+    <!-- Datepicker CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet" />
 </head>
 
 <body>
@@ -18,21 +22,65 @@
             .then(data => document.getElementById("header").innerHTML = data);
     </script>
 
-
     <div class="wrapper">
         <form action="submit_leave.php" method="post">
             <div id="personalDetails"></div>
-            <div id="leaveDetails"></div>
-            <div id="actionDetails"></div>
+            <table class="container-table">
+                <tr>
+                    <td colspan="2" class="title">
+                        <h5>6. DETAILS OF APPLICATION</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="divider">
+                        <div id="sectionA"></div>
+                    </td>
+                    <td class="divider">
+                        <div id="sectionB"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="divider">
+                        <div id="sectionC">
+                            <div class="container" style="margin-top: 50px;">
+                                <label>6.C NUMBER OF WORKING DAYS APPLIED FOR</label>
+                                <input type="text" id="workingDays" class="form-control" readonly /><br />
 
-            <div class="buttonGroup">
-                <input type="submit" value="Submit">
-            </div>
+                                <label>Inclusive Dates</label>
+                                <div class="input-group date" id="datepicker">
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="Dates" name="Dates"
+                                        placeholder="Select days" required />
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="divider">
+                        <div id="sectionD"></div>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 
+    <div id="actionDetails"></div>
+
+    <div class="buttonGroup">
+        <input type="submit" value="Submit">
+    </div>
+
+    <!-- Your custom scripts -->
     <script src="../Leave Form/details/loadSections.js"></script>
+    <script src="inclusiveDates.js"></script>
     <script src="dropdown.js"></script>
+
+    <!-- Required JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
 </body>
 
 </html>
