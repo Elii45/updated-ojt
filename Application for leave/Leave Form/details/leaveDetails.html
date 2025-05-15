@@ -111,17 +111,36 @@
     <tr>
         <td class="divider">
             <div class="container3C">
-                <label>6.C NUMBER OF WORKING DAYS APPLIED FOR</label>
-                <input type="text" id="workingDays" class="form-control" readonly />
+                <!-- Flatpickr CSS -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 
-                <label>Inclusive Dates</label>
-                <div class="input-group date" id="datepicker">
-                    <input type="text" class="form-control" id="Dates" name="inclDates" placeholder="Select days"
-                        required readonly />
-                    <span class="input-group-addon">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                    </span>
+                <!-- Flatpickr Input -->
+                <div class="locator-input-group">
+                    <label for="inclusiveDates" class="locator-input-label">Inclusive Dates:</label>
+                    <input id="inclusiveDates" type="text" class="locator-input-field"
+                        placeholder="Select multiple dates" />
                 </div>
+
+                <div id="workingDaysDisplay" style="margin-top: 10px; font-weight: bold;">
+                    Total Days Selected: 0
+                </div>
+
+                <!-- Flatpickr JS -->
+                <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+                <script>
+                    flatpickr("#inclusiveDates", {
+                        mode: "multiple",
+                        dateFormat: "Y-m-d",
+                        altInput: true,
+                        altFormat: "F j, Y",
+                        onChange: function (selectedDates) {
+                            document.getElementById("workingDaysDisplay").textContent =
+                                "Total Days Selected: " + selectedDates.length;
+                        }
+                    });
+                </script>
+
+            </div>
         </td>
         <td class="divider">
             <div class="container3D">

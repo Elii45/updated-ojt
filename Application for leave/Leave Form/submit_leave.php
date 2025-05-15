@@ -163,9 +163,36 @@ try {
         $detailDescription = 'No details provided';
     }
     
-    $workingDays = isset($_POST['workingDays']) ? $_POST['workingDays'] : '0'; // Default to 0 if not provided
-$inclDates = isset($_POST['inclDates']) ? $_POST['inclDates'] : ''; // Default to empty string if not provided
+   // Working Days and Inclusive Dates
+$inclusive_dates = '';
+$working_days = 0;
 
+// Validate and sanitize inclusive_dates (expecting comma-separated date strings)
+if (isset($_POST['inclusive_dates'])) {
+    // Remove whitespace and sanitize input string
+    $datesInput = trim($_POST['inclusive_dates']);
+
+    // Split into array by comma
+    $datesArray = explode(',', $datesInput);
+
+    // Validate each date, only keep valid Y-m-d format dates
+    $validDates = [];
+    foreach ($datesArray as $date) {
+        $date = trim($date);
+        $d = DateTime::createFromFormat('Y-m-d', $date);
+        if ($d && $d->format('Y-m-d') === $date) {
+            $validDates[] = $date;
+        }
+    }
+
+    // Rebuild inclusive_dates as a comma-separated string of valid dates
+    $inclusive_dates = implode(',', $validDates);
+}
+
+// Validate working_days as integer
+if (isset($_POST['working_days'])) {
+    $working_days = intval($_POST['working_days']);
+}
     
     // Handle commutation field
     $commutation = 'notRequested'; // Default value
@@ -191,7 +218,7 @@ $inclDates = isset($_POST['inclDates']) ? $_POST['inclDates'] : ''; // Default t
     
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("isssssss", $employeeId, $leaveType, $leaveTypeOthers, $detailType, $detailDescription, 
-                      $workingDays, $inclDates, $commutation);
+                      $working_days, $inclusive_dates, $commutation);
     $stmt->execute();
     
     $leaveId = $conn->insert_id;

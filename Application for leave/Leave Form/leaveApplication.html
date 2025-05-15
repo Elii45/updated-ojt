@@ -2,16 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Application for Leave</title>
-    <link rel="stylesheet" href="leaveApplication.css">
-    <script src="fetch_offices.php"></script>
-
-    <!-- Datepicker CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
-        rel="stylesheet" />
+    <link rel="stylesheet" href="leaveApplication.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 </head>
 
 <body>
@@ -41,21 +36,18 @@
                 </tr>
                 <tr>
                     <td class="divider">
-                        <div id="sectionC">
-                            <div class="container" style="margin-top: 50px;">
-                                <label>6.C NUMBER OF WORKING DAYS APPLIED FOR</label>
-                                <input type="text" id="workingDays" class="form-control" readonly />
-
-                                <label>Inclusive Dates</label>
-                                <div class="input-group date" id="datepicker">
-                                    <input type="text" class="form-control" id="Dates" name="inclDates" placeholder="Select days" required readonly />
-                                    <span class="input-group-addon">
-                                        <i class="glyphicon glyphicon-calendar"></i>
-                                    </span>
-                                </div>
-                            </div>
-
+                        <div class="locator-input-group">
+                            <label for="inclusive_dates" class="locator-input-label">Inclusive Dates:</label>
+                            <input id="inclusive_dates" name="inclusive_dates" type="text" class="locator-input-field"
+                                placeholder="Select multiple dates" autocomplete="off" />
                         </div>
+
+                        <div id="workingDaysDisplay">
+                            Total Days Selected: 0
+                        </div>
+
+                        <!-- Hidden input to store total selected days -->
+                        <input type="hidden" name="working_days" id="working_days" value="0" />
                     </td>
                     <td class="divider">
                         <div id="sectionD"></div>
@@ -64,9 +56,9 @@
             </table>
             <div id="actionDetails"></div>
 
-                <div class="buttonGroup">
-        <input type="submit" value="Submit">
-    </div>
+            <div class="buttonGroup">
+                <input type="submit" value="Submit" />
+            </div>
         </form>
     </div>
 
@@ -74,111 +66,21 @@
     <script src="../Leave Form/details/loadSections.js"></script>
     <script src="dropdown.js"></script>
 
-    <!-- Required JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    function loadSection(id, url) {
-        fetch(url)
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById(id).innerHTML = data;
-
-                if (id === "sectionC") {
-                    const $datepicker = $('#datepicker');
-                    let selectedDates = [];
-
-                    $datepicker.datepicker({
-                        startDate: new Date(),
-                        multidate: true,
-                        format: "mm/dd/yyyy", // We'll override the display anyway
-                        daysOfWeekHighlighted: [5, 6],
-                        todayHighlight: true,
-                        autoclose: false
-                    }).on('changeDate', function (e) {
-                        selectedDates = e.dates
-                            .map(date => new Date(date))
-                            .sort((a, b) => a - b);
-
-                        setTimeout(() => {
-                            $('#Dates').val(formatDateRanges(selectedDates));
-                            $('#workingDays').val(selectedDates.length);
-                        }, 0);
-                    });
-
-                    // Reapply formatted text when calendar hides (clicked outside)
-                    $datepicker.on('hide', function () {
-                        setTimeout(() => {
-                            $('#Dates').val(formatDateRanges(selectedDates));
-                        }, 0);
-                    });
-
-                    // Show calendar when calendar icon is clicked
-                    $('.input-group-addon').click(function () {
-                        $datepicker.datepicker('show');
-                    });
-                }
-            })
-            .catch(error => console.error(`Error loading ${url}:`, error));
-    }
-
-    loadSection("sectionC", "details/sections/SectionC_Dates.html");
-
-    // Formatting helpers
-    function formatDate(date) {
-        return date.toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-        });
-    }
-
-    function isConsecutive(date1, date2) {
-        return date2.getTime() - date1.getTime() === 86400000;
-    }
-
-    function makeRange(start, end) {
-        const sameDay = start.getTime() === end.getTime();
-        if (sameDay) {
-            return formatDate(start);
-        }
-
-        const sameMonthYear = start.getFullYear() === end.getFullYear() &&
-                              start.getMonth() === end.getMonth();
-
-        if (sameMonthYear) {
-            return `${start.toLocaleDateString('en-US', { month: 'long' })} ${start.getDate()}–${end.getDate()}, ${start.getFullYear()}`;
-        } else {
-            return `${formatDate(start)}–${formatDate(end)}`;
-        }
-    }
-
-    function formatDateRanges(dates) {
-        if (!dates.length) return '';
-
-        const ranges = [];
-        let start = dates[0];
-        let end = start;
-
-        for (let i = 1; i < dates.length; i++) {
-            if (isConsecutive(end, dates[i])) {
-                end = dates[i];
-            } else {
-                ranges.push(makeRange(start, end));
-                start = dates[i];
-                end = start;
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#inclusive_dates", {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "F j, Y",
+            onChange: function (selectedDates) {
+                const count = selectedDates.length;
+                document.getElementById("workingDaysDisplay").textContent = "Total Days Selected: " + count;
+                document.getElementById("working_days").value = count;
             }
-        }
-        ranges.push(makeRange(start, end));
-        return ranges.join(', ');
-    }
-});
-</script>
-
+        });
+    </script>
 </body>
 
 </html>
