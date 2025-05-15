@@ -60,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label>1. OFFICE/DEPARTMENT</label>
                         <select id="officeDropdown" name="office" required>
                             <option value="">Select an Office</option>
-                            <!-- You can optionally prefill office options here -->
                             <option value="<?php echo htmlspecialchars($employee['office']); ?>" selected>
                                 <?php echo htmlspecialchars($employee['office']); ?>
                             </option>

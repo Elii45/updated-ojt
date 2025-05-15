@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<form action="submit_action_details.php?employee_id=<?= $employeeId ?>" method="post" class="container-table">
+<form method="post" action="">
     <table>
         <tr>
             <td colspan="2" class="title">
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <td colspan="2" class="divider">
                 <div class="container4C">
                     <label>Disapproved due to:</label>
-                    <input type="text" name="disapproved_reason" value="<?= htmlspecialchars($actionDetails['disapproved_reason'] ?? '') ?>">
+                    <input type="text" name="disapproved_reason" value="<?= htmlspecialchars($action['disapproved_reason'] ?? '') ?>">
                 </div>
             </td>
         </tr>
