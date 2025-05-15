@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("fetch_offices.php") // Fetch from PHP
-        .then(response => response.json()) 
+    fetch("fetch_offices.php")
+        .then(response => response.json())
         .then(data => {
-            console.log("Fetched Offices:", data); // Debugging
-
             const officeDropdown = document.getElementById("officeDropdown");
+            const selectedOfficeId = officeDropdown.getAttribute("data-selected-office");
 
             if (!Array.isArray(data)) {
                 console.error("Invalid JSON format", data);
@@ -15,6 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 const option = document.createElement("option");
                 option.value = office.office_id;
                 option.textContent = office.office_name;
+
+                // Fix: Convert both to strings before comparing
+                if (String(office.office_id) === String(selectedOfficeId)) {
+                    option.selected = true;
+                }
+
                 officeDropdown.appendChild(option);
             });
         })

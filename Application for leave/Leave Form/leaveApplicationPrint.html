@@ -2,40 +2,210 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application for Leave - Print Version</title>
-    <link rel="stylesheet" href="leaveApplicationPrint.css">
-    <link rel="stylesheet" href="inputPrint.css">
-    <link rel="stylesheet" href="leaveApplicationPrinting.css" media="print">
-    <script src="leaveApplicationPrint.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leave Application - Print View</title>
 </head>
 
 <body>
-    <div id="header"></div>
-    <script>
-        fetch("header.html")
-            .then(response => response.text())
-            .then(data => document.getElementById("header").innerHTML = data);
-    </script>
 
-    <div class="wrapper-print">
-        
+    <h1>Application for Leave</h1>
 
-        <div id="printForm">
-            <div id="personalDetails" class="print-section"></div>
-            <div id="leaveDetails" class="print-section"></div>
-            <div id="actionDetails" class="print-section"></div>
+    <div id="content">
+        <div class="section-title">1. Personal Details</div>
+        <table>
+            <tr>
+                <th>Office</th>
+                <td id="office"></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td id="lastName"></td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td id="firstName"></td>
+            </tr>
+            <tr>
+                <th>Middle Name</th>
+                <td id="middleName"></td>
+            </tr>
+            <tr>
+                <th>Filing Date</th>
+                <td id="filingDate"></td>
+            </tr>
+            <tr>
+                <th>Position</th>
+                <td id="position"></td>
+            </tr>
+            <tr>
+                <th>Salary</th>
+                <td id="salary"></td>
+            </tr>
+        </table>
 
-            <div class="buttonGroup-print-only">
-                <button type="button" onclick="window.print()">Print This Page</button>
-                <button type="button" onclick="window.location.href='leaveApplication.html'">Back to Form</button>
-            </div>
-        </div>
+        <div class="section-title">2. Details of Application</div>
+        <table>
+            <tr>
+                <th>Leave Type</th>
+                <td id="leaveType"></td>
+            </tr>
+            <tr>
+                <th>Leave Type (Others)</th>
+                <td id="leaveTypeOthers"></td>
+            </tr>
+            <tr>
+                <th>Detail Type</th>
+                <td id="detailType"></td>
+            </tr>
+            <tr>
+                <th>Detail Description</th>
+                <td id="detailDescription"></td>
+            </tr>
+            <tr>
+                <th>Inclusive Dates</th>
+                <td id="inclusiveDates"></td>
+            </tr>
+            <tr>
+                <th>Total Working Days</th>
+                <td id="workingDays"></td>
+            </tr>
+            <tr>
+                <th>Commutation</th>
+                <td id="commutation"></td>
+            </tr>
+        </table>
+
+        <div class="section-title">3. Action Details</div>
+        <table>
+            <tr>
+                <th>As of</th>
+                <td id="asOf"></td>
+            </tr>
+            <tr>
+                <th>Vacation Leave Total Earned</th>
+                <td id="vacationTotalEarned"></td>
+            </tr>
+            <tr>
+                <th>Vacation Leave Less Application</th>
+                <td id="vacationLessApplication"></td>
+            </tr>
+            <tr>
+                <th>Vacation Leave Balance</th>
+                <td id="vacationBalance"></td>
+            </tr>
+            <tr>
+                <th>Sick Leave Total Earned</th>
+                <td id="sickTotalEarned"></td>
+            </tr>
+            <tr>
+                <th>Sick Leave Less Application</th>
+                <td id="sickLessApplication"></td>
+            </tr>
+            <tr>
+                <th>Sick Leave Balance</th>
+                <td id="sickBalance"></td>
+            </tr>
+            <tr>
+                <th>Days With Pay</th>
+                <td id="daysWithPay"></td>
+            </tr>
+            <tr>
+                <th>Days Without Pay</th>
+                <td id="daysWithoutPay"></td>
+            </tr>
+            <tr>
+                <th>Disapproved Reason</th>
+                <td id="disapprovedReason"></td>
+            </tr>
+        </table>
     </div>
-    
-    <script src="../details/loadSections.js"></script>
-    <script src="fetch_print.js"></script>
+
+    <div class="buttonGroup">
+        <button type="button" id="editBtn">Edit</button>
+        <button type="button" id="printBtn">Print</button>
+    </div>
+
+<script>
+    document.getElementById('editBtn').addEventListener('click', () => {
+    const employeeId = getParam('employee_id');
+    const leaveId = getParam('leave_id');
+    if (employeeId && leaveId) {
+        window.location.href = `edit_leave.php?employee_id=${employeeId}&leave_id=${leaveId}`;
+    } else {
+        alert('No record to edit yet. Please submit the form first.');
+    }
+});
+
+</script>
+
+    <script>
+        // Helper: Get URL param by name
+        function getParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name) || '';
+        }
+
+        // Map fields to element IDs
+        const fieldMap = {
+            officeName: 'office',
+            lastName: 'lastName',
+            firstName: 'firstName',
+            middleName: 'middleName',
+            filingDate: 'filingDate',
+            position: 'position',
+            salary: 'salary',
+            leaveType: 'leaveType',
+            leaveTypeOthers: 'leaveTypeOthers',
+            detailType: 'detailType',
+            detailDescription: 'detailDescription',
+            inclusive_dates: 'inclusiveDates',
+            working_days: 'workingDays',
+            commutation: 'commutation',
+            asOf: 'asOf',
+            vacationTotalEarned: 'vacationTotalEarned',
+            vacationLessApplication: 'vacationLessApplication',
+            vacationBalance: 'vacationBalance',
+            sickTotalEarned: 'sickTotalEarned',
+            sickLessApplication: 'sickLessApplication',
+            sickBalance: 'sickBalance',
+            pay: 'daysWithPay',
+            withoutPay: 'daysWithoutPay',
+            disapprovedTo: 'disapprovedReason'
+        };
+
+        // Populate fields
+        for (const [param, elemId] of Object.entries(fieldMap)) {
+            const el = document.getElementById(elemId);
+            let val = getParam(param);
+
+            // Format salary as currency
+            if (param === 'salary' && val) {
+                val = parseFloat(val).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            }
+
+            // Format dates nicely for filingDate and inclusive_dates
+            if ((param === 'filingDate' || param === 'inclusive_dates') && val) {
+                if (param === 'inclusive_dates') {
+                    // Split multiple dates and format
+                    const dates = val.split(',').map(d => {
+                        const dateObj = new Date(d);
+                        return dateObj.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                    });
+                    val = dates.join(', ');
+                } else {
+                    // Single date formatting
+                    const d = new Date(val);
+                    if (!isNaN(d)) {
+                        val = d.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+                    }
+                }
+            }
+
+            // Display '-' if empty
+            el.textContent = val.trim() === '' ? '-' : val;
+        }
+    </script>
 </body>
 
 </html>
