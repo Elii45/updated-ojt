@@ -12,7 +12,7 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "ojt";
-$port = 3306;
+$port = 3307;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 if ($conn->connect_error) {
@@ -57,7 +57,8 @@ $conn->close();
 
 <h2>Edit Leave Application</h2>
 
-<form method="POST" action="process_edit_leave.php">
+<!-- Make sure the form action is correct and the method is POST -->
+<form method="POST" action="update_leave.php">
     <input type="hidden" name="employee_id" value="<?php echo htmlspecialchars($employeeId); ?>">
     <?php if ($leaveId): ?>
         <input type="hidden" name="leave_id" value="<?php echo htmlspecialchars($leaveId); ?>">
@@ -93,3 +94,15 @@ $conn->close();
         <button type="submit">Save Changes</button>
     </div>
 </form>
+
+<!-- Add a debug script to check form submission -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        console.log('Form is being submitted');
+        // Uncomment the next line to see all form data that will be submitted
+        // console.log(new FormData(form));
+    });
+});
+</script>

@@ -3,7 +3,7 @@ $servername = "127.0.0.1";
 $username = "root";
 $password = "";
 $dbname = "ojt";
-$port = 3306;
+$port = 3307;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 if ($conn->connect_error) {
@@ -28,23 +28,7 @@ if (!$leave) {
     die("No matching leave record found.");
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $leaveType = $_POST['leaveType'] ?? '';
-    $leaveTypeOthers = $_POST['leaveTypeOthers'] ?? '';
-    $detailType = $_POST['detailType'] ?? '';
-    $detailDescription = $_POST['detailDescription'] ?? '';
-    $workingDays = $_POST['working_days'] ?? 0;
-    $inclusiveDates = $_POST['inclusive_dates'] ?? '';
-    $commutation = $_POST['commutation'] ?? 'notRequested';
-
-    $updateLeaveSql = "UPDATE leavedetails SET leave_type=?, leave_type_others=?, detail_type=?, detail_description=?, working_days=?, inclusive_dates=?, commutation=? WHERE id=?";
-    $stmtUpdateLeave = $conn->prepare($updateLeaveSql);
-    $stmtUpdateLeave->bind_param("ssssisis", $leaveType, $leaveTypeOthers, $detailType, $detailDescription, $workingDays, $inclusiveDates, $commutation, $leaveId);
-    $stmtUpdateLeave->execute();
-
-    header("Location: ../../leaveApplicationPrint.html?employee_id=$employeeId&leave_id=$leaveId");
-    exit;
-}
+// Remove the POST processing logic from here
 
 function isChecked($value, $target) {
     return $value === $target ? 'checked' : '';
@@ -56,80 +40,80 @@ function escape($str) {
 ?>
 
 <h3>Edit Leave Details</h3>
-<form method="post" action="">
-    <div class="container3A">
-        <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>
-        <?php
-        $leaveOptions = [
-            "vacationLeave" => "Vacation Leave",
-            "forceLeave" => "Mandatory/Forced Leave",
-            "sickLeave" => "Sick Leave",
-            "maternityLeave" => "Maternity Leave",
-            "paternityLeave" => "Paternity Leave",
-            "specialPrivilege" => "Special Privilege Leave",
-            "soloParentLeave" => "Solo Parent Leave",
-            "studyLeave" => "Study Leave",
-            "vawcLeave" => "10-Day VAWC Leave",
-            "rehabPriv" => "Rehabilitation Privilege",
-            "specialLeave" => "Special Leave Benefits for Women",
-            "specialEmergency" => "Special Emergency Leave",
-            "adoptionLeave" => "Adoption Leave",
-            "others" => "Others (Specify)"
-        ];
+<!-- Remove the form tag from here -->
+<div class="container3A">
+    <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>
+    <?php
+    $leaveOptions = [
+        "vacationLeave" => "Vacation Leave",
+        "forceLeave" => "Mandatory/Forced Leave",
+        "sickLeave" => "Sick Leave",
+        "maternityLeave" => "Maternity Leave",
+        "paternityLeave" => "Paternity Leave",
+        "specialPrivilege" => "Special Privilege Leave",
+        "soloParentLeave" => "Solo Parent Leave",
+        "studyLeave" => "Study Leave",
+        "vawcLeave" => "10-Day VAWC Leave",
+        "rehabPriv" => "Rehabilitation Privilege",
+        "specialLeave" => "Special Leave Benefits for Women",
+        "specialEmergency" => "Special Emergency Leave",
+        "adoptionLeave" => "Adoption Leave",
+        "others" => "Others (Specify)"
+    ];
 
-        foreach ($leaveOptions as $val => $label) {
-            echo "<input type='radio' name='leaveType' value='$val' " . isChecked($leave['leave_type'], $val) . " required> <label>$label</label><br>";
-            if ($val === 'others') {
-                echo "<input type='text' name='leaveTypeOthers' value='" . escape($leave['leave_type_others']) . "'>";
-            }
+    foreach ($leaveOptions as $val => $label) {
+        echo "<input type='radio' name='leaveType' value='$val' " . isChecked($leave['leave_type'], $val) . " required> <label>$label</label><br>";
+        if ($val === 'others') {
+            echo "<input type='text' name='leaveTypeOthers' value='" . escape($leave['leave_type_others']) . "'>";
         }
-        ?>
+    }
+    ?>
+</div>
+
+<div class="container3B">
+    <label>6.B DETAILS OF LEAVE</label>
+
+    <!-- Vacation/Special Privilege Leave Details -->
+    <div id="vacationDetails">
+        <label>In case of vacation/special privilege Leave:</label><br>
+        <input type="radio" name="detailType" value="withinPhilippines" <?= isChecked($leave['detail_type'], 'withinPhilippines') ?>> Within Philippines
+        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'withinPhilippines' ? escape($leave['detail_description']) : '' ?>"><br>
+
+        <input type="radio" name="detailType" value="abroad" <?= isChecked($leave['detail_type'], 'abroad') ?>> Abroad
+        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'abroad' ? escape($leave['detail_description']) : '' ?>"><br><br>
     </div>
 
-    <div class="container3B">
-        <label>6.B DETAILS OF LEAVE</label>
+    <!-- Sick Leave Details -->
+    <div id="sickLeaveDetails">
+        <label>In case of sick Leave:</label><br>
+        <input type="radio" name="detailType" value="hospital" <?= isChecked($leave['detail_type'], 'hospital') ?>> In Hospital (Specify Illness)
+        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'hospital' ? escape($leave['detail_description']) : '' ?>"><br>
 
-        <!-- Vacation/Special Privilege Leave Details -->
-        <div id="vacationDetails">
-            <label>In case of vacation/special privilege Leave:</label><br>
-            <input type="radio" name="detailType" value="withinPhilippines" <?= isChecked($leave['detail_type'], 'withinPhilippines') ?>> Within Philippines
-            <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'withinPhilippines' ? escape($leave['detail_description']) : '' ?>"><br>
-
-            <input type="radio" name="detailType" value="abroad" <?= isChecked($leave['detail_type'], 'abroad') ?>> Abroad
-            <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'abroad' ? escape($leave['detail_description']) : '' ?>"><br><br>
-        </div>
-
-        <!-- Sick Leave Details -->
-        <div id="sickLeaveDetails">
-            <label>In case of sick Leave:</label><br>
-            <input type="radio" name="detailType" value="hospital" <?= isChecked($leave['detail_type'], 'hospital') ?>> In Hospital (Specify Illness)
-            <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'hospital' ? escape($leave['detail_description']) : '' ?>"><br>
-
-            <input type="radio" name="detailType" value="outPatient" <?= isChecked($leave['detail_type'], 'outPatient') ?>> Out Patient (Specify Illness)
-            <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'outPatient' ? escape($leave['detail_description']) : '' ?>"><br><br>
-        </div>
-
-        <!-- Special Leave Benefits for Women -->
-        <div id="womenLeaveDetails">
-            <label>In case of Special Leave Benefits for Women:</label><br>
-            <label>Specify Illness</label>
-            <input type="text" name="detailDescription" value="<?= $leave['leave_type'] === 'specialLeave' ? escape($leave['detail_description']) : '' ?>"><br>
-        </div>
-
-        <!-- Study Leave -->
-        <div id="studyLeaveDetails">
-            <label>In case of Study Leave:</label><br>
-            <input type="radio" name="detailType" value="masters" <?= isChecked($leave['detail_type'], 'masters') ?>> Completion of Master's Degree<br>
-            <input type="radio" name="detailType" value="boardExam" <?= isChecked($leave['detail_type'], 'boardExam') ?>> BAR/Board Examination Review<br>
-        </div>
-
-        <!-- Other Purposes -->
-        <div id="otherPurposes">
-            <label>Other Purposes:</label><br>
-            <input type="radio" name="detailType" value="monetization" <?= isChecked($leave['detail_type'], 'monetization') ?>> Monetization of Leave Credits<br>
-            <input type="radio" name="detailType" value="terminal" <?= isChecked($leave['detail_type'], 'terminal') ?>> Terminal Leave<br>
-        </div>
+        <input type="radio" name="detailType" value="outPatient" <?= isChecked($leave['detail_type'], 'outPatient') ?>> Out Patient (Specify Illness)
+        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'outPatient' ? escape($leave['detail_description']) : '' ?>"><br><br>
     </div>
+
+    <!-- Special Leave Benefits for Women -->
+    <div id="womenLeaveDetails">
+        <label>In case of Special Leave Benefits for Women:</label><br>
+        <label>Specify Illness</label>
+        <input type="text" name="detailDescription" value="<?= $leave['leave_type'] === 'specialLeave' ? escape($leave['detail_description']) : '' ?>"><br>
+    </div>
+
+    <!-- Study Leave -->
+    <div id="studyLeaveDetails">
+        <label>In case of Study Leave:</label><br>
+        <input type="radio" name="detailType" value="masters" <?= isChecked($leave['detail_type'], 'masters') ?>> Completion of Master's Degree<br>
+        <input type="radio" name="detailType" value="boardExam" <?= isChecked($leave['detail_type'], 'boardExam') ?>> BAR/Board Examination Review<br>
+    </div>
+
+    <!-- Other Purposes -->
+    <div id="otherPurposes">
+        <label>Other Purposes:</label><br>
+        <input type="radio" name="detailType" value="monetization" <?= isChecked($leave['detail_type'], 'monetization') ?>> Monetization of Leave Credits<br>
+        <input type="radio" name="detailType" value="terminal" <?= isChecked($leave['detail_type'], 'terminal') ?>> Terminal Leave<br>
+    </div>
+</div>
 
 <!-- Flatpickr CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
@@ -175,10 +159,8 @@ function escape($str) {
     });
 </script>
 
-    Commutation:
-    <select name="commutation">
-        <option value="requested" <?= $leave['commutation'] === 'requested' ? 'selected' : '' ?>>Requested</option>
-        <option value="notRequested" <?= $leave['commutation'] === 'notRequested' ? 'selected' : '' ?>>Not Requested</option>
-    </select><br><br>
-
-</form>
+Commutation:
+<select name="commutation">
+    <option value="requested" <?= $leave['commutation'] === 'requested' ? 'selected' : '' ?>>Requested</option>
+    <option value="notRequested" <?= $leave['commutation'] === 'notRequested' ? 'selected' : '' ?>>Not Requested</option>
+</select><br><br>
