@@ -43,7 +43,10 @@ if ($leaveId) {
     $leaveType = $_POST['leaveType'] ?? '';
     $leaveTypeOthers = $_POST['leaveTypeOthers'] ?? '';
     $detailType = $_POST['detailType'] ?? '';
-    $detailDescription = $_POST['detailDescription'] ?? '';
+    $detailDescriptions = $_POST['detailDescription'] ?? [];
+$detailType = $_POST['detailType'] ?? '';
+$detailDescription = $detailDescriptions[$detailType] ?? '';
+
     $workingDays = $_POST['working_days'] ?? 0;
     $inclusiveDates = $_POST['inclusive_dates'] ?? '';
     $commutation = $_POST['commutation'] ?? 'notRequested';

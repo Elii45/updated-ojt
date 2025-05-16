@@ -77,27 +77,27 @@ function escape($str) {
     <div id="vacationDetails">
         <label>In case of vacation/special privilege Leave:</label><br>
         <input type="radio" name="detailType" value="withinPhilippines" <?= isChecked($leave['detail_type'], 'withinPhilippines') ?>> Within Philippines
-        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'withinPhilippines' ? escape($leave['detail_description']) : '' ?>"><br>
+        <input type="text" name="detailDescription[withinPhilippines]" value="<?= $leave['detail_type'] === 'withinPhilippines' ? escape($leave['detail_description']) : '' ?>"><br>
 
         <input type="radio" name="detailType" value="abroad" <?= isChecked($leave['detail_type'], 'abroad') ?>> Abroad
-        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'abroad' ? escape($leave['detail_description']) : '' ?>"><br><br>
+        <input type="text" name="detailDescription[abroad]" value="<?= $leave['detail_type'] === 'abroad' ? escape($leave['detail_description']) : '' ?>"><br><br>
     </div>
 
     <!-- Sick Leave Details -->
     <div id="sickLeaveDetails">
         <label>In case of sick Leave:</label><br>
         <input type="radio" name="detailType" value="hospital" <?= isChecked($leave['detail_type'], 'hospital') ?>> In Hospital (Specify Illness)
-        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'hospital' ? escape($leave['detail_description']) : '' ?>"><br>
+        <input type="text" name="detailDescription[hospital]" value="<?= $leave['detail_type'] === 'hospital' ? escape($leave['detail_description']) : '' ?>"><br>
 
         <input type="radio" name="detailType" value="outPatient" <?= isChecked($leave['detail_type'], 'outPatient') ?>> Out Patient (Specify Illness)
-        <input type="text" name="detailDescription" value="<?= $leave['detail_type'] === 'outPatient' ? escape($leave['detail_description']) : '' ?>"><br><br>
+        <input type="text" name="detailDescription[outPatient]" value="<?= $leave['detail_type'] === 'outPatient' ? escape($leave['detail_description']) : '' ?>"><br><br>
     </div>
 
     <!-- Special Leave Benefits for Women -->
     <div id="womenLeaveDetails">
         <label>In case of Special Leave Benefits for Women:</label><br>
         <label>Specify Illness</label>
-        <input type="text" name="detailDescription" value="<?= $leave['leave_type'] === 'specialLeave' ? escape($leave['detail_description']) : '' ?>"><br>
+        <input type="text" name="detailDescription[womenLeave]" value="<?= $leave['leave_type'] === 'specialLeave' ? escape($leave['detail_description']) : '' ?>"><br>
     </div>
 
     <!-- Study Leave -->
