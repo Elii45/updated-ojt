@@ -6,7 +6,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "ojt";
-$port = 3306; // Your MySQL port
+$port = 3307;
 
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
