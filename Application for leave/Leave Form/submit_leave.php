@@ -239,18 +239,25 @@ if (isset($_POST['working_days'])) {
         $disapprovedReason = isset($_POST['disapprovedTo']) && !empty($_POST['disapprovedTo']) ? $_POST['disapprovedTo'] : null;
         
         // Insert approval details
-        $sql = "INSERT INTO leaveapproval (employee_id, leave_id, as_of, 
-                vacation_leave_balance, vacation_less_application, 
-                sick_leave_balance, sick_less_application, 
-                days_with_pay, days_without_pay, disapproved_reason) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO leaveapproval (
+            employee_id, leave_id, as_of, 
+            vacation_total_earned, vacation_less_application, vacation_leave_balance, 
+            sick_total_earned, sick_less_application, sick_leave_balance, 
+            days_with_pay, days_without_pay, 
+            disapproved_reason
+        ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("iisddddids", $employeeId, $leaveId, $asOf, 
-                          $vacationTotalEarned, $vacationLessApplication, 
-                          $sickTotalEarned, $sickLessApplication, 
-                          $daysWithPay, $daysWithoutPay, $disapprovedReason);
-        $stmt->execute();
+$stmt->bind_param(
+    "iisdddddddis", 
+    $employeeId, $leaveId, $asOf, 
+    $vacationTotalEarned, $vacationLessApplication, $vacationBalance,
+    $sickTotalEarned, $sickLessApplication, $sickBalance,
+    $daysWithPay, $daysWithoutPay, 
+    $disapprovedReason
+);
+$stmt->execute();
     }
     
     // Commit transaction
