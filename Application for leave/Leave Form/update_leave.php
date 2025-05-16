@@ -50,7 +50,7 @@ if ($leaveId) {
 
     $updateLeaveSql = "UPDATE leavedetails SET leave_type=?, leave_type_others=?, detail_type=?, detail_description=?, working_days=?, inclusive_dates=?, commutation=? WHERE id=? AND employee_id=?";
 $stmtLeave = $conn->prepare($updateLeaveSql);
-$stmtLeave->bind_param("sssssisii", $leaveType, $leaveTypeOthers, $detailType, $detailDescription, $workingDays, $inclusiveDates, $commutation, $leaveId, $employeeId);
+$stmtLeave->bind_param("sssssssii", $leaveType, $leaveTypeOthers, $detailType, $detailDescription, $workingDays, $inclusiveDates, $commutation, $leaveId, $employeeId);
 if (!$stmtLeave->execute()) {
     die("Error updating leave details: " . $stmtLeave->error);
 }
