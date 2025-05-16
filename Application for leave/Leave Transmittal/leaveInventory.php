@@ -16,12 +16,13 @@ if ($conn->connect_error) {
 // Set content type to JSON
 header('Content-Type: application/json');
 
-// SQL query to fetch employee leave applications
+// SQL query to fetch employee leave applications including leave_type
 $sql = "
     SELECT 
         CONCAT(e.last_name, ', ', e.first_name, ' ', IFNULL(e.middle_name, '')) AS full_name, 
         e.filing_date, 
-        l.inclusive_dates
+        l.inclusive_dates,
+        l.leave_type
     FROM EmployeeDetails e
     LEFT JOIN LeaveDetails l ON e.id = l.employee_id
     LEFT JOIN LeaveApproval a ON e.id = a.employee_id
