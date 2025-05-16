@@ -126,18 +126,18 @@
         <button type="button" id="printBtn">Print</button>
     </div>
 
-<script>
-    document.getElementById('editBtn').addEventListener('click', () => {
-    const employeeId = getParam('employee_id');
-    const leaveId = getParam('leave_id');
-    if (employeeId && leaveId) {
-        window.location.href = `edit_leave.php?employee_id=${employeeId}&leave_id=${leaveId}`;
-    } else {
-        alert('No record to edit yet. Please submit the form first.');
-    }
-});
+    <script>
+        document.getElementById('editBtn').addEventListener('click', () => {
+            const employeeId = getParam('employee_id');
+            const leaveId = getParam('leave_id');
+            if (employeeId && leaveId) {
+                window.location.href = `edit_leave.php?employee_id=${employeeId}&leave_id=${leaveId}`;
+            } else {
+                alert('No record to edit yet. Please submit the form first.');
+            }
+        });
 
-</script>
+    </script>
 
     <script>
         // Helper: Get URL param by name
@@ -206,6 +206,77 @@
             el.textContent = val.trim() === '' ? '-' : val;
         }
     </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const employeeId = getParam('employee_id');
+    const leaveId = getParam('leave_id');
+
+    if (employeeId && leaveId) {
+        fetch(`fetch_leave.php?employee_id=${employeeId}&leave_id=${leaveId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.success) {
+                    console.error('Failed to fetch leave data');
+                    return;
+                }
+
+                const record = data.data;
+
+                // Directly populate the HTML by ID
+                const populate = (id, value) => {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = value !== null && value !== '' ? value : '-';
+                };
+
+                // Personal Details
+                populate('office', record.office);
+                populate('lastName', record.last_name);
+                populate('firstName', record.first_name);
+                populate('middleName', record.middle_name);
+                populate('filingDate', formatDate(record.filing_date));
+                populate('position', record.position);
+                populate('salary', formatCurrency(record.salary));
+
+                // Leave Details
+                populate('leaveType', record.leave_type);
+                populate('leaveTypeOthers', record.leave_type_others);
+                populate('detailType', record.detail_type);
+                populate('detailDescription', record.detail_description);
+                populate('inclusiveDates', formatInclusiveDates(record.inclusive_dates));
+                populate('workingDays', record.working_days);
+                populate('commutation', record.commutation);
+
+                // Action Details
+                populate('asOf', formatDate(record.as_of));
+                populate('vacationTotalEarned', record.vacation_total_earned);
+                populate('vacationLessApplication', record.vacation_less_application);
+                populate('vacationBalance', record.vacation_leave_balance);
+                populate('sickTotalEarned', record.sick_total_earned);
+                populate('sickLessApplication', record.sick_less_application);
+                populate('sickBalance', record.sick_leave_balance);
+                populate('daysWithPay', record.days_with_pay);
+                populate('daysWithoutPay', record.days_without_pay);
+                populate('disapprovedReason', record.disapproved_reason);
+            })
+            .catch(err => console.error('Fetch error:', err));
+    }
+
+    function formatCurrency(value) {
+        if (!value || isNaN(value)) return '-';
+        return parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    }
+
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return !isNaN(date) ? date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '-';
+    }
+
+    function formatInclusiveDates(str) {
+        return str.split(',').map(d => formatDate(d)).join(', ');
+    }
+});
+</script>
+
 </body>
 
 </html>

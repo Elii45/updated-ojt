@@ -1,5 +1,5 @@
 <?php
-// process_edit_leave.php / update_leave.php
+// process_edit_leave.php
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     die("Invalid request method.");
@@ -49,12 +49,12 @@ if ($leaveId) {
     $commutation = $_POST['commutation'] ?? 'notRequested';
 
     $updateLeaveSql = "UPDATE leavedetails SET leave_type=?, leave_type_others=?, detail_type=?, detail_description=?, working_days=?, inclusive_dates=?, commutation=? WHERE id=? AND employee_id=?";
-    $stmtLeave = $conn->prepare($updateLeaveSql);
-    $stmtLeave->bind_param("sssssisii", $leaveType, $leaveTypeOthers, $detailType, $detailDescription, $workingDays, $inclusiveDates, $commutation, $leaveId, $employeeId);
-    if (!$stmtLeave->execute()) {
-        die("Error updating leave details: " . $stmtLeave->error);
-    }
-    $stmtLeave->close();
+$stmtLeave = $conn->prepare($updateLeaveSql);
+$stmtLeave->bind_param("sssssisii", $leaveType, $leaveTypeOthers, $detailType, $detailDescription, $workingDays, $inclusiveDates, $commutation, $leaveId, $employeeId);
+if (!$stmtLeave->execute()) {
+    die("Error updating leave details: " . $stmtLeave->error);
+}
+$stmtLeave->close();
 }
 
 // === ACTION DETAILS UPDATE ===
@@ -72,46 +72,29 @@ if ($leaveId) {
     $otherSpecify = $_POST['other_specify'] ?? '';
     $disapprovedReason = $_POST['disapproved_reason'] ?? '';
 
-    // Use the correct column names (snake_case instead of camelCase)
-    $updateActionSql = "UPDATE leaveapproval SET 
-                      as_of = ?,
-                      vacation_total_earned = ?,
-                      sick_total_earned = ?,
-                      vacation_leave_balance = ?,
-                      vacation_less_application = ?,
-                      sick_leave_balance = ?,
-                      sick_less_application = ?,
-                      days_with_pay = ?,
-                      days_without_pay = ?,
-                      other_days = ?,
-                      other_specify = ?,
-                      disapproved_reason = ?
-                      WHERE employee_id = ?";
+    $updateActionSql = "UPDATE leaveapproval 
+                  SET as_of=?, vacation_total_earned=?, sick_total_earned=?, vacation_leave_balance=?, vacation_less_application=?, 
+                      sick_leave_balance=?, sick_less_application=?, 
+                      days_with_pay=?, days_without_pay=?, other_days=?, 
+                      other_specify=?, disapproved_reason=?
+                  WHERE employee_id=?";
     
     $stmtAction = $conn->prepare($updateActionSql);
-    if (!$stmtAction) {
-        die("Prepare failed: " . $conn->error);
-    }
-    
     $stmtAction->bind_param("sdddddddddssi", 
         $asOf, $vacEarned, $sickEarned, $vlBalance, $vlLess, $slBalance, $slLess,
         $withPay, $withoutPay, $otherDays, $otherSpecify, $disapprovedReason,
         $employeeId
     );
-    
-    if (!$stmtAction->execute()) {
-        die("Error updating action details: " . $stmtAction->error);
-    }
-    
+    $stmtAction->execute();
     $stmtAction->close();
 }
 
 $conn->close();
 
 // Redirect back or to a confirmation page
-echo "<script>
-    alert('Leave application successfully updated.');
-    window.location.href = '../../leaveApplicationPrint.html?employee_id=" . urlencode($employeeId) . "&leave_id=" . urlencode($leaveId) . "';
-</script>";
+$printUrl = "/updated-ojt/Application%20for%20leave/Leave%20Form/leaveApplicationPrint.html?employee_id=" . urlencode($employeeId) . "&leave_id=" . urlencode($leaveId);
+
+header("Location: $printUrl");
 exit;
+
 ?>
