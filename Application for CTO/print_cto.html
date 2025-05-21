@@ -4,51 +4,167 @@
 <head>
   <meta charset="UTF-8" />
   <title>CTO Print Preview</title>
+  <link rel="stylesheet" href="cto.css">
+  <link rel="stylesheet" href="../logoHeader.css">
+  <link rel="stylesheet" href="../footer.css">
+  <link rel="stylesheet" href="print.css">
+  <link rel="stylesheet" href="alert.css">
 </head>
 
 <body>
-  <h2>CTO Print Preview</h2>
-  <div class="preview" id="previewData">
-    <!-- Data inserted via JS -->
-  </div>
-  <div class="actions">
-    <button onclick="window.print()">Print</button>
-    <button onclick="editForm()">Edit</button>
+  <div class="logo-container">
+    <img src="../images/topheaderlogo.png" alt="Office Logo">
   </div>
 
+  <div class="container">
+    <h2>APPLICATION FOR COMPENSATORY TIME-OFF (CTO)</h2>
+    <div class="form-group">
+      <div class="date">
+        <label for="filingDate">Date of Filing:</label>
+        <span id="filingDateLabel"></span>
+      </div>
+
+      <div class="office">
+        <label for="office">Office:</label>
+        <span id="officeLabel">Provincial Information Technology Office (PITO)</span>
+        <input type="hidden" id="office" name="office" />
+      </div>
+
+      <div class="employeeName">
+        <label for="employeeName">Employee Name:</label>
+        <span id="employeeNameLabel"></span>
+      </div>
+
+      <div class="position">
+        <label for="position">Position:</label>
+        <span id="positionLabel"></span>
+      </div>
+      <br>
+      <br>
+      <table>
+        <tr>
+          <td>No. of Hours Earned COCs:</td>
+          <td><span id="earnedHoursLabel"></span></td>
+        </tr>
+        <tr>
+          <td>Date of CTO:</td>
+          <td><span id="ctoDateLabel"></span></td>
+        </tr>
+        <tr>
+          <td>No. of Hours Applied For:</td>
+          <td><span id="appliedHoursLabel"></span></td>
+        </tr>
+      </table>
+
+      <div class="namegroup">
+        <div class="submitted">
+          <label>Submitted by:</label>
+          <span id="submittedLabel"></span>
+          <div class="signature">Signature of Employee/Applicant</div>
+        </div>
+
+        <div class="approved">
+          <label>Approved by:</label>
+          <span id="approvedLabel"></span>
+          <div class="signature">Name/Signature of Department Head</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button onclick="window.print()">Print</button>
+        <button onclick="editForm()">Edit</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-text">
+      <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
+        Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
+        Telephone Nos.: +63 44 791 8145 <br>
+        Email Address: phrmo@bulacan.gov.ph</p>
+    </div>
+    <img src="../images/footer.png" alt="Footer Image">
+  </footer>
+
   <script>
-    function formatDate(dateStr) {
-      const options = { year: "numeric", month: "long", day: "numeric" };
-      return new Date(dateStr).toLocaleDateString(undefined, options);
+    function formatDateForDisplay(dateStr) {
+      if (!dateStr) return "";
+      const d = new Date(dateStr);
+      const yyyy = d.getFullYear();
+      const mm = String(d.getMonth() + 1).padStart(2, '0');
+      const dd = String(d.getDate()).padStart(2, '0');
+      return `${mm}/${dd}/${yyyy}`;
     }
 
     const params = new URLSearchParams(window.location.search);
-    const preview = document.getElementById("previewData");
 
-    const fields = [
-      { key: "filingDate", label: "Date of Filing", isDate: true },
-      { key: "office", label: "Office" },
-      { key: "employeeName", label: "Employee Name" },
-      { key: "position", label: "Position" },
-      { key: "earnedHours", label: "No. of Hours Earned COCs", suffix: " Hours" },
-      { key: "ctoDate", label: "Date of CTO", isDate: true },
-      { key: "appliedHours", label: "No. of Hours Applied For", suffix: " Hours" },
-    ];
+    // Fill labels with data from URL params
+    const filingDate = params.get("filingDate");
+    if (filingDate) {
+      document.getElementById("filingDateLabel").textContent = formatDateForDisplay(filingDate);
+    }
 
-    fields.forEach(({ key, label, isDate, suffix }) => {
-      const rawValue = params.get(key) || "";
-      const displayValue = isDate ? formatDate(rawValue) : rawValue + (suffix || "");
-      const div = document.createElement("div");
-      div.className = "row";
-      div.innerHTML = `<span class="label">${label}:</span> ${displayValue}`;
-      preview.appendChild(div);
+    const officeValue = params.get("office");
+    if (officeValue) {
+      document.getElementById("officeLabel").textContent = officeValue;
+      document.getElementById("office").value = officeValue;
+    }
+
+    const employeeName = params.get("employeeName");
+    if (employeeName) {
+      document.getElementById("employeeNameLabel").textContent = employeeName;
+      document.getElementById("submittedLabel").textContent = employeeName; // <-- Added here
+    }
+
+    const position = params.get("position");
+    if (position) {
+      document.getElementById("positionLabel").textContent = position;
+    }
+
+    const earnedHours = params.get("earnedHours");
+    if (earnedHours) {
+      document.getElementById("earnedHoursLabel").textContent = earnedHours;
+    }
+
+    const ctoDate = params.get("ctoDate");
+    if (ctoDate) {
+      document.getElementById("ctoDateLabel").textContent = formatDateForDisplay(ctoDate);
+    }
+
+    const appliedHours = params.get("appliedHours");
+    if (appliedHours) {
+      document.getElementById("appliedHoursLabel").textContent = appliedHours;
+    }
+
+    const submitted = params.get("submitted");
+    if (submitted) {
+      // You may want to overwrite this if needed, but here it will stay as employeeName
+      // document.getElementById("submittedLabel").textContent = submitted;
+    }
+
+    const approved = params.get("approved");
+    if (approved) {
+      document.getElementById("approvedLabel").textContent = approved;
+    }
+
+    // Fetch Department Head name from PHP API
+  fetch('fetch-department-head.php')
+    .then(response => response.json())
+    .then(data => {
+      if (data.name) {
+        document.getElementById("approvedLabel").textContent = data.name;
+      } else {
+        console.error("Department Head not found");
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching department head:", error);
     });
-
+    
     function editForm() {
-      const params = new URLSearchParams(window.location.search);
       window.location.href = "edit_cto.html?" + params.toString();
     }
   </script>
 </body>
-
 </html>
