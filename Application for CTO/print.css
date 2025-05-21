@@ -1,273 +1,57 @@
+/* print.css */
+
+@page {
+  size: A4 landscape;
+  margin: 0;
+}
+
 @media print {
-    @page {
-        size: A4 landscape;
-        margin: 0mm;
-    }
+  html, body {
+    width: 297mm;
+    height: 210mm;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-size: 11pt; /* Scale text size slightly */
+  }
 
-    /* Hide elements */
-    .print-alert,
-    .button,
-    .custom-alert,
-    input[type="date"],
-    input[type="text"] {
-        display: none !important;
-    }
+  body {
+    position: relative;
+  }
 
-    body,
-    html {
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-        font-size: 9pt;
-    }
+  .actions, .no-print, button {
+    display: none !important;
+  }
 
-    header {
-        width: 100%;
-        max-width: 100%;
-        text-align: center;
-        font-size: 8pt;
-        font-weight: bold;
-    }
+  .container {
+    transform: scale(0.95); /* Shrinks content to fit */
+    transform-origin: top left;
+    width: 100%;
+    height: 100%;
+    padding: 10mm;
+    box-sizing: border-box;
+  }
 
-    form {
-        width: 950px;
-        height: 300px;
-        transform: none !important;
-        align-items: center;
-        font-size: 10pt;
-        page-break-inside: avoid;
-        background-image: url("../images/body.png");
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
+  .logo-container img,
+  footer img {
+    max-width: 100%;
+    height: auto;
+  }
 
-    }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
 
-    .container {
-        width: 1000px;
-        height: 520px;
-        margin-left: 65px;
-    }
+  * {
+    page-break-inside: avoid;
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
 
-    .form-group {
-        margin-top: 0px !important;
-    }
-
-    table {
-        width: 600px;
-        margin-top: -20px;
-        border: 2px solid black !important;
-        font-size: 9pt;
-        page-break-inside: avoid;
-
-    }
-
-    td,
-    th {
-        padding: 3px;
-        text-align: center;
-        border: 2px solid black !important;
-    }
-
-    td:last-child input {
-        width: 60%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        text-align: center;
-    }
-
-    /*Inputs*/
-    input,
-    select,
-    textarea {
-        font-size: 10pt;
-        border-bottom: 1px solid black !important;
-        width: 100%;
-        background: transparent;
-        color: black;
-        padding: 3px;
-        page-break-inside: avoid;
-    }
-
-    button {
-        display: none;
-    }
-
-    .signature-section {
-        page-break-inside: avoid;
-        text-align: center;
-    }
-
-    input,
-    select {
-        background: transparent !important;
-        color: black !important;
-        font-size: inherit;
-        pointer-events: none;
-        width: auto;
-        display: inline;
-    }
-
-    input::before,
-    select::before {
-        content: attr(data-value);
-        display: inline;
-        color: black;
-    }
-
-    input[type="text"],
-    input[type="date"],
-    input[type="number"] {
-        display: inline !important;
-        border-bottom: none;
-    }
-
-    input:not([type="date"])::before,
-    select::before {
-        content: attr(data-value);
-        display: inline;
-        color: black;
-    }
-
-    input[type="date"] {
-        border-bottom: 1px solid black;
-        position: relative;
-        visibility: hidden;
-    }
-
-    input[type="date"]::before {
-        content: attr(data-value);
-        visibility: visible;
-        position: relative;
-        color: black;
-        margin-top: 6px;
-    }
-
-    input[type="number"] {
-        border: none !important;
-        background: transparent !important;
-        color: black !important;
-        font-size: 10pt;
-        width: 100%;
-        display: inline-block;
-        height: auto;
-        text-align: left;
-    }
-
-    input[type="number"]::-webkit-inner-spin-button,
-    input[type="number"]::-webkit-outer-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
-
-    select[name="office"] {
-        border: none !important;
-        background: transparent !important;
-        color: black !important;
-        font-size: 8pt;
-        width: 100%;
-        display: inline-block;
-        height: auto;
-        margin: 0px !important;
-        line-height: normal !important;
-        appearance: none;
-        pointer-events: none;
-        text-align: left;
-        border-bottom: 1px solid black !important;
-    }
-
-    select[name="office"]::-ms-expand {
-        display: none;
-    }
-
-    select[name="office"] option {
-        color: black !important;
-    }
-
-    input[name="filingDate"] {
-        border: none;
-        border-bottom: 1px solid black !important;
-        color: transparent !important;
-        caret-color: transparent !important;
-        background: transparent !important;
-        text-shadow: none !important;
-        width: 100%;
-        display: inline-block;
-        height: auto;
-        margin: 0px !important;
-        line-height: normal !important;
-    }
-
-    input[name="filingDate"]::placeholder {
-        color: transparent !important;
-    }
-
-    input[name="filingDate"]::after {
-        content: " ";
-        visibility: visible;
-        display: block;
-        margin-left: -100px;
-        border-bottom: 1px solid black;
-        width: 450px;
-    }
-
-    label {
-        font-weight: bold;
-        color: black !important;
-    }
-
-    /*Signature*/
-    .namegroup {
-        margin-top: 15px;
-        background: transparent;
-        margin-left: 100px;
-    }
-
-    .approved .signature,
-    .submitted .signature {
-        font-size: 12px;
-    }
-
-    .cto-date-container {
-        height: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 15px;
-        margin-left: -35px;
-    }
-
-    input[name="ctoDate"] {
-        text-align: left;
-    }
-
-    /*Footer*/
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        text-align: center;
-        background: white;
-        padding: 10px;
-        font-size: 12px;
-    }
-
-    .footer img {
-        width: 100%;
-        max-height: 100%;
-        object-fit: fill;
-    }
-
-    .footer-text {
-        font-size: 7px;
-        color: rgb(17, 31, 189);
-        text-align: left;
-        margin-top: 5px;
-        margin-right: 300px !important;
-    }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
 }
