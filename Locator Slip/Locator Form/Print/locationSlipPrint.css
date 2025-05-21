@@ -4,34 +4,6 @@ body {
     padding: 20px;
 }
 
-/* Logo Header */
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Center the content horizontally */
-    width: 100%;
-    position: relative;
-}
-
-.text-section {
-    font-size: 9px;
-    color: #666;
-    text-align: left;
-    line-height: 0.2;
-    position: absolute;
-    left: 80px;
-    /* Adjust based on preference */
-    top: 55%;
-    transform: translateY(-50%);
-}
-
-.office-logo {
-    max-width: 65vw;
-    height: auto;
-    margin-left: 50px;
-}
-
 /* Header */
 .header {
     text-align: center;
