@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>CTO Print Preview</title>
+</head>
+
+<body>
+  <h2>CTO Print Preview</h2>
+  <div class="preview" id="previewData">
+    <!-- Data inserted via JS -->
+  </div>
+  <div class="actions">
+    <button onclick="window.print()">Print</button>
+    <button onclick="editForm()">Edit</button>
+  </div>
+
+  <script>
+    function formatDate(dateStr) {
+      const options = { year: "numeric", month: "long", day: "numeric" };
+      return new Date(dateStr).toLocaleDateString(undefined, options);
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const preview = document.getElementById("previewData");
+
+    const fields = [
+      { key: "filingDate", label: "Date of Filing", isDate: true },
+      { key: "office", label: "Office" },
+      { key: "employeeName", label: "Employee Name" },
+      { key: "position", label: "Position" },
+      { key: "earnedHours", label: "No. of Hours Earned COCs", suffix: " Hours" },
+      { key: "ctoDate", label: "Date of CTO", isDate: true },
+      { key: "appliedHours", label: "No. of Hours Applied For", suffix: " Hours" },
+    ];
+
+    fields.forEach(({ key, label, isDate, suffix }) => {
+      const rawValue = params.get(key) || "";
+      const displayValue = isDate ? formatDate(rawValue) : rawValue + (suffix || "");
+      const div = document.createElement("div");
+      div.className = "row";
+      div.innerHTML = `<span class="label">${label}:</span> ${displayValue}`;
+      preview.appendChild(div);
+    });
+
+    function editForm() {
+      const params = new URLSearchParams(window.location.search);
+      window.location.href = "edit_cto.html?" + params.toString();
+    }
+  </script>
+</body>
+
+</html>

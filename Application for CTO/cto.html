@@ -1,113 +1,100 @@
+<!-- cto.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application for CTO</title>
-    <link rel="stylesheet" href="cto.css">
-    <link rel="stylesheet" href="../logoHeader.css">
-    <link rel="stylesheet" href="../footer.css">
-    <link rel="stylesheet" href="print.css">
-    <link rel="stylesheet" href="alert.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CTO Application</title>
 </head>
 
 <body>
-
-    <div class="logo-container">
-        <img src="../images/topheaderlogo.png" alt="Office Logo">
-    </div>
-
     <div class="container">
         <h2>APPLICATION FOR COMPENSATORY TIME-OFF (CTO)</h2>
 
-        <form action="submit_cto.php" method="POST">
+        <form id="ctoForm">
             <div class="form-group">
-                <div class="date">
-                    <label for="filingDate">Date of Filing:</label>
-                    <input type="date" id="filingDate" name="filingDate" required><br>
-                </div>
-
-                <div class="office">
-                    <label for="office">Office:</label>
-                    <select id="officeDropdown" name="office" required>
-                        <option value="">Select an Office</option>
-                    </select>                    
-                </div>
-
-                <div class="employeeName">
-                    <label for="employeeName">Employee Name:</label>
-                    <input type="text" id="employeeName" name="employeeName" required>
-                </div><br>
-
-                <div class="position">
-                    <label for="position">Position:</label>
-                    <input type="text" id="position" name="position" required>
-                </div>
+                <label for="filingDate">Date of Filing:</label>
+                <input type="date" id="filingDate" name="filingDate" required />
             </div>
-            <br>
-            <br>
-            <table>
-                <tr>
-                    <td>No. of Hours Earned COCs:</td>
-                    <td><input type="number" name="earnedHours" required min="0"> Hours</td>
-                </tr>
-                <tr>
-                    <td>Date of CTO:</td>
-                    <td>
-                        <div class="cto-date-container">
-                            <input type="date" name="ctoDate" required>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>No. of Hours Applied For:</td>
-                    <td><input type="number" name="appliedHours" required min="0"> Hours</td>
-                </tr>
-            </table>
 
-            <button type="button" onclick="submitAndPrint()">Print</button>
+            <div class="form-group">
+                <label>Office:</label>
+                <span>Provincial Information Technology Office (PITO)</span>
+                <input type="hidden" name="office" value="Provincial Information Technology Office (PITO)" />
+            </div>
 
+
+            <div class="form-group">
+                <label for="employeeName">Employee Name:</label>
+                <input type="text" id="employeeName" name="employeeName" required />
+            </div>
+
+            <div class="form-group">
+                <label for="position">Position:</label>
+                <input type="text" id="position" name="position" required />
+            </div>
+
+            <div class="form-group">
+                <label for="earnedHours">No. of Hours Earned (COC):</label>
+                <input type="number" id="earnedHours" name="earnedHours" required min="0" />
+            </div>
+
+            <div class="form-group">
+                <label for="ctoDate">Date of CTO:</label>
+                <input type="date" id="ctoDate" name="ctoDate" required />
+            </div>
+
+            <div class="form-group">
+                <label for="appliedHours">No. of Hours Applied For:</label>
+                <input type="number" id="appliedHours" name="appliedHours" required min="0" />
+            </div>
+
+            <div class="button-group">
+                <button type="button" onclick="submitForm()">Submit & Preview</button>
+            </div>
         </form>
 
-        <div class="namegroup">
-            <div class="submitted">
-                <label for="submitted">Submitted by:</label>
-                <input type="text" id="submitted" name="submitted">
-                <span class="signature">Signature of Employee/Applicant</span>
-            </div>
-
-            <div class="approved">
-                <label for="approved">Approved by:</label>
-                <input type="text" id="approved" name="approved">
-                <span class="signature">Name/Signature of Department Head</span>
-            </div>
+        <div id="customAlert" class="custom-alert">
+            <p id="alertMessage"></p>
+            <button onclick="closeAlert()">OK</button>
         </div>
     </div>
 
-    <div class="custom-alert" id="customAlert">
-        <p>Please fill out all required fields before printing.</p>
-        <button onclick="closeCustomAlert()">OK</button>
-    </div>
+    <script>
+        function submitForm() {
+            const form = document.getElementById("ctoForm");
+            const formData = new FormData(form);
 
-    <div class="print-alert" id="printAlert">
-        <p>Form submitted successfully!</p>
-        <button onclick="closeCustomAlert()">OK</button>
-    </div>
+            fetch("submit_cto.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success" && data.payload && data.payload.id) {
+                        const params = new URLSearchParams();
+                        formData.forEach((value, key) => params.append(key, value));
+                        params.set("id", data.payload.id);
+                        window.location.href = "print_cto.html?" + params.toString();
+                    } else {
+                        showAlert(data.message || "Submission failed.");
+                    }
+                })
+                .catch(() => {
+                    showAlert("An unexpected error occurred.");
+                });
+        }
 
-    <footer class="footer">
-        <div class="footer-text">
-            <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
-                Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
-                Telephone Nos.: +63 44 791 8145 <br>
-                Email Address: phrmo@bulacan.gov.ph</p>
-        </div>
-        <img src="../images/footer.png" alt="Footer Image">
-    </footer>
+        function showAlert(message) {
+            document.getElementById("alertMessage").textContent = message;
+            document.getElementById("customAlert").style.display = "block";
+        }
 
-    <script src="dropdown.js"></script>
-    <script src="print.js"></script>
-    <script src="fetch_offices.js"></script>
+        function closeAlert() {
+            document.getElementById("customAlert").style.display = "none";
+        }
+    </script>
 </body>
 
 </html>
