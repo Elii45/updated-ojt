@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Edit Locator Slip</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <style>
+    .request-group {
+      margin-bottom: 10px;
+    }
+    .remove-btn {
+      margin-left: 10px;
+    }
+    .button-group {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>EDIT LOCATOR SLIP</h2>
+  </div>
+
+  <div id="errorMessage" class="error-message">
+    <!-- Optional error message -->
+  </div>
+
+  <form action="update_locator.php" method="POST">
+    <input type="hidden" id="originalRequest" name="originalRequest" value="John Doe, Jane Smith" />
+    <input type="hidden" id="originalDate" name="originalDate" value="2024-05-15" />
+
+    <div class="content1">
+      <div class="official">
+        <input type="checkbox" id="official" name="official" checked />
+        <label for="officialText">Official</label><br />
+      </div>
+      <div class="date-group">
+        <label for="date">Date:</label>
+        <div class="input-container">
+          <input type="date" id="date" name="date" value="2024-05-15" />
+          <span class="subtext">(Date of Filing)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content2">
+      <div class="field-group">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" value="City Hall" required />
+      </div>
+
+      <div class="field-group">
+        <label for="purpose">Purpose:</label>
+        <input type="text" id="purpose" name="purpose" value="Meeting with officials" required />
+      </div>
+    </div>
+
+    <div class="content3">
+      <label for="inclDate">Inclusive Dates:</label>
+      <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" value="2024-05-15 to 2024-05-17" required />
+
+      <label for="timeDeparture">Departure Time:</label>
+      <input type="time" id="timeDeparture" name="timeDeparture" value="08:00" required /><br /><br />
+
+      <label for="timeArrival">Arrival Time:</label>
+      <input type="time" id="timeArrival" name="timeArrival" value="17:00" required /><br /><br />
+    </div>
+
+    <div id="dropdown-container">
+      <div class="request-group">
+        <label for="request">Requested by:</label>
+        <select id="request" name="request[]" required class="request">
+          <option value="" disabled>Select Employee</option>
+          <option value="PITO Office" selected>PITO Office</option>
+          <option value="Doe, John">Doe, John</option>
+          <option value="Smith, Jane">Smith, Jane</option>
+          <option value="Garcia, Maria">Garcia, Maria</option>
+        </select>
+      </div>
+      <div class="request-group">
+        <select name="request[]" required class="request">
+          <option value="" disabled>Select Employee</option>
+          <option value="Doe, John" selected>Doe, John</option>
+          <option value="Smith, Jane">Smith, Jane</option>
+          <option value="Garcia, Maria">Garcia, Maria</option>
+        </select>
+        <button type="button" class="remove-btn" onclick="this.parentElement.remove(); updateDropdowns();">Remove</button>
+      </div>
+    </div>
+
+    <button type="button" id="addDropdown">Add</button>
+
+    <div class="button-group">
+      <button type="button" class="back-btn" onclick="window.history.back()">Cancel</button>
+      <input type="submit" id="submit" value="Update" class="submit" />
+    </div>
+  </form>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="../Script/inclusiveDate.js"></script>
+  <script src="locatorSlip.js"></script>
+  <script>
+    // Simulated list of employees passed to JavaScript
+    window.employeesList = [
+      { name: "Doe, John" },
+      { name: "Smith, Jane" },
+      { name: "Garcia, Maria" },
+      { name: "PITO Office" }
+    ];
+
+    function updateDropdowns() {
+      // Optionally update UI or re-render options
+    }
+
+    // Optional: Automatically initialize flatpickr
+    flatpickr("#inclDate", {
+      mode: "range",
+      dateFormat: "Y-m-d"
+    });
+  </script>
+</body>
+</html>

@@ -87,37 +87,39 @@
 
   <!-- Scripts -->
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const editBtn = document.getElementById("editBtn");
+  document.addEventListener("DOMContentLoaded", function () {
+    const editBtn = document.getElementById("editBtn");
 
-      editBtn.addEventListener("click", function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        window.location.href = "../Edit/locatorEdit.php?" + urlParams.toString();
-      });
-
-      // ✅ Fetch department head on load
-      fetchDepartmentHead();
+    editBtn.addEventListener("click", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      // Redirect to HTML instead of PHP
+      window.location.href = "edit_locator.html?" + urlParams.toString();
     });
 
-    const departmentHeadSignatureEl = document.getElementById("departmentHeadSignature");
+    // ✅ Fetch department head on load
+    fetchDepartmentHead();
+  });
 
-    async function fetchDepartmentHead() {
-      try {
-        const response = await fetch("../Backend/fetch-department-head.php");
-        const data = await response.json();
-        console.log("Department Head Fetch Response:", data); // Optional for debugging
+  const departmentHeadSignatureEl = document.getElementById("departmentHeadSignature");
 
-        if (data.name) {
-          const departmentHead = data.name;
-          departmentHeadSignatureEl.textContent = `INH. ${departmentHead.toUpperCase()}`;
-        } else {
-          console.error("No department head found");
-        }
-      } catch (error) {
-        console.error("Error fetching department head:", error);
+  async function fetchDepartmentHead() {
+    try {
+      const response = await fetch("../Backend/fetch-department-head.php");
+      const data = await response.json();
+      console.log("Department Head Fetch Response:", data);
+
+      if (data.name) {
+        const departmentHead = data.name;
+        departmentHeadSignatureEl.textContent = `INH. ${departmentHead.toUpperCase()}`;
+      } else {
+        console.error("No department head found");
       }
+    } catch (error) {
+      console.error("Error fetching department head:", error);
     }
-  </script>
+  }
+</script>
+
 </body>
 
 </html>
