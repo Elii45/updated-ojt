@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Locator Slip</title>
     <link rel="stylesheet" href="Style/locatorSlip.css">
-    <script src="Script/inclusiveDate.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>
@@ -39,6 +37,9 @@
             </div>
         </div>
 
+        <!-- Flatpickr CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
         <div class="content3">
             <label for="inclDate">Inclusive Dates:</label>
             <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" required>
@@ -50,28 +51,202 @@
             <input type="time" id="timeArrival" name="timeArrival" required><br><br>
         </div>
 
+        <!-- Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script>
+            flatpickr("#inclDate", {
+                mode: "multiple",
+                dateFormat: "Y-m-d",
+                altInput: true,
+                altFormat: "F j, Y",
+                onChange: function (selectedDates) {
+                    document.getElementById("workingDaysDisplay").textContent =
+                        "Total Days Selected: " + selectedDates.length;
+                }
+            });
+        </script>
+
+
         <div class="request-group">
-            <!-- Dropdown Container -->
             <div id="dropdown-container">
                 <div class="request-group">
                     <label for="request">Requested by:</label>
                 </div>
             </div>
 
-            <!-- Add Button -->
             <button type="button" id="addDropdown" class="addButton">
                 <span class="icon">+</span>
             </button>
-
         </div>
 
         <input type="submit" id="submit" value="Submit" class="submit">
     </form>
 
-    <!-- Script -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="Script/locator.js"></script> <!-- Submit -->
-    <script src="Script/getEmployees.js"></script> <!-- Dropdown -->
-</body>
+    <!-- Submit -->
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault()
 
+            // Get form data
+            const form = document.getElementById("locatorForm")
+            const formData = new FormData(form)
+
+            // Create URL parameters
+            const params = new URLSearchParams()
+
+            // Add form fields to URL parameters
+            params.append("official", document.getElementById("official").checked ? "yes" : "no")
+            params.append("date", document.getElementById("date").value)
+            params.append("destination", document.getElementById("destination").value)
+            params.append("purpose", document.getElementById("purpose").value)
+            params.append("inclDate", document.getElementById("inclDate").value)
+            params.append("timeDeparture", document.getElementById("timeDeparture").value)
+            params.append("timeArrival", document.getElementById("timeArrival").value)
+            params.append("request", document.getElementById("request").value)
+
+            // Show alert
+            alert("Locator Slip Submitted Successfully!")
+
+            // Redirect to print page with form data
+            window.location.href = `../Print/locatorSlipPrint.html?${params.toString()}`
+
+            return false
+        }
+    </script>
+    <!-- Dropdown -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetchEmployees();
+
+            let addButton = document.getElementById("addDropdown");
+            addButton.addEventListener("click", function () {
+                addDropdown();
+            });
+        });
+
+        let employeesList = [];
+
+        function fetchEmployees() {
+            fetch("Backend/getEmployees.php")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        console.error("Error:", data.error);
+                        return;
+                    }
+                    employeesList = data;
+                })
+                .catch(error => console.error("Error fetching employee names:", error));
+        }
+
+        function populateDropdown(selectElement, isFirst = false) {
+            let selectedValues = getSelectedEmployees();
+
+            selectElement.innerHTML = `<option value="" disabled selected>Select Employee</option>`;
+
+            if (isFirst) {
+                selectElement.innerHTML += `<option value="PITO Office">PITO Office</option>`;
+            }
+
+            employeesList.forEach(employee => {
+                if (!selectedValues.includes(employee.name)) {
+                    let option = document.createElement("option");
+                    option.value = employee.name;
+                    option.textContent = employee.name;
+                    selectElement.appendChild(option);
+                }
+            });
+        }
+
+        function addDropdown() {
+            const container = document.getElementById("dropdown-container");
+
+            let newGroup = document.createElement("div");
+            newGroup.classList.add("request-group");
+
+            let select = document.createElement("select");
+            select.name = "request[]";
+            select.required = true;
+            select.classList.add("request");
+
+            let isFirstDropdown = container.querySelectorAll(".request").length === 0;
+            populateDropdown(select, isFirstDropdown);
+
+            // Ensure it always starts with "Select Employee"
+            select.value = "";
+
+            let removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.type = "button";
+            removeBtn.classList.add("remove-btn");
+            removeBtn.onclick = function () {
+                newGroup.remove();
+                updateDropdowns();
+            };
+
+            newGroup.appendChild(select);
+            newGroup.appendChild(removeBtn);
+            container.appendChild(newGroup);
+
+            select.addEventListener("change", function () {
+                updateDropdowns();
+            });
+
+            updateDropdowns();
+        }
+
+        function updateDropdowns() {
+            let selectedValues = getSelectedEmployees();
+
+            document.querySelectorAll(".request").forEach((select, index) => {
+                let previousValue = select.value;
+
+                let availableOptions = employeesList.filter(emp =>
+                    !selectedValues.includes(emp.name) || emp.name === previousValue
+                );
+
+                select.innerHTML = `<option value="" disabled ${previousValue ? "" : "selected"}>Select Employee</option>`;
+
+                if (index === 0) {
+                    select.innerHTML += `<option value="PITO Office">PITO Office</option>`;
+                }
+
+                availableOptions.forEach(employee => {
+                    let option = document.createElement("option");
+                    option.value = employee.name;
+                    option.textContent = employee.name;
+                    select.appendChild(option);
+                });
+
+                if (previousValue && select.querySelector(`option[value="${previousValue}"]`)) {
+                    select.value = previousValue;
+                } else {
+                    select.value = ""; // Ensure "Select Employee" is shown when adding new
+                }
+            });
+
+            handleSelection();
+        }
+
+        function getSelectedEmployees() {
+            return Array.from(document.querySelectorAll(".request"))
+                .map(select => select.value)
+                .filter(value => value !== "");
+        }
+
+        function handleSelection() {
+            let dropdowns = document.querySelectorAll(".request");
+            let addButton = document.getElementById("addDropdown");
+
+            if (dropdowns.length > 0 && dropdowns[0].value === "PITO Office") {
+                addButton.disabled = true;
+                dropdowns.forEach((select, index) => {
+                    if (index > 0) select.closest(".request-group").remove();
+                });
+            } else {
+                addButton.disabled = false;
+            }
+        }
+    </script>
+</body>
 </html>

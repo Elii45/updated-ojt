@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Form</title>
+  <!-- Flatpickr CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+</head>
+<body>
+  <h2>Create Form</h2>
+  <form id="createForm">
+
+    <div class="content1">
+      <div class="official">
+        <input type="checkbox" id="official" name="official">
+        <label for="official">Official</label><br>
+      </div>
+      <div class="date-group">
+        <label for="date">Date:</label>
+        <div class="input-container">
+          <input type="date" id="date" name="date">
+          <span class="subtext">(Date of Filing)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content2">
+      <div class="field-group">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" required>
+      </div>
+
+      <div class="field-group">
+        <label for="purpose">Purpose:</label>
+        <input type="text" id="purpose" name="purpose" required>
+      </div>
+    </div>
+
+    <div class="content3">
+      <label for="inclDate">Inclusive Dates:</label>
+      <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" required>
+
+      <label for="timeDeparture">Departure Time: </label>
+      <input type="time" id="timeDeparture" name="timeDeparture" required><br><br>
+
+      <label for="timeArrival">Arrival Time: </label>
+      <input type="time" id="timeArrival" name="timeArrival" required><br><br>
+    </div>
+
+    <div id="create-dropdown-container"></div>
+
+    <button type="button" id="createAddDropdown" class="addButton"><span>+</span> Add Employee</button>
+    <br><br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Flatpickr JS -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script>
+    flatpickr("#inclDate", {
+      mode: "multiple",
+      dateFormat: "Y-m-d",
+      altInput: true,
+      altFormat: "F j, Y"
+      // No onChange function here, so no total days display
+    });
+  </script>
+
+  <script type="module" src="./script.js"></script>
+</body>
+</html>

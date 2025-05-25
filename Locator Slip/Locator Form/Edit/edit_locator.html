@@ -1,44 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edit Locator Slip</title>
+  <!-- Flatpickr CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <style>
     .request-group {
       margin-bottom: 10px;
     }
+
     .remove-btn {
       margin-left: 10px;
     }
-    .button-group {
-      margin-top: 20px;
-    }
   </style>
 </head>
+
 <body>
-  <div class="header">
+  <form id="editLocatorForm" action="update_locator.php" method="POST">
     <h2>EDIT LOCATOR SLIP</h2>
-  </div>
-
-  <div id="errorMessage" class="error-message">
-    <!-- Optional error message -->
-  </div>
-
-  <form action="update_locator.php" method="POST">
-    <input type="hidden" id="originalRequest" name="originalRequest" value="John Doe, Jane Smith" />
-    <input type="hidden" id="originalDate" name="originalDate" value="2024-05-15" />
 
     <div class="content1">
       <div class="official">
-        <input type="checkbox" id="official" name="official" checked />
-        <label for="officialText">Official</label><br />
+        <input type="checkbox" id="official" name="official" />
+        <label for="official">Official</label><br />
       </div>
       <div class="date-group">
         <label for="date">Date:</label>
         <div class="input-container">
-          <input type="date" id="date" name="date" value="2024-05-15" />
+          <input type="date" id="date" name="date" />
           <span class="subtext">(Date of Filing)</span>
         </div>
       </div>
@@ -47,77 +39,270 @@
     <div class="content2">
       <div class="field-group">
         <label for="destination">Destination:</label>
-        <input type="text" id="destination" name="destination" value="City Hall" required />
+        <input type="text" id="destination" name="destination" required />
       </div>
 
       <div class="field-group">
         <label for="purpose">Purpose:</label>
-        <input type="text" id="purpose" name="purpose" value="Meeting with officials" required />
+        <input type="text" id="purpose" name="purpose" required />
       </div>
     </div>
 
     <div class="content3">
       <label for="inclDate">Inclusive Dates:</label>
-      <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" value="2024-05-15 to 2024-05-17" required />
+      <input type="text" id="inclDate" name="inclDate" placeholder="Select Dates" required />
 
       <label for="timeDeparture">Departure Time:</label>
-      <input type="time" id="timeDeparture" name="timeDeparture" value="08:00" required /><br /><br />
+      <input type="time" id="timeDeparture" name="timeDeparture" required />
 
       <label for="timeArrival">Arrival Time:</label>
-      <input type="time" id="timeArrival" name="timeArrival" value="17:00" required /><br /><br />
+      <input type="time" id="timeArrival" name="timeArrival" required />
     </div>
 
-    <div id="dropdown-container">
-      <div class="request-group">
-        <label for="request">Requested by:</label>
-        <select id="request" name="request[]" required class="request">
-          <option value="" disabled>Select Employee</option>
-          <option value="PITO Office" selected>PITO Office</option>
-          <option value="Doe, John">Doe, John</option>
-          <option value="Smith, Jane">Smith, Jane</option>
-          <option value="Garcia, Maria">Garcia, Maria</option>
-        </select>
-      </div>
-      <div class="request-group">
-        <select name="request[]" required class="request">
-          <option value="" disabled>Select Employee</option>
-          <option value="Doe, John" selected>Doe, John</option>
-          <option value="Smith, Jane">Smith, Jane</option>
-          <option value="Garcia, Maria">Garcia, Maria</option>
-        </select>
-        <button type="button" class="remove-btn" onclick="this.parentElement.remove(); updateDropdowns();">Remove</button>
-      </div>
+    <div class="request-group">
+      <label>Requested by:</label>
     </div>
 
-    <button type="button" id="addDropdown">Add</button>
+    <div id="dropdown-container"></div>
 
-    <div class="button-group">
-      <button type="button" class="back-btn" onclick="window.history.back()">Cancel</button>
-      <input type="submit" id="submit" value="Update" class="submit" />
-    </div>
+    <button type="button" id="addDropdown" class="addButton">
+      <span class="icon">+</span> Add Requested By
+    </button>
+
+    <input type="submit" value="Update Locator Slip" class="submit" />
   </form>
 
+  <!-- Flatpickr JS -->
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="../Script/inclusiveDate.js"></script>
-  <script src="locatorSlip.js"></script>
-  <script>
-    // Simulated list of employees passed to JavaScript
-    window.employeesList = [
-      { name: "Doe, John" },
-      { name: "Smith, Jane" },
-      { name: "Garcia, Maria" },
-      { name: "PITO Office" }
-    ];
 
-    function updateDropdowns() {
-      // Optionally update UI or re-render options
+  <script>
+    let employeesList = [];
+
+    document.addEventListener("DOMContentLoaded", async function () {
+      await fetchEmployees();
+
+      const preselected = getPreselectedEmployees();
+
+      if (preselected.length > 0) {
+        preselected.forEach((name, index) => {
+          addDropdown(name, index === 0);
+        });
+      } else {
+        addDropdown(true); // Add first dropdown with PITO Office option
+      }
+
+      populateFormFromURL();
+
+      document.getElementById("addDropdown").addEventListener("click", function () {
+        addDropdown();
+      });
+
+      updateDropdowns(); // Initial update to sync dropdown options and buttons
+    });
+
+    function getPreselectedEmployees() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const requested = urlParams.get("requested");
+      if (!requested) return [];
+      // Split on commas, trim, decode
+      return requested.split(",").map(name => decodeURIComponent(name.trim()));
     }
 
-    // Optional: Automatically initialize flatpickr
-    flatpickr("#inclDate", {
-      mode: "range",
-      dateFormat: "Y-m-d"
-    });
+    async function fetchEmployees() {
+      try {
+        const response = await fetch("../Backend/getEmployees.php");
+        const data = await response.json();
+        if (data.error) {
+          console.error("Error:", data.error);
+          employeesList = [];
+          return;
+        }
+        employeesList = data; // Expecting data to be array of {name: "..."}
+      } catch (error) {
+        console.error("Error fetching employee names:", error);
+        employeesList = [];
+      }
+    }
+
+    function addDropdown(defaultValue = "", isFirstDropdown = false) {
+      const container = document.getElementById("dropdown-container");
+
+      let newGroup = document.createElement("div");
+      newGroup.classList.add("request-group");
+
+      let select = document.createElement("select");
+      select.name = "request[]";
+      select.required = true;
+      select.classList.add("request");
+
+      // Populate dropdown options with current selections considered
+      populateDropdown(select, isFirstDropdown, defaultValue);
+
+      let removeBtn = document.createElement("button");
+      removeBtn.textContent = "Remove";
+      removeBtn.type = "button";
+      removeBtn.classList.add("remove-btn");
+      removeBtn.onclick = function () {
+        newGroup.remove();
+        updateDropdowns();
+      };
+
+      newGroup.appendChild(select);
+      newGroup.appendChild(removeBtn);
+      container.appendChild(newGroup);
+
+      select.addEventListener("change", function () {
+        updateDropdowns();
+      });
+
+      updateDropdowns();
+    }
+
+    function populateDropdown(selectElement, isFirst = false, defaultValue = "") {
+      // Get selected values from all dropdowns except this one (to allow defaultValue)
+      let selectedValues = getSelectedEmployees().filter(val => val !== defaultValue);
+
+      selectElement.innerHTML = `<option value="" disabled>Select Employee</option>`;
+
+      if (isFirst) {
+        selectElement.innerHTML += `<option value="PITO Office">PITO Office</option>`;
+      }
+
+      employeesList.forEach(employee => {
+        // Show employee option only if not selected elsewhere OR if this is the defaultValue
+        if (!selectedValues.includes(employee.name) || employee.name === defaultValue) {
+          let option = document.createElement("option");
+          option.value = employee.name;
+          option.textContent = employee.name;
+          selectElement.appendChild(option);
+        }
+      });
+
+      // Set selected value
+      if (defaultValue) {
+        selectElement.value = defaultValue;
+      } else {
+        selectElement.value = "";
+      }
+    }
+
+    function getSelectedEmployees() {
+      return Array.from(document.querySelectorAll(".request"))
+        .map(select => select.value)
+        .filter(value => value !== "");
+    }
+
+    function updateDropdowns() {
+      let selectedValues = getSelectedEmployees();
+
+      const dropdowns = document.querySelectorAll(".request");
+      dropdowns.forEach((select, index) => {
+        let previousValue = select.value;
+
+        // Compute available options considering current selections
+        let availableOptions = employeesList.filter(emp =>
+          !selectedValues.includes(emp.name) || emp.name === previousValue
+        );
+
+        select.innerHTML = `<option value="" disabled ${previousValue ? "" : "selected"}>Select Employee</option>`;
+
+        if (index === 0) {
+          select.innerHTML += `<option value="PITO Office">PITO Office</option>`;
+        }
+
+        availableOptions.forEach(employee => {
+          let option = document.createElement("option");
+          option.value = employee.name;
+          option.textContent = employee.name;
+          select.appendChild(option);
+        });
+
+        // Restore previous selection if still valid
+        if (previousValue && select.querySelector(`option[value="${previousValue}"]`)) {
+          select.value = previousValue;
+        } else {
+          select.value = "";
+        }
+      });
+
+      handleSelection();
+      toggleRemoveButtons();
+    }
+
+    // Disable Add button and remove extra dropdowns if first dropdown is PITO Office
+    function handleSelection() {
+      let dropdowns = document.querySelectorAll(".request");
+      let addButton = document.getElementById("addDropdown");
+
+      if (dropdowns.length > 0 && dropdowns[0].value === "PITO Office") {
+        addButton.disabled = true;
+        // Remove all except first dropdown
+        dropdowns.forEach((select, index) => {
+          if (index > 0) select.closest(".request-group").remove();
+        });
+      } else {
+        addButton.disabled = false;
+      }
+    }
+
+    // Disable Remove button if only one dropdown remains
+    function toggleRemoveButtons() {
+      const container = document.getElementById("dropdown-container");
+      const groups = container.querySelectorAll(".request-group");
+      groups.forEach(group => {
+        const removeBtn = group.querySelector(".remove-btn");
+        removeBtn.disabled = groups.length === 1;
+      });
+    }
+
+    // Convert 12-hour AM/PM time strings to 24-hour HH:mm
+    function convertTo24Hour(timeStr) {
+      if (!timeStr) return "";
+      if (/^\d{2}:\d{2}$/.test(timeStr)) {
+        return timeStr;
+      }
+      let m = timeStr.match(/^(\d{1,2}):(\d{2})\s*(AM|PM)$/i);
+      if (!m) return "";
+      let hour = parseInt(m[1], 10);
+      const minutes = m[2];
+      const ampm = m[3].toUpperCase();
+      if (ampm === "PM" && hour !== 12) hour += 12;
+      if (ampm === "AM" && hour === 12) hour = 0;
+      return (hour < 10 ? "0" : "") + hour + ":" + minutes;
+    }
+
+    function populateFormFromURL() {
+      const params = new URLSearchParams(window.location.search);
+
+      document.getElementById('official').checked = params.get('official') === 'yes';
+      document.getElementById('date').value = params.get('date') || '';
+      document.getElementById('destination').value = params.get('destination') || '';
+      document.getElementById('purpose').value = params.get('purpose') || '';
+
+      // Initialize flatpickr first
+      const inclDatePicker = flatpickr("#inclDate", {
+        mode: "multiple",
+        dateFormat: "Y-m-d",
+        altInput: true,
+        altFormat: "F j, Y",
+      });
+
+      const inclDateStr = params.get('inclDate') || '';
+      if (inclDateStr) {
+        const datesArray = inclDateStr.split(',').map(d => d.trim()).filter(Boolean);
+        inclDatePicker.setDate(datesArray, true);
+      }
+
+      let timeDepRaw = params.get('timeDeparture') || '';
+      let timeArrRaw = params.get('timeArrival') || '';
+
+      const timeDep = convertTo24Hour(timeDepRaw);
+      const timeArr = convertTo24Hour(timeArrRaw);
+
+      document.getElementById('timeDeparture').value = timeDep;
+      document.getElementById('timeArrival').value = timeArr;
+    }
   </script>
 </body>
+
 </html>
