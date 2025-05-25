@@ -1,0 +1,196 @@
+/* Reset some default styling */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  padding: 20px;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #2c3e50;
+}
+
+form#createForm {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.content1, .content2, .content3 {
+  margin-bottom: 20px;
+}
+
+/* Checkbox container */
+.official {
+  margin-bottom: 15px;
+}
+
+.official input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.official label {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Date group styling */
+.date-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input-container input[type="date"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-container input[type="date"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+.subtext {
+  font-size: 0.85rem;
+  color: #777;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Fields inside content2 */
+.field-group {
+  margin-bottom: 15px;
+}
+
+.field-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.field-group input[type="text"] {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.field-group input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* content3 labels and inputs */
+.content3 label {
+  display: inline-block;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.content3 input[type="text"],
+.content3 input[type="time"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  transition: border-color 0.3s;
+  width: auto;
+  min-width: 150px;
+}
+
+.content3 input[type="text"]:focus,
+.content3 input[type="time"]:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+/* Dropdown container */
+#create-dropdown-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Add Employee button styling */
+.addButton {
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.addButton:hover {
+  background-color: #219150;
+}
+
+.addButton span {
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+/* Submit button */
+button[type="submit"] {
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: block;
+  margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+  background-color: #1f6391;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .content3 input[type="text"],
+  .content3 input[type="time"] {
+    width: 100%;
+    margin-right: 0;
+  }
+}
