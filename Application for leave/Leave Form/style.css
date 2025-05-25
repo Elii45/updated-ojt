@@ -1,0 +1,281 @@
+/* --- GENERAL STYLES --- */
+body {
+    font-family: Arial, sans-serif;
+   
+    margin: 0;
+    padding: 0;
+  }
+  .container-table {
+    width: 1020px !important;
+    margin: 30px;
+    border-collapse: collapse;
+    
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .personal-details-table {
+    width: 1020px !important;
+    margin-left: -70px;
+  }
+ 
+
+  
+  /* Title Section */
+  .title {
+    background-color: #004080;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 16px;
+  }
+  .container4A, .container4B, .container4C {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    width: 450px;
+  }
+  
+  /* --- TABLE STYLES --- */
+  .table4 {
+    width: 80% !important;
+    
+    margin-top: 10px;
+    
+  }
+  
+  .table4 th, .table4 td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  .table4 th {
+    background: #004080;
+    color: white;
+    
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  td, th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+  }
+  
+  th {
+    background: #004080;
+    color: white;
+  }
+  
+  /* --- FORM STYLES --- */
+  input, textarea, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  input[type="number"] {
+    width: 40px;
+    text-align: center;
+  }
+  
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  /* --- LABEL STYLES --- */
+  label {
+    font-weight: bold;
+    color: #004080;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* --- CONTAINERS & GRID LAYOUT --- */
+  .container {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  .section-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+  
+  .details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  /* --- DIVIDER STYLES --- */
+  .divider {
+    border-top: 2px solid #004080;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 5px;
+  }
+  
+  /* --- APPROVED & DISAPPROVED CONTAINERS --- */
+  .container4C-check {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    
+  }
+  
+  /* --- APPROVED SECTION --- */
+  .approvedContainer {
+    flex: 1;
+    padding: 15px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    
+    
+  }
+  
+  .approvedContainer input[type="number"] {
+    width: 50px; /* Shorter width */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    
+  }
+  .approvedContainer input[type="text"] {
+    width: 95%;
+  }
+  
+.inclusive-dates-input {
+  width: 98%;
+}
+  /* --- DISAPPROVED SECTION --- */
+  .disapproved.container {
+    flex: 1;
+    padding: 15px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+  
+  /* --- DROPDOWN STYLES (React Select) --- */
+  .css-1s2u09g-control {
+    background-color: white;
+    border: 2px solid #004080;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .css-1s2u09g-control:hover {
+    border-color: #002b5e;
+  }
+  
+  .css-1wa3eu0-placeholder {
+    color: #666;
+    font-style: italic;
+  }
+  
+  .css-26l3qy-menu {
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .css-yt9ioa-option {
+    padding: 10px;
+    font-size: 14px;
+    color: #004080;
+  }
+  
+  .css-yt9ioa-option:hover,
+  .css-1n7v3ny-option {
+    background-color: #004080 !important;
+    color: white !important;
+  }
+  
+  strong {
+    color: #004080;
+  }
+  
+  small {
+    color: #666;
+    font-size: 12px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.input-field {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    width: 95%;
+    padding: 8px 12px;
+    color: #4a4a4a;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+    border-color: #3b82f6;
+}
+
+  
+  /* --- RESPONSIVE DESIGN --- */
+  @media (max-width: 768px) {
+    .section-grid,
+    .details-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .container4C-check {
+      flex-direction: column;
+    }
+  
+    input,
+    select,
+    textarea {
+      font-size: 12px;
+    }
+  
+    .approvedContainer input[type="number"] {
+      width: 100%; /* Full width on small screens */
+    }
+  
+    .divider {
+      padding: 10px;
+    }
+  }
+  

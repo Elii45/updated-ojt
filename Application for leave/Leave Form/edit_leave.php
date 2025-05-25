@@ -55,54 +55,58 @@ if ($leaveId) {
 $conn->close();
 ?>
 
-<h2>Edit Leave Application</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Leave Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrapper">
+    <form method="POST" action="update_leave.php">
+        <input type="hidden" name="employee_id" value="<?php echo htmlspecialchars($employeeId); ?>">
+        <?php if ($leaveId): ?>
+            <input type="hidden" name="leave_id" value="<?php echo htmlspecialchars($leaveId); ?>">
+        <?php endif; ?>
 
-<!-- Make sure the form action is correct and the method is POST -->
-<form method="POST" action="update_leave.php">
-    <input type="hidden" name="employee_id" value="<?php echo htmlspecialchars($employeeId); ?>">
-    <?php if ($leaveId): ?>
-        <input type="hidden" name="leave_id" value="<?php echo htmlspecialchars($leaveId); ?>">
-    <?php endif; ?>
-
-    <div>
-        <h3>Personal Details</h3>
-        <?php
-        // Make $employee available inside included file
-        include __DIR__ . '/edit_leave/personal_details/index.php';
-        ?>
-    </div>
-
-    <?php if ($leaveId): ?>
-        <div>
-            <h3>Leave Details</h3>
-            <?php
-            // Make $leave available inside included file
-            include __DIR__ . '/edit_leave/leave_details/index.php';
-            ?>
+        <div id="personalDetails">
+            <?php include __DIR__ . '/edit_leave/personal_details/index.php'; ?>
         </div>
 
-        <div>
-            <h3>Action Details</h3>
-            <?php
-            // Make $action available inside included file
-            include __DIR__ . '/edit_leave/action_details/index.php';
-            ?>
+        <table class="container-table">
+            <tr>
+                <td colspan="2" class="title">
+                    <h5>6. DETAILS OF APPLICATION</h5>
+                </td>
+            </tr>
+            <tr>
+                <td class="divider">
+                    <div id="sectionA">
+                        <?php include __DIR__ . '/edit_leave/leave_details/index.php'; ?>
+                    </div>
+                </td>
+                <td class="divider">
+                    <div id="sectionB">
+                        <?php include __DIR__ . '/edit_leave/action_details/index.php'; ?>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+        <div class="buttonGroup">
+            <input type="submit" value="Save Changes" />
         </div>
-    <?php endif; ?>
+    </form>
+</div>
 
-    <div style="margin-top: 20px;">
-        <button type="submit">Save Changes</button>
-    </div>
-</form>
-
-<!-- Add a debug script to check form submission -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('form');
     form.addEventListener('submit', function(e) {
         console.log('Form is being submitted');
-        // Uncomment the next line to see all form data that will be submitted
-        // console.log(new FormData(form));
     });
 });
 </script>
+</body>
+</html>
