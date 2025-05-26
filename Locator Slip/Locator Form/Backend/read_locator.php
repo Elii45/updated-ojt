@@ -58,9 +58,9 @@ $conn->close();
     <div class="container">
         <h2>Locator Slip Details</h2>
         <div class="field">
-            <span class="label">Official:</span>
-            <span class="value"><?= $row['official'] ? "Yes" : "No" ?></span>
+            <input type="checkbox" disabled <?= $row['official'] ? 'checked' : '' ?> /> Official
         </div>
+
         <div class="field">
             <span class="label">Date of Filing:</span>
             <span class="value"><?= htmlspecialchars($row['date']) ?></span>
@@ -87,7 +87,7 @@ $conn->close();
         </div>
         <div class="field">
             <span class="label">Requested by:</span>
-            <span class="value"><?= htmlspecialchars($row['requested_by']) ?></span>
+            <span class="value"><?= htmlspecialchars(str_replace(';', ',', $row['requested_by'])) ?></span>
         </div>
 
         <div class="buttons">

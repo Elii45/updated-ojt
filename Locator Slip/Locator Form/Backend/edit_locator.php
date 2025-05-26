@@ -33,7 +33,7 @@ $stmt->close();
 $conn->close();
 
 // Split requested_by string into array of requesters
-$requesters = preg_split('/,\s*/', $data['requested_by'] ?? "", -1, PREG_SPLIT_NO_EMPTY);
+$requesters = preg_split('/;\s*/', $data['requested_by'] ?? "", -1, PREG_SPLIT_NO_EMPTY);
 ?>
 
 <!DOCTYPE html>

@@ -28,7 +28,7 @@ if (empty($requesters)) {
 }
 
 // Convert requesters array into comma-separated string
-$requestersStr = implode(", ", $requesters);
+$requestersStr = implode("; ", $requesters);
 
 // Format times to 12-hour format if times are valid
 $timeDeparture12 = $timeDeparture ? date("h:i A", strtotime($timeDeparture)) : null;
