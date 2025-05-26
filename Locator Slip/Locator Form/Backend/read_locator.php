@@ -89,22 +89,29 @@ $timeOfArrivalFormatted = date('h:i A', strtotime($row['time_of_arrival']));
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Locator Slip Details</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 2rem; background: #f9f9f9; }
-        h2 { text-align: center; margin-bottom: 1rem; }
-        .container { max-width: 600px; margin: 0 auto; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 0 10px #ccc; }
-        .field { margin-bottom: 1rem; }
-        .label { font-weight: bold; display: block; margin-bottom: 0.3rem; }
-        .value { padding: 0.5rem; background: #eee; border-radius: 4px; }
-        .buttons { margin-top: 1.5rem; text-align: center; }
-        button { padding: 0.6rem 1.2rem; font-size: 1rem; border: none; border-radius: 5px; cursor: pointer; }
-        button.edit { background-color: #007BFF; color: white; }
-        button.back { background-color: #6c757d; color: white; margin-left: 10px; }
-    </style>
+    <link rel="stylesheet" href="../Style/read.css">
+    <link rel="stylesheet" href="../Style/print.css">
+    <link rel="stylesheet" href="../../footer.html">
+    <link rel="stylesheet" href="../../locatorHeader.html">
 </head>
 <body>
     <div class="container">
-        <h2>Locator Slip Details</h2>
+        <!-- LOGO -->
+    <div class="logo-container">
+        <div class="text-section">
+            <p>Form No. HRD 12</p>
+            <p>Jul 2019</p>
+            <p>Rev 03</p>
+        </div>
+        <img src="../../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
+    </div>
+
+    <!-- HEADER -->
+    <div class="header">
+        <h1>Provincial Information Technology Office</h1>
+        <h2 class="subtext">(Office)</h2>
+    </div>
+        <h2>Locator Slip</h2>
         <div class="field">
             <input type="checkbox" disabled <?= $row['official'] ? 'checked' : '' ?> /> Official
         </div>
