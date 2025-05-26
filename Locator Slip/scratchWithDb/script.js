@@ -4,7 +4,7 @@ let employeesList = [];
 // ===== Fetch Employees =====
 async function fetchEmployees() {
   try {
-    const response = await fetch("getEmployees.php");
+    const response = await fetch("./getEmployees.php");
     if (!response.ok) throw new Error("Network error");
     const data = await response.json();
 
@@ -14,71 +14,88 @@ async function fetchEmployees() {
     }
 
     employeesList = data; // Save fetched employees
-    initializeForms(); // Initialize both Create and Edit forms with dropdowns
+    initializeForms(); // Initialize forms that are present on the page
   } catch (error) {
     alert("Failed to fetch employees: " + error.message);
   }
 }
 
 // ===== DOM Elements =====
-// --- Create Elements ---
+// Use optional chaining to avoid errors if elements don't exist
 const createContainer = document.getElementById("create-dropdown-container");
 const createAddBtn = document.getElementById("createAddDropdown");
 const createForm = document.getElementById("createForm");
 
-// --- Read Elements ---
 const readContainer = document.getElementById("readContainer");
 const editFromReadBtn = document.getElementById("editFromRead");
 
-// --- Edit Elements ---
 const editContainer = document.getElementById("edit-dropdown-container");
 const editAddBtn = document.getElementById("editAddDropdown");
 const editForm = document.getElementById("editForm");
 
 // ===== Initialize Forms =====
 function initializeForms() {
-  // Add initial dropdowns to Create and Edit forms
-  addDropdown(createContainer);
-  addDropdown(editContainer);
+  if (createContainer && createAddBtn && createForm) {
+    addDropdown(createContainer);
+    createAddBtn.addEventListener("click", () => addDropdown(createContainer));
+    createForm.addEventListener("submit", handleCreateSubmit);
+  }
+
+  if (readContainer && editFromReadBtn) {
+    // On page load, load selected employees from localStorage if any
+    const saved = localStorage.getItem("selectedEmployees");
+    if (saved) {
+      updateReadForm(JSON.parse(saved));
+    }
+    editFromReadBtn.addEventListener("click", () => {
+      const selected = getSelectedEmployeesFromRead();
+      localStorage.setItem("selectedEmployees", JSON.stringify(selected));
+      // Navigate to edit page with data saved in localStorage
+      window.location.href = "edit.html";
+    });
+  }
+
+  if (editContainer && editAddBtn && editForm) {
+    // On page load, populate edit form from localStorage if exists
+    const saved = localStorage.getItem("selectedEmployees");
+    if (saved) {
+      buildDropdowns(editContainer, JSON.parse(saved));
+    } else {
+      addDropdown(editContainer);
+    }
+
+    editAddBtn.addEventListener("click", () => addDropdown(editContainer));
+    editForm.addEventListener("submit", handleEditSubmit);
+  }
 }
 
-// ===== CREATE =====
-// Add new dropdown to Create form
-createAddBtn.addEventListener("click", () => addDropdown(createContainer));
+// ===== Handlers =====
 
-// Handle Create form submission
-createForm.addEventListener("submit", e => {
+function handleCreateSubmit(e) {
   e.preventDefault();
   const selectedEmployees = getSelectedEmployees(createContainer);
   if (!selectedEmployees.length) {
     alert("Select at least one employee.");
     return;
   }
-  updateReadForm(selectedEmployees); // Populate Read view
-  resetEditForm(); // Clear and reset Edit form
-});
+  // Save selection in localStorage
+  localStorage.setItem("selectedEmployees", JSON.stringify(selectedEmployees));
+  // Redirect to read view
+  window.location.href = "read.html";
+}
 
-// ===== READ =====
-// Transfer data from Read view to Edit view
-editFromReadBtn.addEventListener("click", () => {
-  const selected = getSelectedEmployeesFromRead();
-  buildDropdowns(editContainer, selected); // Populate Edit with selected employees
-});
-
-// ===== EDIT =====
-// Add new dropdown to Edit form
-editAddBtn.addEventListener("click", () => addDropdown(editContainer));
-
-// Handle Edit form submission
-editForm.addEventListener("submit", e => {
+function handleEditSubmit(e) {
   e.preventDefault();
   const selected = getSelectedEmployees(editContainer);
   if (!selected.length) {
     alert("Select at least one employee.");
     return;
   }
-  updateReadForm(selected); // Update Read view with changes
-});
+  // Update localStorage with new selection
+  localStorage.setItem("selectedEmployees", JSON.stringify(selected));
+  // Redirect to read view
+  window.location.href = "read.html";
+}
 
 // ===== Helper Functions =====
 
@@ -107,14 +124,13 @@ function addDropdown(container, preselect = "") {
 
   group.appendChild(select);
 
-  // Don't show remove button for first PITO Office selection
   if (!(isFirst && preselect === "PITO Office")) {
     group.appendChild(removeBtn);
   }
 
   container.appendChild(group);
   select.addEventListener("change", () => updateDropdowns(container));
-  updateDropdowns(container); // Refresh all dropdowns after adding
+  updateDropdowns(container);
 }
 
 // Populates a <select> element with available employee options
@@ -126,7 +142,7 @@ function populateDropdown(select, container, isFirst, selectedValue) {
     select.innerHTML += `<option value="PITO Office">PITO Office</option>`;
   }
 
-  employeesList.forEach(emp => {
+  employeesList.forEach((emp) => {
     if (!selected.includes(emp.name) || emp.name === selectedValue) {
       const option = document.createElement("option");
       option.value = emp.name;
@@ -135,7 +151,6 @@ function populateDropdown(select, container, isFirst, selectedValue) {
     }
   });
 
-  // Preselect previously chosen value if available
   if (selectedValue && select.querySelector(`option[value="${selectedValue}"]`)) {
     select.value = selectedValue;
   } else {
@@ -155,7 +170,7 @@ function updateDropdowns(container) {
       select.innerHTML += `<option value="PITO Office">PITO Office</option>`;
     }
 
-    employeesList.forEach(emp => {
+    employeesList.forEach((emp) => {
       if (!selected.includes(emp.name) || emp.name === prev) {
         const option = document.createElement("option");
         option.value = emp.name;
@@ -171,14 +186,14 @@ function updateDropdowns(container) {
     }
   });
 
-  handleSelection(container); // Special handling for "PITO Office"
+  handleSelection(container);
 }
 
 // Returns array of selected employee names from a container
 function getSelectedEmployees(container) {
   return Array.from(container.querySelectorAll(".request"))
-    .map(select => select.value)
-    .filter(val => val !== "");
+    .map((select) => select.value)
+    .filter((val) => val !== "");
 }
 
 // Handles logic when "PITO Office" is selected
@@ -189,7 +204,7 @@ function handleSelection(container) {
   if (selects.length > 0 && selects[0].value === "PITO Office") {
     addBtn.disabled = true;
     selects.forEach((select, i) => {
-      if (i > 0) select.closest(".request-group").remove(); // Remove extra dropdowns
+      if (i > 0) select.closest(".request-group").remove();
     });
   } else {
     addBtn.disabled = false;
@@ -205,8 +220,8 @@ function updateReadForm(selected) {
   }
 
   let html = "<ul>";
-  selected.forEach(emp => {
-    html += `<li>${emp === "PITO Office" ? "<strong>PITO Office</strong>" : emp}</li>`;
+  selected.forEach((name) => {
+    html += `<li>${name}</li>`;
   });
   html += "</ul>";
 
@@ -214,27 +229,19 @@ function updateReadForm(selected) {
   editFromReadBtn.disabled = false;
 }
 
-// Returns list of employees shown in the Read view
+// Retrieves selected employees from Read view (localStorage copy)
 function getSelectedEmployeesFromRead() {
-  return Array.from(readContainer.querySelectorAll("li")).map(li => li.textContent.trim());
+  const saved = localStorage.getItem("selectedEmployees");
+  return saved ? JSON.parse(saved) : [];
 }
 
-// Builds dropdowns in Edit form using provided employee list
-function buildDropdowns(container, employees) {
-  container.innerHTML = ""; // Clear existing
-  if (!employees.length) {
-    addDropdown(container);
-    return;
-  }
-  employees.forEach(emp => addDropdown(container, emp));
-  updateDropdowns(container);
-}
-
-// Resets Edit form to initial empty state
-function resetEditForm() {
-  editContainer.innerHTML = "";
-  addDropdown(editContainer);
+// Builds dropdowns in Edit form from saved data
+function buildDropdowns(container, selected) {
+  container.innerHTML = "";
+  selected.forEach((name, idx) => {
+    addDropdown(container, name);
+  });
 }
 
 // ===== Start =====
-fetchEmployees(); // Load employees and initialize on page load
+fetchEmployees();

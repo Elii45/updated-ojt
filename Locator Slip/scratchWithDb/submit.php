@@ -12,12 +12,6 @@ if ($conn->connect_error) {
 }
 
 // Retrieve form data
-// Make sure to send 'id' via POST to know which record to update
-$id = isset($_POST['id']) ? intval($_POST['id']) : 0;
-if ($id === 0) {
-    die("Error: Invalid or missing ID.");
-}
-
 $official = isset($_POST['official']) ? 1 : 0;
 $date = $_POST['date'];
 $destination = $_POST['destination'];
@@ -26,31 +20,30 @@ $inclDate = $_POST['inclDate'];
 $timeDeparture = $_POST['timeDeparture'];
 $timeArrival = $_POST['timeArrival'];
 
+// ✅ Ensure `request` is always an array
 $requesters = isset($_POST['request']) && is_array($_POST['request']) ? $_POST['request'] : [];
+
 if (empty($requesters)) {
     die("Error: No requesters selected.");
 }
+
+// ✅ Convert array into a comma-separated string
 $requestersStr = implode(", ", $requesters);
 
 // Format times to 12-hour format
 $timeDeparture12 = date("h:i A", strtotime($timeDeparture));
 $timeArrival12 = date("h:i A", strtotime($timeArrival));
 
-// Prepare the update statement
-$sql = "UPDATE locator_slip 
-        SET official = ?, date = ?, destination = ?, purpose = ?, inclusive_dates = ?, time_of_departure = ?, time_of_arrival = ?, requested_by = ?
-        WHERE id = ?";
+// ✅ Insert into database (store multiple employees in one row)
+$sql = "INSERT INTO locator_slip (official, date, destination, purpose, inclusive_dates, time_of_departure, time_of_arrival, requested_by) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("Prepare failed: " . $conn->error);
-}
-
-$stmt->bind_param("isssssssi", $official, $date, $destination, $purpose, $inclDate, $timeDeparture12, $timeArrival12, $requestersStr, $id);
+$stmt->bind_param("isssssss", $official, $date, $destination, $purpose, $inclDate, $timeDeparture12, $timeArrival12, $requestersStr);
 
 if ($stmt->execute()) {
-    // Redirect back or to a confirmation page
-    header("Location: ../Print/locatorSlipPrint.html?id=$id&official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
+    // ✅ Redirect to print page with form data
+    header("Location: ../Print/locatorSlipPrint.html?official=$official&date=$date&destination=$destination&purpose=$purpose&inclDate=$inclDate&timeDeparture=$timeDeparture12&timeArrival=$timeArrival12&request=" . urlencode($requestersStr));
     exit();
 } else {
     echo "Error: " . $stmt->error;
