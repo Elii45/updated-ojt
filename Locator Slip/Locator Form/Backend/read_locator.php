@@ -33,6 +33,54 @@ $row = $result->fetch_assoc();
 
 $stmt->close();
 $conn->close();
+
+// Helper function to format inclusive dates into ranges
+function formatDateRanges(array $dates): string {
+    // Convert strings to timestamps and sort
+    $timestamps = array_map('strtotime', array_map('trim', $dates));
+    sort($timestamps);
+
+    $ranges = [];
+    $start = $timestamps[0];
+    $prev = $start;
+
+    for ($i = 1; $i <= count($timestamps); $i++) {
+        $current = $timestamps[$i] ?? null;
+
+        // Check if current date is consecutive (prev + 1 day)
+        if ($current === $prev + 86400) {
+            $prev = $current;
+            continue;
+        }
+
+        // Format range or single date
+        if ($start === $prev) {
+            $ranges[] = date('M j', $start);
+        } else {
+            $ranges[] = date('M j', $start) . '-' . date('j', $prev);
+        }
+
+        $start = $current;
+        $prev = $current;
+    }
+
+    // Append the year from first date (assuming all dates same year)
+    $year = date('Y', $timestamps[0]);
+
+    return implode(', ', $ranges) . " $year";
+}
+
+// Format the inclusive dates field
+$inclusiveDates = explode(',', $row['inclusive_dates']);
+$inclusiveDatesFormatted = formatDateRanges($inclusiveDates);
+
+// Format date of filing
+$dateOfFilingFormatted = date('M j, Y', strtotime($row['date']));
+
+// Format times with AM/PM
+$timeOfDepartureFormatted = date('h:i A', strtotime($row['time_of_departure']));
+$timeOfArrivalFormatted = date('h:i A', strtotime($row['time_of_arrival']));
+
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +111,7 @@ $conn->close();
 
         <div class="field">
             <span class="label">Date of Filing:</span>
-            <span class="value"><?= htmlspecialchars($row['date']) ?></span>
+            <span class="value"><?= htmlspecialchars($dateOfFilingFormatted) ?></span>
         </div>
         <div class="field">
             <span class="label">Destination:</span>
@@ -75,15 +123,15 @@ $conn->close();
         </div>
         <div class="field">
             <span class="label">Inclusive Dates:</span>
-            <span class="value"><?= htmlspecialchars($row['inclusive_dates']) ?></span>
+            <span class="value"><?= htmlspecialchars($inclusiveDatesFormatted) ?></span>
         </div>
         <div class="field">
             <span class="label">Time of Departure:</span>
-            <span class="value"><?= htmlspecialchars($row['time_of_departure']) ?></span>
+            <span class="value"><?= htmlspecialchars($timeOfDepartureFormatted) ?></span>
         </div>
         <div class="field">
             <span class="label">Time of Arrival:</span>
-            <span class="value"><?= htmlspecialchars($row['time_of_arrival']) ?></span>
+            <span class="value"><?= htmlspecialchars($timeOfArrivalFormatted) ?></span>
         </div>
         <div class="field">
             <span class="label">Requested by:</span>
