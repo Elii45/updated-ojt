@@ -44,28 +44,7 @@ $requesters = preg_split('/;\s*/', $data['requested_by'] ?? "", -1, PREG_SPLIT_N
     <title>Edit Locator Slip #<?php echo htmlspecialchars($id); ?></title>
     <!-- Flatpickr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
-    <style>
-        .remove-btn {
-            margin-left: 10px;
-            padding: 2px 6px;
-            background: #e74c3c;
-            border: none;
-            color: white;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
-        .request-group {
-            margin-bottom: 10px;
-        }
-
-        .addButton {
-            margin-top: 10px;
-            padding: 4px 8px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel="stylesheet" href="../Style/locatorSlip.css">
 </head>
 
 <body>
@@ -175,9 +154,7 @@ $requesters = preg_split('/;\s*/', $data['requested_by'] ?? "", -1, PREG_SPLIT_N
                 console.error("Error fetching employee names:", error);
                 // fallback dummy data
                 employeesList = [
-                    { name: "PITO Office" },
-                    { name: "John Doe" },
-                    { name: "Jane Smith" }
+                    { name: "PITO Office" }
                 ];
                 console.log("Using fallback employees:", employeesList);
             }
