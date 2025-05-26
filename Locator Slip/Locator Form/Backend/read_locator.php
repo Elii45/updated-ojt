@@ -1,5 +1,4 @@
 <?php
-// DB connection setup
 $servername = "127.0.0.1";
 $username = "root";
 $password = "";
@@ -11,14 +10,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get id from URL and validate
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("Invalid or missing locator slip ID.");
 }
 
 $id = intval($_GET['id']);
 
-// Prepare & execute SQL query to fetch the record
 $sql = "SELECT * FROM locator_slip WHERE id = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id);
@@ -91,64 +88,79 @@ $timeOfArrivalFormatted = date('h:i A', strtotime($row['time_of_arrival']));
     <title>Locator Slip Details</title>
     <link rel="stylesheet" href="../Style/read.css">
     <link rel="stylesheet" href="../Style/print.css">
-    <link rel="stylesheet" href="../../footer.html">
-    <link rel="stylesheet" href="../../locatorHeader.html">
 </head>
 <body>
-    <div class="container">
-        <!-- LOGO -->
-    <div class="logo-container">
-        <div class="text-section">
-            <p>Form No. HRD 12</p>
-            <p>Jul 2019</p>
-            <p>Rev 03</p>
+    <!-- Locator Header -->
+        <div class="header-wrapper">
+            <?php include '../../../locatorHeader.html'; ?>
         </div>
-        <img src="../../../images/locatorHeader.png" alt="Office Logo" class="office-logo">
-    </div>
 
-    <!-- HEADER -->
-    <div class="header">
-        <h1>Provincial Information Technology Office</h1>
-        <h2 class="subtext">(Office)</h2>
-    </div>
+    <div class="container">        
+        <!-- HEADER -->
+        <div class="header">
+            <h1>Provincial Information Technology Office</h1>
+            <h2 class="subtext">(Office)</h2>
+        </div>
+        
         <h2>Locator Slip</h2>
-        <div class="field">
-            <input type="checkbox" disabled <?= $row['official'] ? 'checked' : '' ?> /> Official
-        </div>
+        <div class="allcontent">
+            <div class="content1">
+                <div class="official">
+                    <input type="checkbox" id="official" name="official" disabled <?= $row['official'] ? 'checked' : '' ?> />
+                    <label for="officialText">Official</label><br>
+                </div>
 
-        <div class="field">
-            <span class="label">Date of Filing:</span>
-            <span class="value"><?= htmlspecialchars($dateOfFilingFormatted) ?></span>
-        </div>
-        <div class="field">
-            <span class="label">Destination:</span>
-            <span class="value"><?= htmlspecialchars($row['destination']) ?></span>
-        </div>
-        <div class="field">
-            <span class="label">Purpose:</span>
-            <span class="value"><?= htmlspecialchars($row['purpose']) ?></span>
-        </div>
-        <div class="field">
-            <span class="label">Inclusive Dates:</span>
-            <span class="value"><?= htmlspecialchars($inclusiveDatesFormatted) ?></span>
-        </div>
-        <div class="field">
-            <span class="label">Time of Departure:</span>
-            <span class="value"><?= htmlspecialchars($timeOfDepartureFormatted) ?></span>
-        </div>
-        <div class="field">
-            <span class="label">Time of Arrival:</span>
-            <span class="value"><?= htmlspecialchars($timeOfArrivalFormatted) ?></span>
-        </div>
-        <div class="field">
-            <span class="label">Requested by:</span>
-            <span class="value"><?= htmlspecialchars(str_replace(';', ',', $row['requested_by'])) ?></span>
-        </div>
+                <div class="date-group">
+                    <label for="date">Date:</label>
+                    <div class="input-container">
+                        <span class="date" id="date" name="date"><?= htmlspecialchars($dateOfFilingFormatted) ?></span>
+                        <span class="subtext">(Date of Filing)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="content2">
+                <div class="field-group">
+                    <label for="destination">Destination:</label>
+                    <span class="value" id="destination" name="destination"><?= htmlspecialchars($row['destination']) ?></span>
+                </div>
+                <div class="field-group">
+                    <label for="purpose">Purpose:</label>
+                    <span class="value" id="purpose" name="purpose"><?= htmlspecialchars($row['purpose']) ?></span>
+                </div>
+            </div>
 
-        <div class="buttons">
-            <button class="edit" onclick="location.href='edit_locator.php?id=<?= $id ?>'">Edit</button>
-            <button class="back" onclick="window.history.back()">Back</button>
+            <div class="content3">
+                <label for="inclDate">Inclusive Dates: </label>
+                <span class="value" id="inclDate" name="inclDate"><?= htmlspecialchars($inclusiveDatesFormatted) ?></span>
+
+                <label for="timeDeparture">Departure Time: </label>
+                <span class="value" id="timeDeparture" name="timeDeparture"><?= htmlspecialchars($timeOfDepartureFormatted) ?></span>
+
+                <label for="timeArrival">Arrival Time: </label>
+                <span class="value" id="timeArrival" name="timeArrival"><?= htmlspecialchars($timeOfArrivalFormatted) ?></span>
+            </div>
+
+            <div class="request-group">
+                <label for="request">Requested by:</label>
+                <span class="value" id="request" name="request"><?= htmlspecialchars(str_replace(';', ',', $row['requested_by'])) ?></span>
+            </div>
+
+            <div class="approved-group">
+                <label for="request">Approved by:</label>
+                <label>ENGR. RHEA LIZA R. VALERIO</label><br>
+                <label>Department Head</label>
+            </div>
+
+            <div class="button-container">
+                <button type="button" class="edit-btn" onclick="location.href='edit_locator.php?id=<?= $id ?>'">Edit</button>
+                <button type="button" onclick="window.print()" class="print-btn">Print This Page</button>
+            </div>
         </div>
     </div>
+    <!-- Footer -->
+        <div class="footer-wrapper">
+            <?php include '../../../footer.html'; ?>
+        </div>
 </body>
 </html>

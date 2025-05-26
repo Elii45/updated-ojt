@@ -1,68 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+    /* Logo Header Styles */
+    .logo-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: relative;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application for Leave</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+    .text-section {
+        font-size: 9px;
+        color: #666;
+        text-align: left;
+        line-height: 1;
+        position: absolute;
+        left: 80px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 
-        .header {
-            display: inline-flex;
-            margin-left: 350px;
-            align-items: center;
-            padding: -2px;
-            width: 1027px;
-            /* Fixed width */
-            height: 100px;
-            /* Fixed height */
-        }
+    .office-logo {
+        max-width: 65vw;
+        height: auto;
+        margin-left: 50px;
+    }
+</style>
 
-        .logo {
-            width: 100px;
-            margin-right: 50px;
-        }
-
-        .stamp {
-            border: 1px dashed #000;
-            padding: 10px;
-            font-size: 12px;
-            margin-left: 200px;
-
-        }
-
-        .title {
-            font-weight: bold;
-            font-size: 30px;
-            margin-top: 10px;
-        }
-
-        .subtext,
-        .italic {
-            font-size: 12px;
-        }
-
-        .italic {
-            font-style: italic;
-            text-align: left;
-            margin-left: 200px;
-        }
-    </style>
-</head>
-
-<body>
-     <div class="logo-container">
-        <div class="text-section">
-            <p>Form No. HRD 12</p>
-            <p>Jul 2019</p>
-            <p>Rev 03</p>
-        </div>
-        <img src="./images/locatorHeader.png" alt="Office Logo" class="office-logo">
+<div class="logo-container">
+    <div class="text-section">
+        <p>Form No. HRD 12</p>
+        <p>Jul 2019</p>
+        <p>Rev 03</p>
     </div>
-</body>
-
-</html>
+    <img src="/updated-ojt/images/locatorHeader.png" alt="Office Logo" class="office-logo" />
+</div>
