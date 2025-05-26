@@ -104,6 +104,7 @@ $timeOfArrivalFormatted = date('h:i A', strtotime($row['time_of_arrival']));
         
         <h2>Locator Slip</h2>
         <div class="allcontent">
+            <img class="bg-print-image" src="../../../images/body.png" alt="Background">
             <div class="content1">
                 <div class="official">
                     <input type="checkbox" id="official" name="official" disabled <?= $row['official'] ? 'checked' : '' ?> />

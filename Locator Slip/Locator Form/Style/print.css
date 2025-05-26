@@ -7,7 +7,7 @@
         page-break-inside: avoid !important;
     }
 
-    .print-btn {
+    .print-btn, .edit-btn {
         display: none !important;
     }
 
@@ -21,6 +21,7 @@
         text-align: center;
         text-decoration: underline;
         font-size: 15px;
+        margin-top: 35px;
     }
 
     /* Logo Header */
@@ -30,6 +31,7 @@
         justify-content: center;
         width: 100%;
         position: relative;
+        height: 150px;
     }
 
     .text-section {
@@ -50,55 +52,76 @@
     }
 
     /* Header */
-    .header {
-        text-align: center;
-        font-size: 18px;
-        font-weight: bold;
-        padding: 10px;
-        color: #0c0909;
-        margin: 10px 0;
-        position: relative;
-    }
-
-    .header h1 {
-        font-size: 20px;
-        margin: 0;
-        padding-bottom: 6px;
-        border-bottom: 1px solid gray;
-        width: 65%;
-        display: inline-block;
-    }
-
-    .subtext {
-        font-size: 14px;
-        font-weight: normal;
-        color: black;
-        text-align: center;
-        margin-top: 5px;
-    }
-
-    /* Form Styling */
-    form {
-        padding: 10px;
-        max-width: 100%;
-        margin: 0 auto;
-        border-radius: 10px;
-        background-image: url("../../images/body.png");
-        background-size: 45% !important;
-        background-position: top center;
-        background-repeat: no-repeat;
-        width: 100%;
-
+.header {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px;
+    color: #0c0909;
+    margin: -20px 0;
+    position: relative;
     
-    }
+}
 
-    label {
-        font-weight: normal;
-        display: block;
-        margin-top: 10px;
-    }
+.header h1 {
+    display: inline-block;
+    font-size: 20px;
+    margin: 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid gray;
+    width: 65%;
+    text-align: center;
+}
 
-    /*Official Checkbox*/
+.header h2 {
+    font-size: 18px;
+    color: black;
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    text-decoration: none;
+    transform: translateX(-50%);
+}
+
+
+h2 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+.allcontent {
+    position: relative;
+    width: 80%;
+    margin: -20px auto;
+    padding: 0;
+    height: 400px; /* or auto, based on your needs */
+    overflow: hidden;
+  }
+
+  .allcontent .bg-print-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: contain;
+    opacity: 0.5; /* Optional: for transparency */
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+label {
+    font-weight: normal;
+    display: block;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+/*Official Checkbox*/
 .official {
     display: flex;
     align-items: center;
@@ -152,7 +175,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    padding: 15px;
+    padding: 0;
     border-radius: 6px;
     margin-bottom: 15px;
     align-items: center;
@@ -166,8 +189,8 @@
     position: relative;
 }
 
-.content1 input[type="text"] {
-    width: 70%;
+.date {
+    width: 100%;
     padding: 8px;
     margin-top: 5px;
     border: none;
@@ -200,7 +223,7 @@
     margin-bottom: 10px;
 }
 
-.content2 input[type="text"] {  
+.content2 span {  
     width: 83.5%;
     padding: 8px;
     margin-top: 5px;
@@ -223,7 +246,7 @@
     width: 100px;
 }
 
-/* Styling for content3 inputs */
+/*Content 3*/
 .content3 {
     display: flex;
     flex-wrap: wrap;
@@ -237,7 +260,7 @@
     text-align: left;
 }
 
-.content3 input[type="text"] {
+.content3 span {
     flex: 1;
     max-width: 209px;
     padding: 6px;
@@ -249,11 +272,14 @@
     text-align: center;
     font-size: 14px;
 }
+
 /* Specific margin adjustments */
 #inclDate {
     margin-left: 10px;
     margin-right: 30px;
+    max-width: 289px;
 }
+
 
 #timeDeparture {
     margin-left: -20px;
@@ -275,7 +301,7 @@
     white-space: nowrap;
 }
 
-.request-group input[type="text"] {
+.request-group span {
     flex: 1;
     max-width: 83.7%;
     padding: 8px;
@@ -315,11 +341,10 @@
 }
 
 .approved-group label:nth-child(2) {
-    /* "ENGR. RHEA LIZA R. VALERIO" */
     display: inline-block;
     border-bottom: 1px solid black;
     padding-bottom: 3px;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
     text-align: center;
     width: 55%;
@@ -333,14 +358,12 @@
     width: 100%;
     margin-top: -10px;
 }
-    .allcontent {
-        margin-top: -30px !important;
-        height: 800px !important;
-        scale: 100% !important;
-        width: 100%!important;
-        padding-bottom: 50px;
-    }
 
+.footer-wrapper {
+    margin-left: 4px; 
+    transform-origin: top center;
+    margin-top: 10px;
+}
 /*Footer*/
 .footer {
     position: fixed; /* Keeps it at the bottom */
@@ -357,9 +380,9 @@
 .footer img {
     max-width: 100%; /* Set a fixed width */
     max-height: 120px; /* Ensure it fits within the footer */
-    object-fit: contain; /* Maintain aspect ratio */
     margin-top: 20px;
     bottom: 0;
+    left: -50px;
     page-break-after: avoid;
 }
 
@@ -367,7 +390,6 @@
     position: fixed;
     z-index: 1;
     left: 60px;
-    
     bottom: 0;
     font-size: 10px;
     margin-left: 250px !important;
@@ -378,4 +400,10 @@
     padding: 10px;
     
 }
-}  
+
+.header-wrapper {
+    transform-origin: top center;
+    margin-left: -6px;
+    margin-top: -21px;
+}
+}
