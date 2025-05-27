@@ -46,18 +46,24 @@ h2 {
     width: 80%;
     margin-top: 20px;
     margin: 0 auto;
+    position: relative;
+    z-index: 0;
+    overflow: hiddens;
 }
-  .allcontent .bg-print-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    object-fit: contain;
-    opacity: 0.5; /* Optional: for transparency */
-  }
 
+.bg-print-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    opacity: 0.5;
+    z-index: -1;
+    pointer-events: none;
+}
 
 label {
     font-weight: normal;
@@ -149,7 +155,8 @@ label {
 .input-container {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers the subtext below the input */
+    align-items: center;
+    /* Centers the subtext below the input */
     position: relative;
     margin-top: 10px;
 }
@@ -160,6 +167,7 @@ label {
     text-align: center;
     margin-top: 2px;
 }
+
 /*Content 2*/
 .content2 {
     display: flex;
@@ -168,7 +176,7 @@ label {
     margin-bottom: 10px;
 }
 
-.content2 span {  
+.content2 span {
     width: 83.5%;
     padding: 8px;
     margin-top: 5px;
@@ -230,6 +238,7 @@ label {
     margin-left: -20px;
     margin-right: 40px;
 }
+
 #timeArrival {
     margin-left: -40px;
 }
@@ -338,7 +347,7 @@ button.print-btn:hover {
 }
 
 .footer-wrapper {
-    margin-left: -6px; 
+    margin-left: -6px;
     transform-origin: top center;
     margin-top: 10px;
 }
