@@ -23,7 +23,8 @@ label {
     border: 2px solid blue;
     align-items: center;
     width: 90%;
-    margin-left: 100px;
+    margin-left: 50px;
+    margin-top: 20px;
 }
 
 /*Form*/
@@ -215,4 +216,10 @@ td:last-child span {
   text-align: center;
   white-space: nowrap;
   margin-top: 5px;
+}
+
+.footer-wrapper {
+    margin-left: 14px;
+    transform-origin: top center;
+    margin-top: 10px;
 }

@@ -1,5 +1,3 @@
-/* print.css */
-
 @page {
   size: A4 landscape;
   margin: 0;
@@ -12,25 +10,31 @@
     margin: 0;
     padding: 0;
     overflow: hidden;
-    font-size: 11pt; /* Scale text size slightly */
+    font-size: 9pt;
+    font-family: Arial, sans-serif;
   }
 
   body {
     position: relative;
   }
 
-  .actions, .no-print, button {
+  .actions,
+  .no-print,
+  button {
     display: none !important;
   }
 
   .container {
-    transform: scale(0.95); /* Shrinks content to fit */
-    transform-origin: top left;
-    width: 100%;
-    height: 100%;
-    padding: 10mm;
-    box-sizing: border-box;
-  }
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  transform-origin: top left;
+  width: 87%;
+  height: auto;
+  padding: 6mm;
+  box-sizing: border-box;
+}
 
   .logo-container img,
   footer img {
@@ -38,20 +42,149 @@
     height: auto;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  /* Form adjustments */
+  .form-group {
+    margin-top: 8px;
   }
 
+  .form-group > div {
+    margin-bottom: 4px;
+  }
+
+  .form-group label {
+    font-size: 9pt;
+    margin-right: 8px;
+  }
+
+  .form-group span {
+    padding: 4px;
+    font-size: 9pt;
+  }
+
+  /* Employee Name field */
+  .employeeName {
+    margin-bottom: 6px;
+  }
+
+  .employeeName label {
+    font-size: 9pt;
+    margin-right: 8px;
+  }
+
+  .employeeName span[type="text"] {
+    padding: 4px;
+    font-size: 9pt;
+  }
+
+  /* Date, text, number spans */
+  span[type="text"],
+  span[type="date"] {
+    padding: 4px;
+    font-size: 9pt;
+  }
+
+  span[type="number"] {
+    font-size: 9pt;
+    width: 60px !important;
+  }
+
+  /* Table formatting */
+  table {
+    width: 60%;
+    border-collapse: collapse;
+    font-size: 9pt;
+  }
+
+  td {
+    padding: 6px;
+    border: 1px solid black;
+  }
+
+  td:first-child {
+    font-weight: bold;
+    text-align: right;
+    padding-right: 8px;
+  }
+
+  td:last-child {
+    text-align: center;
+  }
+
+  td:last-child span {
+    padding: 4px;
+    width: 50%;
+    font-size: 9pt;
+  }
+
+  /* Signature Section */
+  .namegroup {
+    margin: 30px auto 50px;
+    gap: 160px;
+  }
+
+  .submitted span,
+  .approved span {
+    width: 240px;
+    padding: 4px 0;
+    font-size: 9pt;
+  }
+
+  .submitted .signature,
+  .approved .signature {
+    width: 200px;
+    font-size: 12px;
+    margin-top: 3px;
+  }
+
+  .submitted label,
+  .approved label {
+    font-size: 9pt;
+    margin-bottom: 5px;
+  }
+
+  /* Prevent page breaks inside sections */
   * {
     page-break-inside: avoid;
     page-break-before: avoid;
     page-break-after: avoid;
   }
 
-  footer {
-    position: absolute;
-    bottom: 0;
+      /*Footer*/
+.footer-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  page-break-after: avoid;
+  page-break-before: avoid;
+  page-break-inside: avoid;
+}
+
+footer.footer {
+  width: 100%;
+  height: auto;
+  background: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .footer img {
     width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 100%;
+    position: relative;
+  }
+
+  .footer-text {
+    position: relative;
+    font-size: 12px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    margin-top: 10px;
+    z-index: 2;
   }
 }

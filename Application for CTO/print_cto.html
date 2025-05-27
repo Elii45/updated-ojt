@@ -5,9 +5,7 @@
   <meta charset="UTF-8" />
   <title>CTO Print Preview</title>
   <link rel="stylesheet" href="cto.css">
-  <link rel="stylesheet" href="../logoHeader.css">
-  <link rel="stylesheet" href="../footer.css">
-  <link rel="stylesheet" href="print.css">
+  <link rel="stylesheet" href="print.css" media="print">
   <link rel="stylesheet" href="alert.css">
 </head>
 
@@ -77,15 +75,26 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="footer-text">
-      <p>3rd Floor, Capitol Bldg., Antonio S. Bautista <br>
-        Bulacan Provincial Capitol Compound, City of Malolos, Bulacan 3000 <br>
-        Telephone Nos.: +63 44 791 8145 <br>
-        Email Address: phrmo@bulacan.gov.ph</p>
-    </div>
-    <img src="../images/footer.png" alt="Footer Image">
-  </footer>
+  <div class="footer-wrapper">
+    <div id="footer-container"></div>
+  </div>
+
+  <script>
+    // Fetch footer.html and inject it into the div
+    fetch('../footer.html')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.text();
+      })
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => {
+        console.error('Error loading footer:', error);
+      });
+  </script>
 
   <script>
     function formatDateForDisplay(dateStr) {
@@ -149,22 +158,23 @@
     }
 
     // Fetch Department Head name from PHP API
-  fetch('fetch-department-head.php')
-    .then(response => response.json())
-    .then(data => {
-      if (data.name) {
-        document.getElementById("approvedLabel").textContent = data.name;
-      } else {
-        console.error("Department Head not found");
-      }
-    })
-    .catch(error => {
-      console.error("Error fetching department head:", error);
-    });
-    
+    fetch('fetch-department-head.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.name) {
+          document.getElementById("approvedLabel").textContent = data.name;
+        } else {
+          console.error("Department Head not found");
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching department head:", error);
+      });
+
     function editForm() {
       window.location.href = "edit_cto.html?" + params.toString();
     }
   </script>
 </body>
+
 </html>
