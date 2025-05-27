@@ -127,7 +127,7 @@ th {
     line-height: 20px; /* Ensures text stays centered */
     padding: 0px 3px; /* Reduce padding */
   }
-/*Inputs*/
+/*Span*/
 input[type="text"],
 input[type="date"],
 input[type="number"] {
@@ -321,33 +321,6 @@ input[type="checkbox"] {
     width: 90%;
     display: block; 
 }
-
-/* Signature Sections */
-.signatureHR, .signatureApplicant, .signatureAdmin, .signatureGov {
-    text-align: center;
-    padding-top: 10px;
-    width: 50%;
-    margin: 20px auto 5px auto; /* Centers the div horizontally */
-  }
-  
-  #signatureApplicantLabel, #signatureGovLabel, #signatureAdminLabel, #signatureHRLabel {
-    display: block;
-    width: 250px; /* Adjust width for uniformity */
-    min-height: 30px; /* Ensures a good signature area */
-    border-bottom: 1px solid black; /* Signature line */
-    text-align: center;
-    font-family: inherit;
-    margin: 5px auto; /* Centers the label */
-  }
-  
-  .signatureAdmin {
-    margin-top: 90px; /* Adjust spacing */
-    margin-bottom: 5px;
-  }
-  
-  .signatureGov {
-    margin-top: 20px;
-  }
   
   /* Optional: Make Signature Area Responsive */
   @media screen and (max-width: 600px) {
@@ -359,36 +332,3 @@ input[type="checkbox"] {
       width: 200px; /* Adjust line width for smaller screens */
     }
   }
-  
-/*Buttons*/
-.buttonGroup {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
-}
-
-.buttonGroup input[type="submit"],
-.buttonGroup input[type="button"] {
-    width: 150px;
-    padding: 10px;
-    background: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.buttonGroup input[type="submit"]:hover {
-    background: #0056b3;
-}
-
-.buttonGroup input[type="button"] {
-    background: #0015b0;
-}
-
-.buttonGroup input[type="button"]:hover {
-    background: #0015b0;
-}

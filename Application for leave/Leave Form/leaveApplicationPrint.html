@@ -5,22 +5,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Leave Application - Print View</title>
-    <link rel="stylesheet" href="leaveApplicationPrint.css">
-    <link rel="stylesheet" href="inputPrint.css">
     <link rel="stylesheet" href="leaveApplicationPrinting.css" media="print">
 </head>
 
 <body>
-<div id="header"></div>
+    <div id="header"></div>
     <script>
         fetch("header.html")
             .then(response => response.text())
             .then(data => document.getElementById("header").innerHTML = data);
     </script>
 
-<div id="personalDetails"></div>
-<div id="leaveDetails"></div>
-<div id="actionDetails"></div>
+    <div id="personalDetails"></div>
+    <div id="leaveDetails"></div>
+    <div id="actionDetails"></div>
 
 
     <div class="buttonGroup">
@@ -29,19 +27,19 @@
     </div>
 
     <script>
-    const includes = {
-        personalDetails: 'print/personalDetails.html',
-        leaveDetails: 'print/leaveDetails.html',
-        actionDetails: 'print/actionDetails.html'
-    };
+        const includes = {
+            personalDetails: 'print/personalDetails.html',
+            leaveDetails: 'print/leaveDetails.html',
+            actionDetails: 'print/actionDetails.html'
+        };
 
-    for (const [id, file] of Object.entries(includes)) {
-        fetch(file)
-            .then(res => res.text())
-            .then(html => document.getElementById(id).innerHTML = html)
-            .catch(err => console.error(`Error loading ${file}:`, err));
-    }
-</script>
+        for (const [id, file] of Object.entries(includes)) {
+            fetch(file)
+                .then(res => res.text())
+                .then(html => document.getElementById(id).innerHTML = html)
+                .catch(err => console.error(`Error loading ${file}:`, err));
+        }
+    </script>
 
     <script>
         document.getElementById('editBtn').addEventListener('click', () => {
@@ -89,6 +87,7 @@
             pay: 'daysWithPay',
             withoutPay: 'daysWithoutPay',
             disapprovedTo: 'disapprovedReason'
+
         };
 
         // Populate fields
@@ -124,75 +123,95 @@
         }
     </script>
     <script>
-document.addEventListener('DOMContentLoaded', function () {
-    const employeeId = getParam('employee_id');
-    const leaveId = getParam('leave_id');
+        document.addEventListener('DOMContentLoaded', function () {
+            const employeeId = getParam('employee_id');
+            const leaveId = getParam('leave_id');
 
-    if (employeeId && leaveId) {
-        fetch(`fetch_leave.php?employee_id=${employeeId}&leave_id=${leaveId}`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.success) {
-                    console.error('Failed to fetch leave data');
-                    return;
-                }
+            if (employeeId && leaveId) {
+                fetch(`fetch_leave.php?employee_id=${employeeId}&leave_id=${leaveId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            console.error('Failed to fetch leave data');
+                            return;
+                        }
 
-                const record = data.data;
+                        const record = data.data;
 
-                // Directly populate the HTML by ID
-                const populate = (id, value) => {
-                    const el = document.getElementById(id);
-                    if (el) el.textContent = value !== null && value !== '' ? value : '-';
-                };
+                        // Directly populate the HTML by ID
+                        const populate = (id, value) => {
+                            const el = document.getElementById(id);
+                            if (el) el.textContent = value !== null && value !== '' ? value : '-';
+                        };
 
-                // Personal Details
-                populate('office', record.office);
-                populate('lastName', record.last_name);
-                populate('firstName', record.first_name);
-                populate('middleName', record.middle_name);
-                populate('filingDate', formatDate(record.filing_date));
-                populate('position', record.position);
-                populate('salary', formatCurrency(record.salary));
+                        // Personal Details
+                        populate('office', record.office);
+                        populate('lastName', record.last_name);
+                        populate('firstName', record.first_name);
+                        populate('middleName', record.middle_name);
+                        populate('filingDate', formatDate(record.filing_date));
+                        populate('position', record.position);
+                        populate('salary', formatCurrency(record.salary));
 
-                // Leave Details
-                populate('leaveType', record.leave_type);
-                populate('leaveTypeOthers', record.leave_type_others);
-                populate('detailType', record.detail_type);
-                populate('detailDescription', record.detail_description);
-                populate('inclusiveDates', formatInclusiveDates(record.inclusive_dates));
-                populate('workingDays', record.working_days);
-                populate('commutation', record.commutation);
+                        // Leave Details
+                        populate('leaveType', record.leave_type);
+                        populate('leaveTypeOthers', record.leave_type_others);
+                        populate('detailType', record.detail_type);
+                        populate('detailDescription', record.detail_description);
+                        populate('inclusiveDates', formatInclusiveDates(record.inclusive_dates));
+                        populate('workingDays', record.working_days);
+                        populate('commutation', record.commutation);
 
-                // Action Details
-                populate('asOf', formatDate(record.as_of));
-                populate('vacationTotalEarned', record.vacation_total_earned);
-                populate('vacationLessApplication', record.vacation_less_application);
-                populate('vacationBalance', record.vacation_leave_balance);
-                populate('sickTotalEarned', record.sick_total_earned);
-                populate('sickLessApplication', record.sick_less_application);
-                populate('sickBalance', record.sick_leave_balance);
-                populate('daysWithPay', record.days_with_pay);
-                populate('daysWithoutPay', record.days_without_pay);
-                populate('disapprovedReason', record.disapproved_reason);
-            })
-            .catch(err => console.error('Fetch error:', err));
-    }
+                        // Action Details
+                        populate('asOf', formatDate(record.as_of));
+                        populate('vacationTotalEarned', record.vacation_total_earned);
+                        populate('vacationLessApplication', record.vacation_less_application);
+                        populate('vacationBalance', record.vacation_leave_balance);
+                        populate('sickTotalEarned', record.sick_total_earned);
+                        populate('sickLessApplication', record.sick_less_application);
+                        populate('sickBalance', record.sick_leave_balance);
+                        populate('daysWithPay', record.days_with_pay);
+                        populate('daysWithoutPay', record.days_without_pay);
+                        populate('disapprovedReason', record.disapproved_reason);
+                        populate('recommendation', record.recommendation)
+                        populate('disapprovalReason', record.reco_reason)
 
-    function formatCurrency(value) {
-        if (!value || isNaN(value)) return '-';
-        return parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-    }
+                    })
+                    .catch(err => console.error('Fetch error:', err));
+            }
 
-    function formatDate(dateStr) {
-        const date = new Date(dateStr);
-        return !isNaN(date) ? date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '-';
-    }
+            function formatCurrency(value) {
+                if (!value || isNaN(value)) return '-';
+                return parseFloat(value).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            }
 
-    function formatInclusiveDates(str) {
-        return str.split(',').map(d => formatDate(d)).join(', ');
-    }
-});
-</script>
+            function formatDate(dateStr) {
+                const date = new Date(dateStr);
+                return !isNaN(date) ? date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' }) : '-';
+            }
+
+            function formatInclusiveDates(str) {
+                return str.split(',').map(d => formatDate(d)).join(', ');
+            }
+        });
+    </script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const recommendation = params.get('recommendation'); // "approved" or "disapproved"
+        const reason = params.get('disapprovalDetail') || "";
+
+        const approvalCheckbox = document.getElementById('approvalCheckbox');
+        const disapprovalCheckbox = document.getElementById('disapprovalCheckbox');
+        const disapprovalReason = document.getElementById('disapprovalReason');
+
+        if (recommendation === 'approved') {
+            approvalCheckbox.checked = true;
+        } else if (recommendation === 'disapproved') {
+            disapprovalCheckbox.checked = true;
+            disapprovalReason.textContent = reason;
+        }
+    </script>
 
 </body>
 
