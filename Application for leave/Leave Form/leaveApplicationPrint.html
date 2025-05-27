@@ -5,126 +5,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Leave Application - Print View</title>
+    <link rel="stylesheet" href="leaveApplicationPrint.css">
+    <link rel="stylesheet" href="inputPrint.css">
+    <link rel="stylesheet" href="leaveApplicationPrinting.css" media="print">
 </head>
 
 <body>
+<div id="header"></div>
+    <script>
+        fetch("header.html")
+            .then(response => response.text())
+            .then(data => document.getElementById("header").innerHTML = data);
+    </script>
 
-    <h1>Application for Leave</h1>
+<div id="personalDetails"></div>
+<div id="leaveDetails"></div>
+<div id="actionDetails"></div>
 
-    <div id="content">
-        <div class="section-title">1. Personal Details</div>
-        <table>
-            <tr>
-                <th>Office</th>
-                <td id="office"></td>
-            </tr>
-            <tr>
-                <th>Last Name</th>
-                <td id="lastName"></td>
-            </tr>
-            <tr>
-                <th>First Name</th>
-                <td id="firstName"></td>
-            </tr>
-            <tr>
-                <th>Middle Name</th>
-                <td id="middleName"></td>
-            </tr>
-            <tr>
-                <th>Filing Date</th>
-                <td id="filingDate"></td>
-            </tr>
-            <tr>
-                <th>Position</th>
-                <td id="position"></td>
-            </tr>
-            <tr>
-                <th>Salary</th>
-                <td id="salary"></td>
-            </tr>
-        </table>
-
-        <div class="section-title">2. Details of Application</div>
-        <table>
-            <tr>
-                <th>Leave Type</th>
-                <td id="leaveType"></td>
-            </tr>
-            <tr>
-                <th>Leave Type (Others)</th>
-                <td id="leaveTypeOthers"></td>
-            </tr>
-            <tr>
-                <th>Detail Type</th>
-                <td id="detailType"></td>
-            </tr>
-            <tr>
-                <th>Detail Description</th>
-                <td id="detailDescription"></td>
-            </tr>
-            <tr>
-                <th>Inclusive Dates</th>
-                <td id="inclusiveDates"></td>
-            </tr>
-            <tr>
-                <th>Total Working Days</th>
-                <td id="workingDays"></td>
-            </tr>
-            <tr>
-                <th>Commutation</th>
-                <td id="commutation"></td>
-            </tr>
-        </table>
-
-        <div class="section-title">3. Action Details</div>
-        <table>
-            <tr>
-                <th>As of</th>
-                <td id="asOf"></td>
-            </tr>
-            <tr>
-                <th>Vacation Leave Total Earned</th>
-                <td id="vacationTotalEarned"></td>
-            </tr>
-            <tr>
-                <th>Vacation Leave Less Application</th>
-                <td id="vacationLessApplication"></td>
-            </tr>
-            <tr>
-                <th>Vacation Leave Balance</th>
-                <td id="vacationBalance"></td>
-            </tr>
-            <tr>
-                <th>Sick Leave Total Earned</th>
-                <td id="sickTotalEarned"></td>
-            </tr>
-            <tr>
-                <th>Sick Leave Less Application</th>
-                <td id="sickLessApplication"></td>
-            </tr>
-            <tr>
-                <th>Sick Leave Balance</th>
-                <td id="sickBalance"></td>
-            </tr>
-            <tr>
-                <th>Days With Pay</th>
-                <td id="daysWithPay"></td>
-            </tr>
-            <tr>
-                <th>Days Without Pay</th>
-                <td id="daysWithoutPay"></td>
-            </tr>
-            <tr>
-                <th>Disapproved Reason</th>
-                <td id="disapprovedReason"></td>
-            </tr>
-        </table>
-    </div>
 
     <div class="buttonGroup">
         <button type="button" id="editBtn">Edit</button>
         <button type="button" id="printBtn">Print</button>
     </div>
+
+    <script>
+    const includes = {
+        personalDetails: 'print/personalDetails.html',
+        leaveDetails: 'print/leaveDetails.html',
+        actionDetails: 'print/actionDetails.html'
+    };
+
+    for (const [id, file] of Object.entries(includes)) {
+        fetch(file)
+            .then(res => res.text())
+            .then(html => document.getElementById(id).innerHTML = html)
+            .catch(err => console.error(`Error loading ${file}:`, err));
+    }
+</script>
 
     <script>
         document.getElementById('editBtn').addEventListener('click', () => {
