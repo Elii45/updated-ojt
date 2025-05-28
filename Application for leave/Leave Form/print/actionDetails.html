@@ -31,8 +31,8 @@
                     </tr>
                     <tr>
                         <td>Balance</td>
-                        <td><span id="vacationBalance"><?= htmlspecialchars($action['vacation_balance'] ?? '') ?></span></td>
-                        <td><span id="sickBalance"><?= htmlspecialchars($action['sick_balance'] ?? '') ?></span></td>
+                        <td><span id="vacationBalance"><?= htmlspecialchars($action['vacation_leave_balance'] ?? '') ?></span></td>
+                        <td><span id="sickBalance"><?= htmlspecialchars($action['sick_leave_balance'] ?? '') ?></span></td>
                     </tr>
                 </table>
                 <div class="signatureHR">
@@ -74,7 +74,8 @@
 
                         <div><span id="daysWithPay"><?= htmlspecialchars($action['days_with_pay'] ?? '') ?></span><label>days with pay</label></div>
                         <div><span id="daysWithoutPay"><?= htmlspecialchars($action['days_without_pay'] ?? '') ?></span><label>days without pay</label></div>
-                        <div><label>Others(Specify)</label><span id="othersReason"><?= htmlspecialchars($action['others_reason'] ?? '') ?></span></div>
+                        <div><span id="other_days"><?= htmlspecialchars($action['other_days'] ?? '') ?></span><label>Others(Specify)</label>
+                            <span id="other_specify"><?= htmlspecialchars($action['other_specify'] ?? '') ?></span></div>
                     </div>
                     <div class="disapproved container">
                         <label>7.D DISAPPROVED DUE TO:</label><br>

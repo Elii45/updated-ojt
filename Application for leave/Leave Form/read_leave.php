@@ -32,26 +32,46 @@ if (!$employee) {
 }
 
 // Fetch leave details
+if (!$leaveId) {
+    $stmtLatestLeave = $conn->prepare("SELECT id FROM leavedetails WHERE employee_id = ? ORDER BY id DESC LIMIT 1");
+    $stmtLatestLeave->bind_param("i", $employeeId);
+    $stmtLatestLeave->execute();
+    $resultLatestLeave = $stmtLatestLeave->get_result();
+    $latestLeave = $resultLatestLeave->fetch_assoc();
+    $stmtLatestLeave->close();
+    
+    if ($latestLeave) {
+        $leaveId = $latestLeave['id'];
+    }
+}
+
 $leave = null;
 if ($leaveId) {
-    $stmtLeave = $conn->prepare("SELECT * FROM leavedetails WHERE id = ? AND employee_id = ?");
-    $stmtLeave->bind_param("ii", $leaveId, $employeeId);
+    $stmtLeave = $conn->prepare("SELECT * FROM leavedetails WHERE id = ?");
+    $stmtLeave->bind_param("i", $leaveId);
     $stmtLeave->execute();
     $resultLeave = $stmtLeave->get_result();
     $leave = $resultLeave->fetch_assoc();
     $stmtLeave->close();
 }
 
-// Fetch approval/action details
+// Fetch approval/action details (your existing code)...
+
 $action = null;
+
 if ($leaveId) {
-    $stmtAction = $conn->prepare("SELECT * FROM leaveapproval WHERE employee_id = ?");
+    $stmtAction = $conn->prepare("SELECT * FROM leaveapproval WHERE employee_id = ? AND leave_id = ?");
+    $stmtAction->bind_param("ii", $employeeId, $leaveId);
+} else {
+    $stmtAction = $conn->prepare("SELECT * FROM leaveapproval WHERE employee_id = ? ORDER BY id DESC LIMIT 1");
     $stmtAction->bind_param("i", $employeeId);
-    $stmtAction->execute();
-    $resultAction = $stmtAction->get_result();
-    $action = $resultAction->fetch_assoc();
-    $stmtAction->close();
 }
+
+$stmtAction->execute();
+$resultAction = $stmtAction->get_result();
+$action = $resultAction->fetch_assoc();
+$stmtAction->close();
+
 
 $conn->close();
 ?>
