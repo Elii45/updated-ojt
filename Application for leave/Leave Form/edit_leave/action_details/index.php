@@ -76,6 +76,24 @@ if (!$action) {
 
         <td class="divider">
             <div class="container4B">
+                <label>7.B RECOMMENDATION</label><br>
+                <select id="recommendation" name="recommendation">
+                    <option value="approval" <?= (isset($action['recommendation']) && $action['recommendation'] === 'approval') ? 'selected' : '' ?>>For Approval</option>
+                    <option value="disapproval" <?= (isset($action['recommendation']) && $action['recommendation'] === 'disapproval') ? 'selected' : '' ?>>For Disapproval</option>
+                </select><br>
+                <input
+                type="text"
+                id="disapprovalDetail"
+                name="disapprovalDetail"
+                placeholder="Reason for disapproval"
+                style="margin-top: 5px; <?= (isset($action['recommendation']) && $action['recommendation'] === 'disapproval') ? '' : 'display:none;' ?>"
+                value="<?= htmlspecialchars($action['disapproval_detail'] ?? '') ?>"
+                >
+            </div>
+        </td>
+        
+        <td class="divider">
+            <div class="container4C">
                 <label>7.B LEAVE ACTION</label><br>
                 <div>
                     <label>Days with pay:</label>
@@ -99,10 +117,12 @@ if (!$action) {
 
     <tr>
         <td colspan="2" class="divider">
-            <div class="container4C">
+            <div class="container4D">
                 <label>Disapproved due to:</label>
                 <input type="text" name="disapproved_reason" value="<?= htmlspecialchars($action['disapproved_reason'] ?? '') ?>">
             </div>
         </td>
     </tr>
 </table>
+
+<script src="actionDropdown.js"></script>

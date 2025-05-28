@@ -223,39 +223,42 @@ if (isset($_POST['working_days'])) {
     
     $leaveId = $conn->insert_id;
     
-    // 3. Action Details (if provided)
+    // 3. Action Details
     if (isset($_POST['asOf']) && !empty($_POST['asOf'])) {
-        $asOf = $_POST['asOf'];
-        $vacationTotalEarned = isset($_POST['vacationTotalEarned']) && !empty($_POST['vacationTotalEarned']) ? $_POST['vacationTotalEarned'] : 0;
-        $vacationLessApplication = isset($_POST['vacationLessApplication']) && !empty($_POST['vacationLessApplication']) ? $_POST['vacationLessApplication'] : 0;
-        $vacationBalance = isset($_POST['vacationBalance']) && !empty($_POST['vacationBalance']) ? $_POST['vacationBalance'] : 0;
-        $sickTotalEarned = isset($_POST['sickTotalEarned']) && !empty($_POST['sickTotalEarned']) ? $_POST['sickTotalEarned'] : 0;
-        $sickLessApplication = isset($_POST['sickLessApplication']) && !empty($_POST['sickLessApplication']) ? $_POST['sickLessApplication'] : 0;
-        $sickBalance = isset($_POST['sickBalance']) && !empty($_POST['sickBalance']) ? $_POST['sickBalance'] : 0;
-        
-        // Approval details
-        $daysWithPay = isset($_POST['pay']) && !empty($_POST['pay']) ? $_POST['pay'] : 0;
-        $daysWithoutPay = isset($_POST['withoutPay']) && !empty($_POST['withoutPay']) ? $_POST['withoutPay'] : 0;
-        $disapprovedReason = isset($_POST['disapprovedTo']) && !empty($_POST['disapprovedTo']) ? $_POST['disapprovedTo'] : null;
-        
-        // Insert approval details
-        $sql = "INSERT INTO leaveapproval (
-            employee_id, leave_id, as_of, 
-            vacation_total_earned, vacation_less_application, vacation_leave_balance, 
-            sick_total_earned, sick_less_application, sick_leave_balance, 
-            days_with_pay, days_without_pay, 
-            disapproved_reason
-        ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        
-        $stmt = $conn->prepare($sql);
+$asOf = date('Y-m-d'); // You can customize this as needed
+
+$vacationBalance = $_POST['vacationBalance'] ?? 0;
+$vacationLessApplication = $_POST['vacationLessApplication'] ?? 0;
+$sickBalance = $_POST['sickBalance'] ?? 0;
+$sickLessApplication = $_POST['sickLessApplication'] ?? 0;
+
+$recommendation = $_POST['recommendation'] ?? '';
+$disapprovalDetail = $_POST['disapprovalDetail'] ?? '';
+$pay = $_POST['pay'] ?? 0;
+$withoutPay = $_POST['withoutPay'] ?? 0;
+$otherDays = $_POST['otherDays'] ?? 0;
+$otherSpecify = $_POST['otherSpecify'] ?? '';
+$disapprovedReason = $_POST['disapprovedReason'] ?? '';
+
+$vacationTotalEarned = $_POST['vacationTotalEarned'] ?? 0;
+$sickTotalEarned = $_POST['sickTotalEarned'] ?? 0;
+
+$sql = "INSERT INTO leaveapproval 
+    (employee_id, leave_id, as_of, vacation_leave_balance, vacation_less_application, 
+     sick_leave_balance, sick_less_application, recommendation, disapprovalDetail, 
+     days_with_pay, days_without_pay, other_days, other_specify, disapproved_reason, 
+     vacation_total_earned, sick_total_earned) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+$stmt = $conn->prepare($sql);
 $stmt->bind_param(
-    "iisdddddddis", 
+    "iissssssiiisssss", 
     $employeeId, $leaveId, $asOf, 
-    $vacationTotalEarned, $vacationLessApplication, $vacationBalance,
-    $sickTotalEarned, $sickLessApplication, $sickBalance,
-    $daysWithPay, $daysWithoutPay, 
-    $disapprovedReason
+    $vacationBalance, $vacationLessApplication,
+    $sickBalance, $sickLessApplication,
+    $recommendation, $disapprovalDetail,
+    $pay, $withoutPay, $otherDays, $otherSpecify,
+    $disapprovedReason, $vacationTotalEarned, $sickTotalEarned
 );
 $stmt->execute();
     }
@@ -263,22 +266,8 @@ $stmt->execute();
     // Commit transaction
 $conn->commit();
 
-// Fetch office name before redirecting
-$officeId = $_POST['office'];
-$officeQuery = $conn->prepare("SELECT office_name FROM offices WHERE office_id = ?");
-$officeQuery->bind_param("i", $officeId);
-$officeQuery->execute();
-$officeResult = $officeQuery->get_result();
-$officeRow = $officeResult->fetch_assoc();
-$officeName = $officeRow['office_name'] ?? '';
-
-// Redirect to print page with all form data
-$params = $_POST;
-$params['employee_id'] = $employeeId; // Add employee ID to params
-$params['leave_id'] = $leaveId; // Add leave ID to params
-$params['officeName'] = $officeName; // ✅ Include office name in parameters
-
-header("Location: leaveApplicationPrint.html?" . http_build_query($params));
+// Redirect to read_leave.php with the leave ID as query parameter
+header("Location: read_leave.php?id=" . urlencode($leaveId));
 exit;
 
 } catch (Exception $e) {

@@ -11,7 +11,7 @@
                 <label>7.A CERTIFICATION OF LEAVE CREDITS</label><br>
                 <div class="asOf">
                     <label>As of:</label>
-                    <span id="asOf"></span>
+                    <span id="asOf"><?= htmlspecialchars($action['as_of'] ?? '') ?></span>
                 </div>
                 <table class="table4">
                     <tr>
@@ -21,22 +21,22 @@
                     </tr>
                     <tr>
                         <td>Total Earned</td>
-                        <td><span id="vacationTotalEarned"></span></td>
-                        <td><span id="sickTotalEarned"></span></td>
+                        <td><span id="vacationTotalEarned"><?= htmlspecialchars($action['vacation_total_earned'] ?? '') ?></span></td>
+                        <td><span id="sickTotalEarned"><?= htmlspecialchars($action['sick_total_earned'] ?? '') ?></span></td>
                     </tr>
                     <tr>
                         <td>Less this application</td>
-                        <td><span id="vacationLessApplication"></span></td>
-                        <td><span id="sickLessApplication"></span></td>
+                        <td><span id="vacationLessApplication"><?= htmlspecialchars($action['vacation_less_application'] ?? '') ?></span></td>
+                        <td><span id="sickLessApplication"><?= htmlspecialchars($action['sick_less_application'] ?? '') ?></span></td>
                     </tr>
                     <tr>
                         <td>Balance</td>
-                        <td><span id="vacationBalance"></span></td>
-                        <td><span id="sickBalance"></span></td>
+                        <td><span id="vacationBalance"><?= htmlspecialchars($action['vacation_balance'] ?? '') ?></span></td>
+                        <td><span id="sickBalance"><?= htmlspecialchars($action['sick_balance'] ?? '') ?></span></td>
                     </tr>
                 </table>
                 <div class="signatureHR">
-                    <label name="signatureHR" id="signatureHRLabel"></label>
+                    <label name="signatureHR" id="signatureHRLabel"><?= htmlspecialchars($action['signature_hr'] ?? '') ?></label>
                     <label>JOSE FERNANDO G. MANAHAN</label><br>
                     <label>OIC, PHRMO</label>
                 </div>
@@ -48,20 +48,19 @@
                 <label>7.B RECOMMENDATION</label><br>
 
                 <label>
-                    <input type="checkbox" id="approvalCheckbox" disabled> For Approval
+                    <input type="checkbox" id="approvalCheckbox" disabled <?= !empty($action['recommendation']) ? 'checked' : '' ?>> For Approval
                 </label><br>
 
                 <label>
-                    <input type="checkbox" id="disapprovalCheckbox" disabled> For Disapproval due to
+                    <input type="checkbox" id="disapprovalCheckbox" disabled <?= empty($action['recommendation']) ? 'checked' : '' ?>> For Disapproval due to
                 </label>
-                <span id="disapprovalReason" style="margin-left: 5px;"></span>
-                </div>
-                
-                <div class="signatureAdmin">
-                    <label name="signatureAdmin" id="signatureAdminLabel"></label>
-                    <label>ANTONIA V. CONSTANTINO</label><br>
-                    <label>Provincial Administrator</label>
-                </div>
+                <span id="disapprovalReason" style="margin-left: 5px;"><?= htmlspecialchars($action['disapproval_reason'] ?? '') ?></span>
+            </div>
+
+            <div class="signatureAdmin">
+                <label name="signatureAdmin" id="signatureAdminLabel"><?= htmlspecialchars($action['signature_admin'] ?? '') ?></label>
+                <label>ANTONIA V. CONSTANTINO</label><br>
+                <label>Provincial Administrator</label>
             </div>
         </td>
     </tr>
@@ -73,19 +72,18 @@
                     <div class="approvedContainer">
                         <label>7.C APPROVED FOR</label>
 
-                        <div><span id="daysWithPay"></span><label>days with pay</label></div>
-                        <div><span id="daysWithoutPay"></span><label>days without pay</label></div>
-                        <div><span id="othersApproved"><label>Others(Specify)</label><span id="othersReason"></span>
-                        </div>
+                        <div><span id="daysWithPay"><?= htmlspecialchars($action['days_with_pay'] ?? '') ?></span><label>days with pay</label></div>
+                        <div><span id="daysWithoutPay"><?= htmlspecialchars($action['days_without_pay'] ?? '') ?></span><label>days without pay</label></div>
+                        <div><label>Others(Specify)</label><span id="othersReason"><?= htmlspecialchars($action['others_reason'] ?? '') ?></span></div>
                     </div>
                     <div class="disapproved container">
                         <label>7.D DISAPPROVED DUE TO:</label><br>
-                        <span id="disapprovedReason"></span><br>
+                        <span id="disapprovedReason"><?= htmlspecialchars($action['disapproved_reason'] ?? '') ?></span><br>
                     </div>
                 </div>
 
                 <div class="signatureGov">
-                    <label name="signatureGov" id="signatureGovLabel"></label>
+                    <label name="signatureGov" id="signatureGovLabel"><?= htmlspecialchars($action['signature_gov'] ?? '') ?></label>
                     <label>HON. DANIEL R. FERNANDO</label><br>
                     <label>Provincial Governor</label>
                 </div>

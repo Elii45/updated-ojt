@@ -41,9 +41,12 @@
         <td class="divider">
             <div class="container4B">
                 <label>7.B RECOMMENDATION</label><br>
-                <input type="radio" name="approval" value="1"> For Approval<br>
-                <input type="radio" name="disapproval" value="0"> For Disapproval due to
-                <input type="text" name="disapprovalDetail"><br>
+                <select id="recommendation" name="recommendation">
+                    <option value="approval">For Approval</option>
+                    <option value="disapproval">For Disapproval</option>
+                </select><br>
+                <input type="text" id="disapprovalDetail" name="disapprovalDetail" placeholder="Reason for disapproval"
+                    style="display:none; margin-top: 5px;">
             </div>
         </td>
     </tr>
@@ -58,12 +61,12 @@
                         <div><input type="text" name="pay"><label>days with pay</label></div>
                         <div><input type="text" name="withoutPay"><label>days without pay</label>
                         </div>
-                        <div><input type="text" name="othersApproved"><label>Others
-                                (Specify)</label></div>
+                        <div><input type="text" name="otherDays"><label>Others
+                                (Specify)</label> <input type="text" name="otherSpecify"></div>
                     </div>
                     <div class="disapproved container">
                         <label>7.D DISAPPROVED DUE TO:</label><br>
-                        <input type="text" name="disapprovedTo"><br>
+                        <input type="text" name="disapprovedReason"><br>
                     </div>
                 </div>
             </div>

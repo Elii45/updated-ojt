@@ -1,36 +1,34 @@
 <table class="container-table">
-    <tr>
-        <td colspan="2" class="divider">
-            <div class="container1">
-                <div class="office">
-                    <label>1. OFFICE/DEPARTMENT</label>
-                    <span id="office"></span>
-                </div>
-
-                <div class="name">
-                    <div class="name-fields">
-                        <label>2. NAME:</label>
-                        <div><label>Last Name:</label><span id="lastName" ></span>
-                        </div>
-                        <div><label>First Name:</label><span id="firstName" ></span>
-                        </div>
-                        <div><label>Middle Name:</label><span id="middleName" ></span></div>
-                    </div>
-                </div>
-            </div>
-        </td>
-    </tr>
-
-    <tr>
-        <td colspan="2" class="divider">
-            <div class="container1Date">
-            <label>3. DATE OF FILING</label>
-            <span id="filingDate" ></span>
-            <label>4. POSITION</label>
-            <span id="position" ></span>
-            <label>5. SALARY</label>
-            <span id="salary" ></span>
+  <tr>
+    <td colspan="2" class="divider">
+      <div class="container1">
+        <div class="office">
+          <label>1. OFFICE/DEPARTMENT</label>
+          <span id="office"><?= htmlspecialchars($employee['office_department'] ?? '') ?></span>
         </div>
-        </td>
-    </tr>
+
+        <div class="name">
+          <div class="name-fields">
+            <label>2. NAME:</label>
+            <div><label>Last Name:</label><span id="lastName"><?= htmlspecialchars($employee['last_name'] ?? '') ?></span></div>
+            <div><label>First Name:</label><span id="firstName"><?= htmlspecialchars($employee['first_name'] ?? '') ?></span></div>
+            <div><label>Middle Name:</label><span id="middleName"><?= htmlspecialchars($employee['middle_name'] ?? '') ?></span></div>
+          </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="2" class="divider">
+      <div class="container1Date">
+        <label>3. DATE OF FILING</label>
+        <span id="filingDate"><?= htmlspecialchars($employee['date_of_filing'] ?? '') ?></span>
+        <label>4. POSITION</label>
+        <span id="position"><?= htmlspecialchars($employee['position'] ?? '') ?></span>
+        <label>5. SALARY</label>
+        <span id="salary"><?= htmlspecialchars($employee['salary'] ?? '') ?></span>
+      </div>
+    </td>
+  </tr>
 </table>

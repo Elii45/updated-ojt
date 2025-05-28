@@ -1,10 +1,185 @@
 <div class="section-title">2. Details of Application</div>
 <table>
-    <tr><th>Leave Type</th><td id="leaveType"></td></tr>
-    <tr><th>Leave Type (Others)</th><td id="leaveTypeOthers"></td></tr>
-    <tr><th>Detail Type</th><td id="detailType"></td></tr>
-    <tr><th>Detail Description</th><td id="detailDescription"></td></tr>
-    <tr><th>Inclusive Dates</th><td id="inclusiveDates"></td></tr>
-    <tr><th>Total Working Days</th><td id="workingDays"></td></tr>
-    <tr><th>Commutation</th><td id="commutation"></td></tr>
+    <tr>
+        <th>Leave Type</th>
+        <td id="leaveType"></td>
+    </tr>
+    <tr>
+        <th>Leave Type (Others)</th>
+        <td id="leaveTypeOthers"></td>
+    </tr>
+    <tr>
+        <th>Detail Type</th>
+        <td id="detailType"></td>
+    </tr>
+    <tr>
+        <th>Detail Description</th>
+        <td id="detailDescription"></td>
+    </tr>
+    <tr>
+        <th>Inclusive Dates</th>
+        <td id="inclusiveDates"></td>
+    </tr>
+    <tr>
+        <th>Total Working Days</th>
+        <td id="workingDays"></td>
+    </tr>
+    <tr>
+        <th>Commutation</th>
+        <td id="commutation"></td>
+    </tr>
+</table>
+<table class="container-table">
+    <tr>
+        <td colspan="2" class="title">
+            <h5>6. DETAILS OF APPLICATION</h5>
+        </td>
+    </tr>
+    <tr>
+        <td class="divider">
+            <div class="container3A">
+                <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>
+                <input type="radio" name="leaveType" value="vacationLeave" required>
+                <label>Vacation Leave</label>
+                <span class="subtext">(Sec. 51, Rule XVI, Omnibus Rules Implementing E.O
+                    No.292)</span><br>
+                <input type="radio" name="leaveType" value="forceLeave" required>
+                <label>Mandatory/Forced Leave</label>
+                <span class="subtext"> (Sec. 2, Rule XVI, Omnibus Rules Implementing
+                    E.ONo.292)</span><br>
+                <input type="radio" name="leaveType" value="sickLeave" required>
+                <label>Sick Leave</label>
+                <span class="subtext"> (Sec. 43, Rule SVI, Omnibus Rules Implementing E.O
+                    No.292)</span><br>
+                <input type="radio" name="leaveType" value="maternityLeave" required>
+                <label>Maternity Leave</label>
+                <span class="subtext"> (R.A. No. 11210/IRR issued by CSC, DOLE and SSS)</span><br>
+                <input type="radio" name="leaveType" value="paternityLeave" required>
+                <label>Paternity Leave</label>
+                <span class="subtext"> (R.A. No. 8187/CSC MC No. 71, s. 1998, as amended)</span><br>
+                <input type="radio" name="leaveType" value="specialPrivilege" required>
+                <label>Special Privilege Leave</label>
+                <span class="subtext"> (Sec. 21, Rule XVI, Omnibus Rules Implementing E.O
+                    No.292)</span><br>
+                <input type="radio" name="leaveType" value="soloParentLeave" required>
+                <label>Solo Parent Leave</label>
+                <span class="subtext"> (RA No. 8972/CSC MC No. 8, s. 2004)</span><br>
+                <input type="radio" name="leaveType" value="studyLeave" required>
+                <label>Study Leave</label>
+                <span class="subtext"> (Sec. 68, Rule XVI, Omnibus Rules Implementing E.O
+                    No.292)</span><br>
+                <input type="radio" name="leaveType" value="vawcLeave" required>
+                <label>10-Day VAWC Leave</label><span class="subtext"> (RA No. 9262/CSC MC No. 15 s.
+                    2005)</span><br>
+                <input type="radio" name="leaveType" value="rehabPriv" required>
+                <label>Rehabilitation Privilege</label><span class="subtext"> (Sec. 55, Rule XVI,
+                    Omnibus Rules Implementing E.O
+                    No.292)</span><br>
+                <input type="radio" name="leaveType" value="specialLeave" required>
+                <label>Special Leave Benefits for
+                    Women</label><span class="subtext"> (RA No. 9710/CSC No. 25, s. 2010)</span><br>
+                <input type="radio" name="leaveType" value="specialEmergency" required>
+                <label>Special Emergency Leave</label><span class="subtext"> (CSC MC No. 2, s. 2012,
+                    as amended)</span><br>
+                <input type="radio" name="leaveType" value="adoptionLeave" required> <label>Adoption
+                    Leave</label><span class="subtext"> (R.A. No. 8552)</span><br>
+                <input type="radio" name="leaveType" value="others" required><label>Others
+                    (Specify)</label>
+                <input type="text" name="leaveTypeOthers" value="" onclick="disableOtherCheckboxes(this)"><br><br>
+            </div>
+        </td>
+
+        <td class="divider">
+            <div class="container3B">
+                <label>6.B DETAILS OF LEAVE</label>
+
+                <!-- Vacation/Special Privilege Leave Details -->
+                <div id="vacationDetails">
+                    <label>In case of vacation/special privilege Leave:</label><br>
+                    <input type="radio" name="detailType" value="withinPhilippines"> Within Philippines
+                    <input type="text" id="withinPhilippinesDetail" name="withinPhilippinesDetail"
+                        class="required-field"><br>
+
+                    <input type="radio" name="detailType" value="abroad"> Abroad
+                    <input type="text" id="abroadDetails" name="abroadDetails" class="required-field"><br><br>
+                </div>
+
+                <!-- Sick Leave Details -->
+                <div id="sickLeaveDetails">
+                    <label>In case of sick Leave:</label><br>
+                    <input type="radio" name="detailType" value="hospital"> In Hospital (Specify Illness)
+                    <input type="text" id="hospitalDetail" name="hospitalDetail" class="required-field"><br>
+
+                    <input type="radio" name="detailType" value="outPatient"> Out Patient (Specify Illness)
+                    <input type="text" id="outPatientDetail" name="outPatientDetail" class="required-field"><br><br>
+                </div>
+
+                <!-- Special Leave Benefits for Women -->
+                <div id="womenLeaveDetails">
+                    <label>In case of Special Leave Benefits for Women:</label><br>
+                    <label>Specify Illness</label>
+                    <input type="text" id="leaveWomen" name="leaveWomenDetail" class="required-field"><br>
+                </div>
+
+                <!-- Study Leave -->
+                <div id="studyLeaveDetails">
+                    <label>In case of Study Leave:</label><br>
+                    <input type="radio" name="detailType" value="masters"> Completion of Master's Degree<br>
+                    <input type="radio" name="detailType" value="boardExam"> BAR/Board Examination Review<br>
+                </div>
+
+                <!-- Other Purposes -->
+                <div id="otherPurposes">
+                    <label>Other Purposes:</label><br>
+                    <input type="radio" name="detailType" value="monetization"> Monetization of Leave Credits<br>
+                    <input type="radio" name="detailType" value="terminal"> Terminal Leave<br>
+                </div>
+            </div>
+        </td>
+
+    </tr>
+
+    <tr>
+        <td class="divider">
+            <div class="container3C">
+                <label>6.C NUMBER OF WORKING DAYS APPLIED FOR</label>
+                <span id="workingDays">
+                    <?= htmlspecialchars($leave['working_days'] ?? '') ?>
+                </span>
+
+                </span><br>
+                <label class="inclDatesLabel">Inclusive Dates</label>
+                <span id="inclusiveDates">
+                    <?= htmlspecialchars($leave['inclusive_dates'] ?? '') ?>
+                </span>
+                </span>
+            </div>
+        </td>
+        <td class="divider">
+            <div class="container3D">
+                <label>6.D COMMUTATION</label><br>
+
+                <label>
+                    <input type="checkbox" name="commutation" value="notRequested" disabled <?php echo
+                        (isset($leave['commutation']) && $leave['commutation']==='notRequested' ) ? 'checked' : '' ; ?>>
+                    Not Requested
+                </label><br>
+
+                <label>
+                    <input type="checkbox" name="commutation" value="requested" disabled <?php echo
+                        (isset($leave['commutation']) && $leave['commutation']==='requested' ) ? 'checked' : '' ; ?>>
+                    Requested
+                </label><br>
+
+
+                <div class="signatureApplicant">
+                    <label name="signatureApplicant" id="signatureApplicantLabel">
+                        <?= htmlspecialchars($leave['signature_applicant'] ?? '') ?>
+                    </label>
+                    <label>(Signature of Applicant)</label>
+                </div>
+            </div>
+        </td>
+    </tr>
+
 </table>
