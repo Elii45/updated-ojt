@@ -225,57 +225,57 @@ if (isset($_POST['working_days'])) {
     
     // 3. Action Details
     if (isset($_POST['asOf']) && !empty($_POST['asOf'])) {
-$asOf = date('Y-m-d'); // You can customize this as needed
+        $asOf = date('Y-m-d'); // You can customize this as needed
 
-$vacationBalance = $_POST['vacationBalance'] ?? 0;
-$vacationLessApplication = $_POST['vacationLessApplication'] ?? 0;
-$sickBalance = $_POST['sickBalance'] ?? 0;
-$sickLessApplication = $_POST['sickLessApplication'] ?? 0;
+        $vacationBalance = $_POST['vacationBalance'] ?? 0;
+        $vacationLessApplication = $_POST['vacationLessApplication'] ?? 0;
+        $sickBalance = $_POST['sickBalance'] ?? 0;
+        $sickLessApplication = $_POST['sickLessApplication'] ?? 0;
 
-$recommendation = $_POST['recommendation'] ?? '';
-$disapprovalDetail = $_POST['disapprovalDetail'] ?? '';
-$pay = $_POST['pay'] ?? 0;
-$withoutPay = $_POST['withoutPay'] ?? 0;
-$otherDays = $_POST['otherDays'] ?? 0;
-$otherSpecify = $_POST['otherSpecify'] ?? '';
-$disapprovedReason = $_POST['disapprovedReason'] ?? '';
+        $recommendation = $_POST['recommendation'] ?? '';
+        $disapprovalDetail = $_POST['disapprovalDetail'] ?? '';
+        $pay = $_POST['pay'] ?? 0;
+        $withoutPay = $_POST['withoutPay'] ?? 0;
+        $otherDays = $_POST['otherDays'] ?? 0;
+        $otherSpecify = $_POST['otherSpecify'] ?? '';
+        $disapprovedReason = $_POST['disapprovedReason'] ?? '';
 
-$vacationTotalEarned = $_POST['vacationTotalEarned'] ?? 0;
-$sickTotalEarned = $_POST['sickTotalEarned'] ?? 0;
+        $vacationTotalEarned = $_POST['vacationTotalEarned'] ?? 0;
+        $sickTotalEarned = $_POST['sickTotalEarned'] ?? 0;
 
-$sql = "INSERT INTO leaveapproval 
-    (employee_id, leave_id, as_of, vacation_leave_balance, vacation_less_application, 
-     sick_leave_balance, sick_less_application, recommendation, disapprovalDetail, 
-     days_with_pay, days_without_pay, other_days, other_specify, disapproved_reason, 
-     vacation_total_earned, sick_total_earned) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO leaveapproval 
+            (employee_id, leave_id, as_of, vacation_leave_balance, vacation_less_application, 
+            sick_leave_balance, sick_less_application, recommendation, disapprovalDetail, 
+            days_with_pay, days_without_pay, other_days, other_specify, disapproved_reason, 
+            vacation_total_earned, sick_total_earned) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param(
-    "iissssssiiisssss", 
-    $employeeId, $leaveId, $asOf, 
-    $vacationBalance, $vacationLessApplication,
-    $sickBalance, $sickLessApplication,
-    $recommendation, $disapprovalDetail,
-    $pay, $withoutPay, $otherDays, $otherSpecify,
-    $disapprovedReason, $vacationTotalEarned, $sickTotalEarned
-);
-$stmt->execute();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param(
+            "iisssssssiisssss", 
+            $employeeId, $leaveId, $asOf, 
+            $vacationBalance, $vacationLessApplication,
+            $sickBalance, $sickLessApplication,
+            $recommendation, $disapprovalDetail,
+            $pay, $withoutPay, $otherDays, $otherSpecify,
+            $disapprovedReason, $vacationTotalEarned, $sickTotalEarned
+        );
+        $stmt->execute();
     }
     
     // Commit transaction
-$conn->commit();
+    $conn->commit();
 
-// Redirect to read_leave.php with the leave ID as query parameter
-header("Location: read_leave.php?id=" . urlencode($leaveId));
-exit;
+    // Redirect to read_leave.php with the leave ID as query parameter
+    header("Location: read_leave.php?id=" . urlencode($leaveId));
+    exit;
 
-} catch (Exception $e) {
-    // Rollback transaction on error
-    $conn->rollback();
-    echo "Error: " . $e->getMessage();
-    error_log("Database Error: " . $e->getMessage());
-}
+    } catch (Exception $e) {
+        // Rollback transaction on error
+        $conn->rollback();
+        echo "Error: " . $e->getMessage();
+        error_log("Database Error: " . $e->getMessage());
+    }
 
-// Close connection
-$conn->close();
+    // Close connection
+    $conn->close();

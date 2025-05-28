@@ -46,15 +46,17 @@
         <td class="divider">
             <div class="container4B">
                 <label>7.B RECOMMENDATION</label><br>
-
                 <label>
-                    <input type="checkbox" id="approvalCheckbox" disabled <?= !empty($action['recommendation']) ? 'checked' : '' ?>> For Approval
+                    <input type="checkbox" id="approvalCheckbox" disabled <?php echo (isset($action['recommendation']) &&
+                    $action['recommendation']==='approval' ) ? 'checked' : '' ; ?>> For Approval
                 </label><br>
 
                 <label>
-                    <input type="checkbox" id="disapprovalCheckbox" disabled <?= empty($action['recommendation']) ? 'checked' : '' ?>> For Disapproval due to
+                    <input type="checkbox" id="approvalCheckbox" disabled <?php echo (isset($action['recommendation']) &&
+                    $action['recommendation']==='disapproval' ) ? 'checked' : '' ; ?>> For Disapproval due to
                 </label>
-                <span id="disapprovalReason" style="margin-left: 5px;"><?= htmlspecialchars($action['disapproval_reason'] ?? '') ?></span>
+                <br>
+                <span id="disapprovalDetail"><?= htmlspecialchars($action['disapprovalDetail'] ?? '') ?></span>
             </div>
 
             <div class="signatureAdmin">
@@ -79,7 +81,7 @@
                     </div>
                     <div class="disapproved container">
                         <label>7.D DISAPPROVED DUE TO:</label><br>
-                        <span id="disapprovedReason"><?= htmlspecialchars($action['disapproved_reason'] ?? '') ?></span><br>
+                        <span id="disapproved_reason"><?= htmlspecialchars($action['disapproved_reason'] ?? '') ?></span><br>
                     </div>
                 </div>
 
