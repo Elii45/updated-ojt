@@ -8,103 +8,156 @@
         <td class="divider">
             <div class="container3A">
                 <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>
-                <input type="radio" name="leaveType" value="vacationLeave" required>
-                <label>Vacation Leave</label>
-                <span class="subtext">(Sec. 51, Rule XVI, Omnibus Rules Implementing E.O
-                    No.292)</span><br>
-                <input type="radio" name="leaveType" value="forceLeave" required>
-                <label>Mandatory/Forced Leave</label>
-                <span class="subtext"> (Sec. 2, Rule XVI, Omnibus Rules Implementing
-                    E.ONo.292)</span><br>
-                <input type="radio" name="leaveType" value="sickLeave" required>
-                <label>Sick Leave</label>
-                <span class="subtext"> (Sec. 43, Rule SVI, Omnibus Rules Implementing E.O
-                    No.292)</span><br>
-                <input type="radio" name="leaveType" value="maternityLeave" required>
-                <label>Maternity Leave</label>
-                <span class="subtext"> (R.A. No. 11210/IRR issued by CSC, DOLE and SSS)</span><br>
-                <input type="radio" name="leaveType" value="paternityLeave" required>
-                <label>Paternity Leave</label>
-                <span class="subtext"> (R.A. No. 8187/CSC MC No. 71, s. 1998, as amended)</span><br>
-                <input type="radio" name="leaveType" value="specialPrivilege" required>
-                <label>Special Privilege Leave</label>
-                <span class="subtext"> (Sec. 21, Rule XVI, Omnibus Rules Implementing E.O
-                    No.292)</span><br>
-                <input type="radio" name="leaveType" value="soloParentLeave" required>
-                <label>Solo Parent Leave</label>
-                <span class="subtext"> (RA No. 8972/CSC MC No. 8, s. 2004)</span><br>
-                <input type="radio" name="leaveType" value="studyLeave" required>
-                <label>Study Leave</label>
-                <span class="subtext"> (Sec. 68, Rule XVI, Omnibus Rules Implementing E.O
-                    No.292)</span><br>
-                <input type="radio" name="leaveType" value="vawcLeave" required>
-                <label>10-Day VAWC Leave</label><span class="subtext"> (RA No. 9262/CSC MC No. 15 s.
-                    2005)</span><br>
-                <input type="radio" name="leaveType" value="rehabPriv" required>
-                <label>Rehabilitation Privilege</label><span class="subtext"> (Sec. 55, Rule XVI,
-                    Omnibus Rules Implementing E.O
-                    No.292)</span><br>
-                <input type="radio" name="leaveType" value="specialLeave" required>
-                <label>Special Leave Benefits for
-                    Women</label><span class="subtext"> (RA No. 9710/CSC No. 25, s. 2010)</span><br>
-                <input type="radio" name="leaveType" value="specialEmergency" required>
-                <label>Special Emergency Leave</label><span class="subtext"> (CSC MC No. 2, s. 2012,
-                    as amended)</span><br>
-                <input type="radio" name="leaveType" value="adoptionLeave" required> <label>Adoption
-                    Leave</label><span class="subtext"> (R.A. No. 8552)</span><br>
-                <input type="radio" name="leaveType" value="others" required><label>Others
-                    (Specify)</label>
-                <input type="text" name="leaveTypeOthers" value="" onclick="disableOtherCheckboxes(this)"><br><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='vacationLeave' ) ? 'checked' : '' ; ?>>
+                <label for="vacationLeave">Vacation Leave</label>
+                <span class="subtext">(Sec. 51, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='forceLeave' ) ? 'checked' : '' ; ?>>
+                <label for="forceLeave">Mandatory/Forced Leave</label>
+                <span class="subtext">(Sec. 2, Rule XVI, Omnibus Rules Implementing E.ONo.292)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='sickLeave' ) ? 'checked' : '' ; ?>>
+                <label for="sickLeave">Sick Leave</label>
+                <span class="subtext">(Sec. 43, Rule SVI, Omnibus Rules Implementing E.O No.292)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='maternityLeave' ) ? 'checked' : '' ; ?>>
+                <label for="maternityLeave">Maternity Leave</label>
+                <span class="subtext">(R.A. No. 11210/IRR issued by CSC, DOLE and SSS)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='paternityLeave' ) ? 'checked' : '' ; ?>>
+                <label for="paternityLeave">Paternity Leave</label>
+                <span class="subtext">(R.A. No. 8187/CSC MC No. 71, s. 1998, as amended)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='specialPrivilege' ) ? 'checked' : '' ; ?>>
+                <label for="specialPrivilege">Special Privilege Leave</label>
+                <span class="subtext">(Sec. 21, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='soloParentLeave' ) ? 'checked' : '' ; ?>>
+                <label for="soloParentLeave">Solo Parent Leave</label>
+                <span class="subtext">(RA No. 8972/CSC MC No. 8, s. 2004)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='studyLeave' ) ? 'checked' : '' ; ?>>
+                <label for="studyLeave">Study Leave</label>
+                <span class="subtext">(Sec. 68, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='vawcLeave' ) ? 'checked' : '' ; ?>>
+                <label for="vawcLeave">10-Day VAWC Leave</label>
+                <span class="subtext">(RA No. 9262/CSC MC No. 15 s. 2005)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='rehabPriv' ) ? 'checked' : '' ; ?>>
+                <label for="rehabPriv">Rehabilitation Privilege</label>
+                <span class="subtext">(Sec. 55, Rule XVI, Omnibus Rules Implementing E.O No.292)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='womenLeaveDetails' ) ? 'checked' : '' ; ?>>
+                <label for="specialLeave">Special Leave Benefits for Women</label>
+                <span class="subtext">(RA No. 9710/CSC No. 25, s. 2010)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='specialEmergency' ) ? 'checked' : '' ; ?>>
+                <label for="specialEmergency">Special Emergency Leave</label>
+                <span class="subtext">(CSC MC No. 2, s. 2012, as amended)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='adoptionLeave' ) ? 'checked' : '' ; ?>>
+                <label for="adoptionLeave">Adoption Leave</label>
+                <span class="subtext">(R.A. No. 8552)</span><br>
+
+                <input type="checkbox" disabled <?php echo (isset($leave['leave_type']) &&
+                    $leave['leave_type']==='others' ) ? 'checked' : '' ; ?>>
+                <label for="others">Others (Specify)</label>
+                <span id="leaveTypeOthers">
+                    <?= htmlspecialchars($leave['leave_type_others'] ?? '') ?>
             </div>
         </td>
 
         <td class="divider">
-            <div class="container3B">
-                <label>6.B DETAILS OF LEAVE</label>
+    <div class="container3B">
+        <label>6.B DETAILS OF LEAVE</label>
 
-                <!-- Vacation/Special Privilege Leave Details -->
-                <div id="vacationDetails">
-                    <label>In case of vacation/special privilege Leave:</label><br>
-                    <input type="radio" name="detailType" value="withinPhilippines"> Within Philippines
-                    <input type="text" id="withinPhilippinesDetail" name="withinPhilippinesDetail"
-                        class="required-field"><br>
+        <!-- Vacation/Special Privilege Leave Details -->
+        <div id="vacationDetails">
+            <label>In case of vacation/special privilege Leave:</label><br>
 
-                    <input type="radio" name="detailType" value="abroad"> Abroad
-                    <input type="text" id="abroadDetails" name="abroadDetails" class="required-field"><br><br>
-                </div>
+            <!-- Within Philippines -->
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'withinPhilippines') ? 'checked' : '' ?>>
+            <label for="withinPhilippines">Within Philippines</label>
+            <?php if (isset($leave['detail_type']) && $leave['detail_type'] === 'withinPhilippines'): ?>
+                <span id="withinPhilippinesDetail"><?= htmlspecialchars($leave['detail_description'] ?? '') ?></span>
+            <?php endif; ?>
+            <br>
 
-                <!-- Sick Leave Details -->
-                <div id="sickLeaveDetails">
-                    <label>In case of sick Leave:</label><br>
-                    <input type="radio" name="detailType" value="hospital"> In Hospital (Specify Illness)
-                    <input type="text" id="hospitalDetail" name="hospitalDetail" class="required-field"><br>
+            <!-- Abroad -->
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'abroad') ? 'checked' : '' ?>>
+            <label for="abroad">Abroad</label>
+            <?php if (isset($leave['detail_type']) && $leave['detail_type'] === 'abroad'): ?>
+                <span id="abroadDetails"><?= htmlspecialchars($leave['detail_description'] ?? '') ?></span>
+            <?php endif; ?>
+        </div>
 
-                    <input type="radio" name="detailType" value="outPatient"> Out Patient (Specify Illness)
-                    <input type="text" id="outPatientDetail" name="outPatientDetail" class="required-field"><br><br>
-                </div>
+        <!-- Sick Leave Details -->
+        <div id="sickLeaveDetails">
+            <label>In case of sick Leave:</label><br>
 
-                <!-- Special Leave Benefits for Women -->
-                <div id="womenLeaveDetails">
-                    <label>In case of Special Leave Benefits for Women:</label><br>
-                    <label>Specify Illness</label>
-                    <input type="text" id="leaveWomen" name="leaveWomenDetail" class="required-field"><br>
-                </div>
+            <!-- In Hospital -->
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'hospital') ? 'checked' : '' ?>>
+            <label for="hospital">In Hospital (Specify Illness)</label>
+            <?php if (isset($leave['detail_type']) && $leave['detail_type'] === 'hospital'): ?>
+                <span id="hospitalDetails"><?= htmlspecialchars($leave['detail_description'] ?? '') ?></span>
+            <?php endif; ?>
+            <br>
 
-                <!-- Study Leave -->
-                <div id="studyLeaveDetails">
-                    <label>In case of Study Leave:</label><br>
-                    <input type="radio" name="detailType" value="masters"> Completion of Master's Degree<br>
-                    <input type="radio" name="detailType" value="boardExam"> BAR/Board Examination Review<br>
-                </div>
+            <!-- Out Patient -->
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'outPatient') ? 'checked' : '' ?>>
+            <label for="outPatient">Out Patient (Specify Illness)</label>
+            <?php if (isset($leave['detail_type']) && $leave['detail_type'] === 'outPatient'): ?>
+                <span id="outPatientDetail"><?= htmlspecialchars($leave['detail_description'] ?? '') ?></span>
+            <?php endif; ?>
+        </div>
 
-                <!-- Other Purposes -->
-                <div id="otherPurposes">
-                    <label>Other Purposes:</label><br>
-                    <input type="radio" name="detailType" value="monetization"> Monetization of Leave Credits<br>
-                    <input type="radio" name="detailType" value="terminal"> Terminal Leave<br>
-                </div>
-            </div>
-        </td>
+        <!-- Special Leave Benefits for Women -->
+        <div id="womenLeaveDetails">
+            <label>In case of Special Leave Benefits for Women:</label><br>
+            <label>Specify Illness:</label>
+            <?php if (isset($leave['detail_type']) && $leave['detail_type'] === 'women'): ?>
+                <span id="leaveWomenDetail"><?= htmlspecialchars($leave['detail_description'] ?? '') ?></span>
+            <?php endif; ?>
+        </div>
+
+        <!-- Study Leave -->
+        <div id="studyLeaveDetails">
+            <label>In case of Study Leave:</label><br>
+
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'masters') ? 'checked' : '' ?>>
+            <label for="masters">Completion of Master's Degree</label><br>
+
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'boardExam') ? 'checked' : '' ?>>
+            <label for="boardExam">BAR/Board Examination Review</label><br>
+        </div>
+
+        <!-- Other Purposes -->
+        <div id="otherPurposes">
+            <label>Other Purposes:</label><br>
+
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'monetization') ? 'checked' : '' ?>>
+            <label for="monetization">Monetization of Leave Credits</label><br>
+
+            <input type="checkbox" disabled <?= (isset($leave['detail_type']) && $leave['detail_type'] === 'terminal') ? 'checked' : '' ?>>
+            <label for="terminal">Terminal Leave</label><br>
+        </div>
+    </div>
+</td>
 
     </tr>
 
