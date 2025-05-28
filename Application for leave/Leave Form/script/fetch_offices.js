@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("fetch_offices.php")
+    fetch("./backend/fetch_offices.php")
         .then(response => response.json())
         .then(data => {
             const officeDropdown = document.getElementById("officeDropdown");

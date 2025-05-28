@@ -5,13 +5,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Application for Leave</title>
+    <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 </head>
 
 <body>
     <div class="wrapper">
-        <form action="submit_leave.php" method="post">
+        <form action="./backend/submit_leave.php" method="post">
             <div id="personalDetails"></div>
+
             <table class="container-table">
                 <tr>
                     <td colspan="2" class="title">
@@ -38,7 +40,6 @@
                             Total Days Selected: 0
                         </div>
 
-                        <!-- Hidden input to store total selected days -->
                         <input type="hidden" name="working_days" id="working_days" value="0" />
                     </td>
                     <td class="divider">
@@ -46,6 +47,7 @@
                     </td>
                 </tr>
             </table>
+
             <div id="actionDetails"></div>
 
             <div class="buttonGroup">
@@ -56,8 +58,8 @@
 
     <!-- Your custom scripts -->
     <script src="../Leave Form/details/loadSections.js"></script>
-    <script src="dropdown.js"></script>
-    <script src="actionDropdown.js"></script>
+    <script src="./script/dropdown.js"></script>
+    <script src="./script/actionDropdown.js"></script>
 
     <!-- Inclusive dates JS -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

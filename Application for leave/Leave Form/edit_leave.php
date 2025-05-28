@@ -63,7 +63,7 @@ $conn->close();
 </head>
 <body>
 <div class="wrapper">
-    <form method="POST" action="update_leave.php">
+    <form method="POST" action="./backend/update_leave.php">
         <input type="hidden" name="employee_id" value="<?php echo htmlspecialchars($employeeId); ?>">
         <?php if ($leaveId): ?>
             <input type="hidden" name="leave_id" value="<?php echo htmlspecialchars($leaveId); ?>">
