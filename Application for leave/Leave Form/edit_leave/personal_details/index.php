@@ -33,8 +33,6 @@ if (!$employee) {
 // Remove the POST processing logic from here as it will be handled by process_edit_leave.php
 ?>
 
-<h3>Edit Personal Details</h3>
-
 <!-- Remove the form tag from here -->
 <table class="container-table">
     <tr>

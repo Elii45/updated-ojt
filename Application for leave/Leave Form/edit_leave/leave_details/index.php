@@ -39,7 +39,6 @@ function escape($str) {
 }
 ?>
 
-<h3>Edit Leave Details</h3>
 <!-- Remove the form tag from here -->
 <div class="container3A">
     <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>

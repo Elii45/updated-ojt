@@ -93,5 +93,9 @@ $conn->close();
     <?php include './print/actionDetails.html'; ?>
 
 </div>
+<div class="buttons">
+    <a href="edit_leave.php?employee_id=<?= htmlspecialchars($employeeId) ?>&leave_id=<?= htmlspecialchars($leaveId) ?>" class="button">Edit</a>
+    <button onclick="window.print()" class="button">Print</button>
+</div>
 </body>
 </html>

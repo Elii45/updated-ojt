@@ -87,7 +87,7 @@ if (!$action) {
                 name="disapprovalDetail"
                 placeholder="Reason for disapproval"
                 style="margin-top: 5px; <?= (isset($action['recommendation']) && $action['recommendation'] === 'disapproval') ? '' : 'display:none;' ?>"
-                value="<?= htmlspecialchars($action['disapproval_detail'] ?? '') ?>"
+                value="<?= htmlspecialchars($action['disapprovalDetail'] ?? '') ?>"
                 >
             </div>
         </td>

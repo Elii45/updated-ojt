@@ -24,7 +24,7 @@ if ($conn->connect_error) {
 }
 
 // === PERSONAL DETAILS UPDATE ===
-$office = $_POST['office'] ?? '';
+$officeId = $_POST['office'] ?? '';
 $lastName = $_POST['lastName'] ?? '';
 $firstName = $_POST['firstName'] ?? '';
 $middleName = $_POST['middleName'] ?? '';
@@ -32,10 +32,39 @@ $filingDate = $_POST['filingDate'] ?? '';
 $position = $_POST['position'] ?? '';
 $salary = $_POST['salary'] ?? 0;
 
-$updateEmpSql = "UPDATE employeedetails SET office=?, last_name=?, first_name=?, middle_name=?, filing_date=?, position=?, salary=? WHERE id=?";
+// Fetch office_name from the database using officeId
+$sqlOffice = "SELECT office_name FROM offices WHERE office_id = ?";
+$stmtOffice = $conn->prepare($sqlOffice);
+if (!$stmtOffice) {
+    die("Prepare failed: " . $conn->error);
+}
+$stmtOffice->bind_param("i", $officeId);
+$stmtOffice->execute();
+$resultOffice = $stmtOffice->get_result();
+
+if ($row = $resultOffice->fetch_assoc()) {
+    $officeName = $row['office_name'];
+} else {
+    die("Error: Office ID not found.");
+}
+$stmtOffice->close();
+
+// Now update employeedetails with officeName
+$updateEmpSql = "UPDATE employeedetails 
+                 SET office = ?, last_name = ?, first_name = ?, middle_name = ?, filing_date = ?, position = ?, salary = ? 
+                 WHERE id = ?";
 $stmtEmp = $conn->prepare($updateEmpSql);
-$stmtEmp->bind_param("ssssssdi", $office, $lastName, $firstName, $middleName, $filingDate, $position, $salary, $employeeId);
-$stmtEmp->execute();
+if (!$stmtEmp) {
+    die("Prepare failed: " . $conn->error);
+}
+
+// Bind parameters (s = string, d = double, i = int)
+$stmtEmp->bind_param("ssssssdi", $officeName, $lastName, $firstName, $middleName, $filingDate, $position, $salary, $employeeId);
+
+if (!$stmtEmp->execute()) {
+    die("Execute failed: " . $stmtEmp->error);
+}
+
 $stmtEmp->close();
 
 // === LEAVE DETAILS UPDATE ===
@@ -60,33 +89,36 @@ if (!$stmtLeave->execute()) {
 $stmtLeave->close();
 }
 
-// === ACTION DETAILS UPDATE ===
-if ($leaveId) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $leaveId) {
+    // Retrieve POST data
     $asOf = $_POST['as_of'] ?? '';
-    $vacEarned = $_POST['vacationTotalEarned'] ?? 0;
-    $sickEarned = $_POST['sickTotalEarned'] ?? 0;
-    $vlBalance = $_POST['vacation_leave_balance'] ?? 0;
-    $vlLess = $_POST['vacation_less_application'] ?? 0;
-    $slBalance = $_POST['sick_leave_balance'] ?? 0;
-    $slLess = $_POST['sick_less_application'] ?? 0;
-    $withPay = $_POST['days_with_pay'] ?? 0;
-    $withoutPay = $_POST['days_without_pay'] ?? 0;
-    $otherDays = $_POST['other_days'] ?? 0;
+    $vacEarned = floatval($_POST['vacationTotalEarned'] ?? 0);
+    $sickEarned = floatval($_POST['sickTotalEarned'] ?? 0);
+    $vlBalance = floatval($_POST['vacation_leave_balance'] ?? 0);
+    $vlLess = floatval($_POST['vacation_less_application'] ?? 0);
+    $slBalance = floatval($_POST['sick_leave_balance'] ?? 0);
+    $slLess = floatval($_POST['sick_less_application'] ?? 0);
+    $recommendation = $_POST['recommendation'] ?? '';
+    $disapprovalDetail = $_POST['disapprovalDetail'] ?? '';
+    $withPay = floatval($_POST['days_with_pay'] ?? 0);
+    $withoutPay = floatval($_POST['days_without_pay'] ?? 0);
+    $otherDays = floatval($_POST['other_days'] ?? 0);
     $otherSpecify = $_POST['other_specify'] ?? '';
     $disapprovedReason = $_POST['disapproved_reason'] ?? '';
 
     $updateActionSql = "UPDATE leaveapproval 
                   SET as_of=?, vacation_total_earned=?, sick_total_earned=?, vacation_leave_balance=?, vacation_less_application=?, 
-                      sick_leave_balance=?, sick_less_application=?, 
-                      days_with_pay=?, days_without_pay=?, other_days=?, 
-                      other_specify=?, disapproved_reason=?
-                  WHERE employee_id=?";
-    
+                      sick_leave_balance=?, sick_less_application=?, recommendation=?, disapprovalDetail=?, 
+                      days_with_pay=?, days_without_pay=?, other_days=?, other_specify=?, disapproved_reason=?
+                  WHERE employee_id=? AND leave_id=?";
+
     $stmtAction = $conn->prepare($updateActionSql);
-    $stmtAction->bind_param("sdddddddddssi", 
-        $asOf, $vacEarned, $sickEarned, $vlBalance, $vlLess, $slBalance, $slLess,
+    $stmtAction->bind_param(
+        "sddddddssdddssii", 
+        $asOf, $vacEarned, $sickEarned, $vlBalance, $vlLess, $slBalance, $slLess, 
+        $recommendation, $disapprovalDetail,
         $withPay, $withoutPay, $otherDays, $otherSpecify, $disapprovedReason,
-        $employeeId
+        $employeeId, $leaveId
     );
     $stmtAction->execute();
     $stmtAction->close();
@@ -94,10 +126,8 @@ if ($leaveId) {
 
 $conn->close();
 
-// Redirect back or to a confirmation page
-$printUrl = "/updated-ojt/Application%20for%20leave/Leave%20Form/leaveApplicationPrint.html?employee_id=" . urlencode($employeeId) . "&leave_id=" . urlencode($leaveId);
-
-header("Location: $printUrl");
-exit;
+// Redirect to read_leave.php with the leave ID as query parameter
+    header("Location: read_leave.php?id=" . urlencode($leaveId));
+    exit;
 
 ?>
