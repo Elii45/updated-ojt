@@ -1,0 +1,50 @@
+/* Signature Sections */
+.signatureHR,
+.signatureApplicant,
+.signatureAdmin,
+.signatureGov {
+    text-align: center;
+    padding-top: 10px;
+    width: 50%;
+    margin: 20px auto 5px auto;
+}
+
+#signatureApplicantLabel,
+#signatureGovLabel,
+#signatureAdminLabel,
+#signatureHRLabel {
+    display: block;
+    width: 250px;
+    min-height: 30px;
+    border-bottom: 1px solid black;
+    text-align: center;
+    font-family: inherit;
+    margin: 5px auto;
+}
+
+.signatureAdmin {
+    margin-top: 90px;
+    margin-bottom: 5px;
+}
+
+.signatureGov {
+    margin-top: 20px;
+}
+
+/* Optional: Make Signature Area Responsive */
+@media screen and (max-width: 600px) {
+
+    .signatureHR,
+    .signatureApplicant,
+    .signatureAdmin,
+    .signatureGov {
+        width: 80%;
+    }
+
+    #signatureApplicantLabel,
+    #signatureGovLabel,
+    #signatureAdminLabel,
+    #signatureHRLabel {
+        width: 200px;
+    }
+}

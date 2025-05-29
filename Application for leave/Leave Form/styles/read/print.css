@@ -4,7 +4,7 @@
         margin: none;
     }
 
-    .buttonGroup-print-only {
+    .buttons {
         display: none !important;
     }
 
@@ -231,23 +231,26 @@
         padding: 5px;
         margin-right: 50px;
     }
-      
-      #inclDates, .print-field-workingDays {
+
+    #inclDates,
+    .print-field-workingDays {
         color: #333;
         width: 60%;
         border-bottom: 1px solid black;
         padding: 5px;
         display: inline-block;
         margin-left: 30px;
-      }
+    }
 
-      .print-field-actionDate {
-        display: inline-block; /* or block */
+    .print-field-actionDate {
+        display: inline-block;
+        /* or block */
         color: #333;
         width: 30%;
-        border-bottom: 1px solid black; /* Optional underline effect */
+        border-bottom: 1px solid black;
+        /* Optional underline effect */
         padding: 5px;
-      }
+    }
 
     /* Signature Sections */
     .signatureHR,

@@ -76,9 +76,14 @@ $conn->close();
     <head>
         <meta charset="UTF-8" />
         <title>Print Leave Application Form</title>
-        <link rel="stylesheet" href="./styles/read1.css" />
-        <link rel="stylesheet" href="./styles/read2.css" />
-        <link rel="stylesheet" href="./styles/print.css" />
+        <link rel="stylesheet" href="./styles/read/read1.css" />
+        <link rel="stylesheet" href="./styles/read/print.css" />
+        <link rel="stylesheet" href="./styles/read/buttons.css" />
+        <link rel="stylesheet" href="./styles/read/signature.css" />
+        <link rel="stylesheet" href="./styles/read/c1.css" />
+        <link rel="stylesheet" href="./styles/read/c2.css" />
+        <link rel="stylesheet" href="./styles/read/c3.css" />
+        <link rel="stylesheet" href="./styles/read/c4.css" />
     </head>
     <body>
         <?php include './header.html'; ?>
@@ -93,6 +98,6 @@ $conn->close();
         <a href="edit_leave.php?employee_id=<?= htmlspecialchars($employeeId) ?>&leave_id=<?= htmlspecialchars($leaveId) ?>" class="button">Edit</a>
         <button onclick="window.print()" class="button">Print</button>
         </div>
-        
+
     </body>
 </html>

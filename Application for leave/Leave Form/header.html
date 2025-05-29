@@ -2,70 +2,98 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application for Leave</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Application for Leave</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
 
-        .header {
-            display: inline-flex;
-            margin-left: 350px;
-            align-items: center;
-            padding: -2px;
-            width: 1027px;
-            /* Fixed width */
-            height: 100px;
-            /* Fixed height */
-        }
+    .header-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 20px 10px;
+    }
 
-        .logo {
-            width: 100px;
-            margin-right: 50px;
-        }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
 
-        .stamp {
-            border: 1px dashed #000;
-            padding: 10px;
-            font-size: 12px;
-            margin-left: 200px;
+    .italic {
+      font-style: italic;
+      font-size: 12px;
+      text-align: left;
+      margin-left: 0;
+      margin-bottom: 85px;
+      margin-right: 80px;
+      width: 150px;
+    }
 
-        }
+    .logo {
+      width: 95px;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
 
-        .title {
-            font-weight: bold;
-            font-size: 30px;
-            margin-top: 10px;
-        }
+    .middle-section {
+      flex: 1;
+      text-align: center;
+      margin-left: -150px;
+    }
 
-        .subtext,
-        .italic {
-            font-size: 12px;
-        }
+    .subtext,
+    .italic {
+      font-size: 12px;
+    }
 
-        .italic {
-            font-style: italic;
-            text-align: left;
-            margin-left: 200px;
-        }
-    </style>
+    .subtext {
+      margin-left: -30px;
+    }
+
+    .title {
+      font-weight: bold;
+      font-size: 24px;
+      margin-top: 20px;
+    }
+
+    .stamp {
+      border: 1px dashed #000;
+      padding: 8px;
+      font-size: 12px;
+      width: 140px;
+      margin-top: -45px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
-    <div class="italic">Civil Service Form No. 6 <br> Revised 2020</div>
+  <div class="header-wrapper">
     <div class="header">
-        <img src="../../images/Official-Logo-1.png" alt="Bulacan Logo" class="logo">
-        <div>
-            <div class="subtext">Republic of the Philippines</div>
-            <div class="subtext">Provincial Government of Bulacan</div>
-            <div class="subtext">City of Malolos, Bulacan</div>
-            <div class="title">APPLICATION FOR LEAVE</div>
-        </div>
-        <div class="stamp">Stamp of Date of Receipt</div>
+      <div class="italic">
+        Civil Service Form No. 6 <br />
+        Revised 2020
+      </div>
+
+      <img src="../../images/Official-Logo-1.png" alt="Bulacan Logo" class="logo" />
+
+      <div class="middle-section">
+        <div class="subtext">Republic of the Philippines</div>
+        <div class="subtext">Provincial Government of Bulacan</div>
+        <div class="subtext">City of Malolos, Bulacan</div>
+        <div class="title">APPLICATION FOR LEAVE</div>
+      </div>
+
+      <div class="stamp">Stamp of Date of Receipt</div>
     </div>
+  </div>
 </body>
 
 </html>

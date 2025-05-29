@@ -1,0 +1,11 @@
+/* Container 3 */
+.container3A .subtext {
+    margin-left: 10px;
+    font-size: 7pt;
+}
+
+.container3C {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
