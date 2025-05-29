@@ -30,22 +30,29 @@ if (!$employee) {
     die("No matching employee record found.");
 }
 
-// Remove the POST processing logic from here as it will be handled by process_edit_leave.php
+// Permanent office ID
+$fixedOfficeId = 20;
+
+// Get office name for ID 20
+$sqlOffice = "SELECT office_name FROM offices WHERE office_id = ?";
+$stmtOffice = $conn->prepare($sqlOffice);
+$stmtOffice->bind_param("i", $fixedOfficeId);
+$stmtOffice->execute();
+$resultOffice = $stmtOffice->get_result();
+$officeRow = $resultOffice->fetch_assoc();
+$fixedOfficeName = $officeRow['office_name'] ?? 'Unknown Office';
 ?>
 
-<!-- Remove the form tag from here -->
 <table class="container-table">
     <tr>
         <td colspan="2" class="divider">
             <div class="container1">
                 <div class="office">
                     <label>1. OFFICE/DEPARTMENT</label>
-                    <select id="officeDropdown" name="office" required>
-                        <option value="">Select an Office</option>
-                        <option value="<?php echo htmlspecialchars($employee['office']); ?>" selected>
-                            <?php echo htmlspecialchars($employee['office']); ?>
-                        </option>
-                    </select>
+                    <!-- Show office name as plain text -->
+                    <p><?php echo htmlspecialchars($fixedOfficeName); ?></p>
+                    <!-- Store office id as hidden input for form submission -->
+                    <input type="hidden" name="office" value="<?php echo htmlspecialchars($fixedOfficeId); ?>">
                 </div>
 
                 <div class="name">
@@ -82,5 +89,3 @@ if (!$employee) {
         </td>
     </tr>
 </table>
-
-<script src="dropdown.js"></script>

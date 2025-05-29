@@ -127,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $leaveId) {
 $conn->close();
 
 // Redirect to read_leave.php with the leave ID as query parameter
-    header("Location: read_leave.php?id=" . urlencode($leaveId));
+    header("Location: ./read_leave.php?id=" . urlencode($leaveId));
     exit;
 
 ?>
