@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Application for Leave</title>
+    <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="./backend/submit_leave.php" method="post">
+            <div id="personalDetails"></div>
+
+            <table class="container-table">
+                <tr>
+                    <td colspan="2" class="title">
+                        <h5>6. DETAILS OF APPLICATION</h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="divider">
+                        <div id="sectionA"></div>
+                    </td>
+                    <td class="divider">
+                        <div id="sectionB"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="divider">
+                        <div class="locator-input-group">
+                            <label for="inclusive_dates" class="locator-input-label">Inclusive Dates:</label>
+                            <input id="inclusive_dates" name="inclusive_dates" type="text" class="locator-input-field"
+                                placeholder="Select multiple dates" autocomplete="off" />
+                        </div>
+
+                        <div id="workingDaysDisplay">
+                            Total Days Selected: 0
+                        </div>
+
+                        <input type="hidden" name="working_days" id="working_days" value="0" />
+                    </td>
+                    <td class="divider">
+                        <div id="sectionD"></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="actionDetails"></div>
+
+            <div class="buttonGroup">
+                <input type="submit" value="Submit" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Your custom scripts -->
+    <script src="../Leave Form/details/loadSections.js"></script>
+    <script src="./script/dropdown.js"></script>
+    <script src="./script/actionDropdown.js"></script>
+
+    <!-- Inclusive dates JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#inclusive_dates", {
+            mode: "multiple",
+            dateFormat: "Y-m-d",
+            altInput: true,
+            altFormat: "F j, Y",
+            onChange: function (selectedDates) {
+                const count = selectedDates.length;
+                document.getElementById("workingDaysDisplay").textContent = "Total Days Selected: " + count;
+                document.getElementById("working_days").value = count;
+            }
+        });
+    </script>
+</body>
+
+</html>

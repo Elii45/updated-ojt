@@ -1,6 +1,4 @@
 <?php
-// read_leave.php
-
 $employeeId = $_GET['id'] ?? null;
 $leaveId = $_GET['leave_id'] ?? null;
 
@@ -19,7 +17,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch personal details
+//Personal details
 $stmtEmp = $conn->prepare("SELECT * FROM employeedetails WHERE id = ?");
 $stmtEmp->bind_param("i", $employeeId);
 $stmtEmp->execute();
@@ -31,7 +29,7 @@ if (!$employee) {
     die("No matching employee record found.");
 }
 
-// Fetch leave details
+//Leave Details
 if (!$leaveId) {
     $stmtLatestLeave = $conn->prepare("SELECT id FROM leavedetails WHERE employee_id = ? ORDER BY id DESC LIMIT 1");
     $stmtLatestLeave->bind_param("i", $employeeId);
@@ -55,10 +53,8 @@ if ($leaveId) {
     $stmtLeave->close();
 }
 
-// Fetch approval/action details (your existing code)...
-
+//Action Details
 $action = null;
-
 if ($leaveId) {
     $stmtAction = $conn->prepare("SELECT * FROM leaveapproval WHERE employee_id = ? AND leave_id = ?");
     $stmtAction->bind_param("ii", $employeeId, $leaveId);
@@ -72,30 +68,31 @@ $resultAction = $stmtAction->get_result();
 $action = $resultAction->fetch_assoc();
 $stmtAction->close();
 
-
 $conn->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>View Leave Application</title>
-    <link rel="stylesheet" href="./styles/leaveApplication.css" />
-    <link rel="stylesheet" href="./styles/leaveApplicationPrint.css" />
+    <head>
+        <meta charset="UTF-8" />
+        <title>Print Leave Application Form</title>
+        <link rel="stylesheet" href="./styles/read1.css" />
+        <link rel="stylesheet" href="./styles/read2.css" />
+        <link rel="stylesheet" href="./styles/print.css" />
+    </head>
+    <body>
+        <?php include './header.html'; ?>
 
-</head>
-<body>
-<div class="wrapper">
-
-    <?php include './print/personalDetails.html'; ?>
-    <?php include './print/leaveDetails.html'; ?>
-    <?php include './print/actionDetails.html'; ?>
-
-</div>
-<div class="buttons">
-    <a href="edit_leave.php?employee_id=<?= htmlspecialchars($employeeId) ?>&leave_id=<?= htmlspecialchars($leaveId) ?>" class="button">Edit</a>
-    <button onclick="window.print()" class="button">Print</button>
-</div>
-</body>
+        <div class="wrapper">
+            <?php include './print/personalDetails.html'; ?>
+            <?php include './print/leaveDetails.html'; ?>
+            <?php include './print/actionDetails.html'; ?>
+        </div>
+        
+        <div class="buttons">
+        <a href="edit_leave.php?employee_id=<?= htmlspecialchars($employeeId) ?>&leave_id=<?= htmlspecialchars($leaveId) ?>" class="button">Edit</a>
+        <button onclick="window.print()" class="button">Print</button>
+        </div>
+        
+    </body>
 </html>
