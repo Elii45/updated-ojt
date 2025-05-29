@@ -1,9 +1,8 @@
 Things to do
 -Leave
     -Print
-        -Header
+        -CSS + Print
         -signature connection
-        -Print CSS
     -Create + Edit
         -CSS
         -Dropdown change (leave)

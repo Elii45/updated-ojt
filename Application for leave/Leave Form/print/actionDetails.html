@@ -11,7 +11,9 @@
                 <label>7.A CERTIFICATION OF LEAVE CREDITS</label><br>
                 <div class="asOf">
                     <label>As of:</label>
-                    <span id="asOf"><?= htmlspecialchars($action['as_of'] ?? '') ?></span>
+                    <span id="asOf">
+                        <?= htmlspecialchars($action['as_of'] ?? '') ?>
+                    </span>
                 </div>
                 <table class="table4">
                     <tr>
@@ -21,25 +23,58 @@
                     </tr>
                     <tr>
                         <td>Total Earned</td>
-                        <td><span id="vacationTotalEarned"><?= htmlspecialchars($action['vacation_total_earned'] ?? '') ?></span></td>
-                        <td><span id="sickTotalEarned"><?= htmlspecialchars($action['sick_total_earned'] ?? '') ?></span></td>
+                        <td><span id="vacationTotalEarned">
+                                <?= htmlspecialchars($action['vacation_total_earned'] ?? '') ?>
+                            </span></td>
+                        <td><span id="sickTotalEarned">
+                                <?= htmlspecialchars($action['sick_total_earned'] ?? '') ?>
+                            </span></td>
                     </tr>
                     <tr>
                         <td>Less this application</td>
-                        <td><span id="vacationLessApplication"><?= htmlspecialchars($action['vacation_less_application'] ?? '') ?></span></td>
-                        <td><span id="sickLessApplication"><?= htmlspecialchars($action['sick_less_application'] ?? '') ?></span></td>
+                        <td><span id="vacationLessApplication">
+                                <?= htmlspecialchars($action['vacation_less_application'] ?? '') ?>
+                            </span></td>
+                        <td><span id="sickLessApplication">
+                                <?= htmlspecialchars($action['sick_less_application'] ?? '') ?>
+                            </span></td>
                     </tr>
                     <tr>
                         <td>Balance</td>
-                        <td><span id="vacationBalance"><?= htmlspecialchars($action['vacation_leave_balance'] ?? '') ?></span></td>
-                        <td><span id="sickBalance"><?= htmlspecialchars($action['sick_leave_balance'] ?? '') ?></span></td>
+                        <td><span id="vacationBalance">
+                                <?= htmlspecialchars($action['vacation_leave_balance'] ?? '') ?>
+                            </span></td>
+                        <td><span id="sickBalance">
+                                <?= htmlspecialchars($action['sick_leave_balance'] ?? '') ?>
+                            </span></td>
                     </tr>
                 </table>
                 <div class="signatureHR">
-                    <label name="signatureHR" id="signatureHRLabel"><?= htmlspecialchars($action['signature_hr'] ?? '') ?></label>
-                    <label>JOSE FERNANDO G. MANAHAN</label><br>
+                <span id="PHRMO-name">Loading...</span><br>
                     <label>OIC, PHRMO</label>
                 </div>
+                <script>
+                    // Fetch data from the PHP file
+                    fetch('./backend/fetch-PHRMO.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.name) {
+                                document.getElementById('PHRMO-name').textContent = data.name;
+                            } else {
+                                document.getElementById('PHRMO-name').textContent = "Not found";
+                                console.error("Error:", data.error);
+                            }
+                        })
+                        .catch(error => {
+                            document.getElementById('admin-name').textContent = "Error loading";
+                            console.error("Fetch error:", error);
+                        });
+                </script>
             </div>
         </td>
 
@@ -47,23 +82,46 @@
             <div class="container4B">
                 <label>7.B RECOMMENDATION</label><br>
                 <label>
-                    <input type="checkbox" id="approvalCheckbox" disabled <?php echo (isset($action['recommendation']) &&
-                    $action['recommendation']==='approval' ) ? 'checked' : '' ; ?>> For Approval
+                    <input type="checkbox" id="approvalCheckbox" disabled <?php echo (isset($action['recommendation'])
+                        && $action['recommendation']==='approval' ) ? 'checked' : '' ; ?>> For Approval
                 </label><br>
 
                 <label>
-                    <input type="checkbox" id="approvalCheckbox" disabled <?php echo (isset($action['recommendation']) &&
-                    $action['recommendation']==='disapproval' ) ? 'checked' : '' ; ?>> For Disapproval due to
+                    <input type="checkbox" id="approvalCheckbox" disabled <?php echo (isset($action['recommendation'])
+                        && $action['recommendation']==='disapproval' ) ? 'checked' : '' ; ?>> For Disapproval due to
                 </label>
                 <br>
-                <span id="disapprovalDetail"><?= htmlspecialchars($action['disapprovalDetail'] ?? '') ?></span>
+                <span id="disapprovalDetail">
+                    <?= htmlspecialchars($action['disapprovalDetail'] ?? '') ?>
+                </span>
             </div>
 
             <div class="signatureAdmin">
-                <label name="signatureAdmin" id="signatureAdminLabel"><?= htmlspecialchars($action['signature_admin'] ?? '') ?></label>
-                <label>ANTONIA V. CONSTANTINO</label><br>
-                <label>Provincial Administrator</label>
+                <span id="dh-name">Loading...</span><br>
+                <label>Department Head, PITO</label>
             </div>
+            <script>
+                    // Fetch data from the PHP file
+                    fetch('./backend/fetch-department-head.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.name) {
+                                document.getElementById('dh-name').textContent = data.name;
+                            } else {
+                                document.getElementById('dh-name').textContent = "Not found";
+                                console.error("Error:", data.error);
+                            }
+                        })
+                        .catch(error => {
+                            document.getElementById('dh-name').textContent = "Error loading";
+                            console.error("Fetch error:", error);
+                        });
+                </script>
         </td>
     </tr>
 
@@ -74,23 +132,54 @@
                     <div class="approvedContainer">
                         <label>7.C APPROVED FOR</label>
 
-                        <div><span id="daysWithPay"><?= htmlspecialchars($action['days_with_pay'] ?? '') ?></span><label>days with pay</label></div>
-                        <div><span id="daysWithoutPay"><?= htmlspecialchars($action['days_without_pay'] ?? '') ?></span><label>days without pay</label></div>
-                        <div><span id="other_days"><?= htmlspecialchars($action['other_days'] ?? '') ?></span><label>Others(Specify)</label>
-                            <span id="other_specify"><?= htmlspecialchars($action['other_specify'] ?? '') ?></span></div>
+                        <div><span id="daysWithPay">
+                                <?= htmlspecialchars($action['days_with_pay'] ?? '') ?>
+                            </span><label>days with pay</label></div>
+                        <div><span id="daysWithoutPay">
+                                <?= htmlspecialchars($action['days_without_pay'] ?? '') ?>
+                            </span><label>days without pay</label></div>
+                        <div><span id="other_days">
+                                <?= htmlspecialchars($action['other_days'] ?? '') ?>
+                            </span><label>Others(Specify)</label>
+                            <span id="other_specify">
+                                <?= htmlspecialchars($action['other_specify'] ?? '') ?>
+                            </span>
+                        </div>
                     </div>
                     <div class="disapproved container">
                         <label>7.D DISAPPROVED DUE TO:</label><br>
-                        <span id="disapproved_reason"><?= htmlspecialchars($action['disapproved_reason'] ?? '') ?></span><br>
+                        <span id="disapproved_reason">
+                            <?= htmlspecialchars($action['disapproved_reason'] ?? '') ?>
+                        </span><br>
                     </div>
                 </div>
 
                 <div class="signatureGov">
-                    <label name="signatureGov" id="signatureGovLabel"><?= htmlspecialchars($action['signature_gov'] ?? '') ?></label>
-                    <label>HON. DANIEL R. FERNANDO</label><br>
+                    <span id="governor-name">Loading...</span><br>
                     <label>Provincial Governor</label>
                 </div>
-
+                <script>
+                    // Fetch data from the PHP file
+                    fetch('./backend/fetch-provincial-gov.php')
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.name) {
+                                document.getElementById('governor-name').textContent = data.name;
+                            } else {
+                                document.getElementById('governor-name').textContent = "Not found";
+                                console.error("Error:", data.error);
+                            }
+                        })
+                        .catch(error => {
+                            document.getElementById('governor-name').textContent = "Error loading";
+                            console.error("Fetch error:", error);
+                        });
+                </script>
             </div>
         </td>
     </tr>
