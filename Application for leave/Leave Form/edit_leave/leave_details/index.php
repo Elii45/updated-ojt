@@ -28,8 +28,6 @@ if (!$leave) {
     die("No matching leave record found.");
 }
 
-// Remove the POST processing logic from here
-
 function isChecked($value, $target) {
     return $value === $target ? 'checked' : '';
 }
@@ -39,7 +37,6 @@ function escape($str) {
 }
 ?>
 
-<!-- Remove the form tag from here -->
 <div class="container3A">
     <label>6.A TYPE OF LEAVE TO BE AVAILED OF</label><br>
     <?php
